@@ -8,4 +8,6 @@ public class DialogPrompt
     public string ButtonText = "Close";
     public float FadeInDuration = .3f;
     public UnityAction OnClose = null;
+    public UnityAction OnPositive = null;
+    public UnityAction OnNegative = null;
 }
