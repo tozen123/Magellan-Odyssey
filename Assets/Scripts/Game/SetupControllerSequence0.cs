@@ -128,9 +128,32 @@ public class SetupControllerSequence0 : MonoBehaviour
 
     public void AutomaticLogin()
     {
-        LoginAvatar(PlayerPrefs.GetString("userEmail"), PlayerPrefs.GetString("userPassword"));
-    }
+        if (PlayerPrefs.HasKey("userEmail") && PlayerPrefs.HasKey("userPassword"))
+        {
+            string email = PlayerPrefs.GetString("userEmail").Trim();
+            string password = PlayerPrefs.GetString("userPassword").Trim();
 
+            LoginAvatar(email, password);
+        }
+        else
+        {
+            DialogMessagePrompt.Instance
+            .SetTitle("System Message")
+            .SetMessage("Saved Login not found")
+            
+            .Show();
+
+            creationCanvas.SetActive(true);
+        }
+            
+
+    }
+    public void ManualLogin()
+    {
+        LoginAvatar(loginEmail.text, loginPassword.text);
+
+
+    }
     public async void LoginAvatar(string login_email, string login_password)
     {
        
