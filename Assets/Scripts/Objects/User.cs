@@ -48,8 +48,7 @@ public class User
             Debug.Log("User data posted successfully!");
 
             //Test
-            EditorUtility.DisplayDialog("Status", response.StatusCode.ToString(), "Ok");
-
+           
 
         }).Catch(error =>
         {

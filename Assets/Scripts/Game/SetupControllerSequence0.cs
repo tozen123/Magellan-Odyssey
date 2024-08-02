@@ -26,6 +26,8 @@ public class SetupControllerSequence0 : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         creationCanvasGroup = creationCanvas.GetComponent<CanvasGroup>();
         loginCanvasGroup = loginCanvas.GetComponent<CanvasGroup>();
 

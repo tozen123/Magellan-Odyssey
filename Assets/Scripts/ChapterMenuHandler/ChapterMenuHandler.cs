@@ -23,4 +23,10 @@ public class ChapterMenuHandler : MonoBehaviour
 
         Chapter1Map.SetActive(state);
     }
+
+
+    public void LoadChapterLevel(string sceneName)
+    {
+        LoadingScreenManager.Instance.LoadScene(sceneName);
+    }
 }

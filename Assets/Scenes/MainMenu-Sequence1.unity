@@ -7668,7 +7668,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1627230977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1941881487}
+        m_TargetAssemblyTypeName: ChapterMenuHandler, Assembly-CSharp
+        m_MethodName: LoadChapterLevel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Chapter1Level1
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1627230977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10287,6 +10299,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2137525004}
     m_Modifications:
+    - target: {fileID: 2741117864668516358, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2741117864668516358, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_IgnoreReversedGraphics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846521113605503098, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846521113605503098, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846521113605503098, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846521113605503098, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846521113605503098, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3617479737603979836, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3617479737603979836, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845990743565728939, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8990529969670232782, guid: 18c455e6725a40a43b614cdce03f9dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
