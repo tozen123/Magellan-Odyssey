@@ -112,8 +112,8 @@ public class SetupControllerSequence0 : MonoBehaviour
 
         string userID = System.Guid.NewGuid().ToString();
 
-        User user = new User(avatar_name, avatar_email, userID, avatar_password);
-        user.WriteUserToDatabase();
+        //User user = new User(avatar_name, avatar_email, userID, avatar_password);
+        //user.WriteUserToDatabase();
 
         PlayerPrefs.SetString("userName", avatar_name);
         PlayerPrefs.SetString("userEmail", avatar_email);
@@ -160,19 +160,19 @@ public class SetupControllerSequence0 : MonoBehaviour
     {
        
 
-        User user = await User.CheckUser(loginEmail.text.Trim().ToString(), loginPassword.text.Trim().ToString());
-        OnLoginResult(user);
+        //User user = await User.CheckUser(loginEmail.text.Trim().ToString(), loginPassword.text.Trim().ToString());
+        //OnLoginResult(user);
     }
 
     private void OnLoginResult(User user)
     {
         if (user != null)
         {
-            PlayerPrefs.SetString("userName", user.name);
-            PlayerPrefs.SetString("userEmail", user.email);
-            PlayerPrefs.SetString("userPassword", user.password);
-            PlayerPrefs.SetString("userID", user.userID);
-            PlayerPrefs.Save();
+            //PlayerPrefs.SetString("userName", user.name);
+            //PlayerPrefs.SetString("userEmail", user.email);
+            //PlayerPrefs.SetString("userPassword", user.password);
+            //PlayerPrefs.SetString("userID", user.userID);
+            //PlayerPrefs.Save();
 
             DialogMessagePrompt.Instance
                 .SetTitle("System Message")

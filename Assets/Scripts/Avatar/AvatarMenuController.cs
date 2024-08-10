@@ -36,7 +36,7 @@ public class AvatarMenuController : MonoBehaviour
             ButtonControlCancel.gameObject.SetActive(true);
 
             ButtonControlClose.gameObject.SetActive(false);
-            ButtonControlLogout.gameObject.SetActive(false);
+            //ButtonControlLogout.gameObject.SetActive(false);
         } 
         else
         {
@@ -46,7 +46,7 @@ public class AvatarMenuController : MonoBehaviour
             ButtonControlCancel.gameObject.SetActive(false);
 
             ButtonControlClose.gameObject.SetActive(true);
-            ButtonControlLogout.gameObject.SetActive(true);
+            //ButtonControlLogout.gameObject.SetActive(true);
         }
     }
 

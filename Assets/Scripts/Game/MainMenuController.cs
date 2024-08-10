@@ -30,14 +30,12 @@ public class MainMenuController : MonoBehaviour
 
     bool CreateUser()
     {
-        if (PlayerPrefs.HasKey("userName") && PlayerPrefs.HasKey("userID") &&  PlayerPrefs.HasKey("userEmail") && PlayerPrefs.HasKey("userPassword"))
+        if (PlayerPrefs.HasKey("userName") )
         {
             user = new User
             {
                 name = PlayerPrefs.GetString("userName"),
-                userID = PlayerPrefs.GetString("userID"),
-                email = PlayerPrefs.GetString("userEmail"),
-                password = PlayerPrefs.GetString("userPassword")
+            
             };
 
             return true;
