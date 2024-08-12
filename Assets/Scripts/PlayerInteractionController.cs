@@ -9,7 +9,6 @@ public class PlayerInteractionController : MonoBehaviour
     [Header("Action Button")]
     public Button ButtonInteract;
     public Button ButtonInventory;
-    public Button ButtonSwing;
     public Button ButtonPickUp;
 
     [Header("Variables DialogueSystem")]
@@ -23,8 +22,6 @@ public class PlayerInteractionController : MonoBehaviour
     private void Awake()
     {
         ButtonSetState(ButtonInteract, false);
-        //ButtonSetState(ButtonInventory, false);
-        //ButtonSetState(ButtonSwing, false);
         ButtonSetState(ButtonPickUp, false);
 
 
@@ -133,19 +130,7 @@ public class PlayerInteractionController : MonoBehaviour
         }
     }
 
-    public void SwingAttack()
-    {
-        int randomAttack = Random.Range(0, 2); // Randomly choose between 0 and 1
-
-        if (randomAttack == 0)
-        {
-            playerAnimator.SetTrigger("Swing1");
-        }
-        else
-        {
-            playerAnimator.SetTrigger("Swing2");
-        }
-    }
+  
 
 
    

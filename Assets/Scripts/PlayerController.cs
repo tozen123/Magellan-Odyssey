@@ -20,10 +20,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Animations")]
     public Animator animator;
-    
+
+    public bool canMove;
 
     private void Start()
     {
+        canMove = true;
+
         _characterController = GetComponent<CharacterController>();
     }
 
@@ -44,7 +47,12 @@ public class PlayerController : MonoBehaviour
         
     }
     private void Look()
-    { 
+    {
+        if (!canMove)
+        {
+            return;
+        }
+
         if(_playerInput != Vector3.zero)
         {
 
@@ -77,8 +85,12 @@ public class PlayerController : MonoBehaviour
          * Vector3 movement = transform.forward * _playerInput.magnitude * movementSpeed * Time.deltaTime;
         */
 
-        Vector3 movement = transform.forward * _playerInput.magnitude * movementSpeed * Time.deltaTime;
-        _characterController.Move(movement);
+        if (canMove)
+        {
+            Vector3 movement = transform.forward * _playerInput.magnitude * movementSpeed * Time.deltaTime;
+            _characterController.Move(movement);
+        }
+       
 
         if(walkEffectSmoke != null)
         {
