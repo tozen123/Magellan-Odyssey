@@ -21,8 +21,11 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("PlayerSword"))
+        if (collision.gameObject.tag.Equals("PlayerProjectile"))
         {
+            collision.gameObject.GetComponent<PlayerProjectile>().Death();
+
+
             CameraShaker.Instance.Shake();
 
             // Calculate knockback direction
@@ -35,6 +38,7 @@ public class EnemyController : MonoBehaviour
             {
                 StartCoroutine(ApplyKnockback(knockbackDirection));
             }
+
         }
     }
 

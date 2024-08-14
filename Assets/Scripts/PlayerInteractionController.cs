@@ -55,7 +55,7 @@ public class PlayerInteractionController : MonoBehaviour
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
                     }
 
-                    if (_character.name == "Hariette")
+                    if (_character.name == "Thomas")
                     {
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
                     }

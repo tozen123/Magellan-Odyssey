@@ -8,27 +8,36 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
 
+    [Header("Interface Reference")]
     public Image characterIcon;
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueArea;
     public List<Button> choiceButtons;
     public GameObject choiceButtonPanelParent;
 
-    public GameObject dialogueBodyParent;
+    [Header("Parents")]
+    [SerializeField] private GameObject dialogoueParent;
 
+    [SerializeField] private GameObject dialogueBodyParent;
+
+    [Header("Feedback References")]
     public GameObject feedbackBodyParent;
     public TextMeshProUGUI feedbackText;
 
     private Queue<DialogueLine> lines;
     private DialogueLine currentLine;
 
-    public bool isDialogueActive = false;
-    private bool isAwaitingInput = false;
+    [Header("Configurations")]
 
+    public bool isDialogueActive = false;
+    public bool isCompleteQuiz = false;
     public float typingSpeed = 0.03f;
 
-    public Animator animator;
-    public bool isCompleteQuiz = false;
+
+    private bool isAwaitingInput = false;
+
+
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
@@ -38,6 +47,7 @@ public class DialogueManager : MonoBehaviour
         lines = new Queue<DialogueLine>();
 
         animator.Play("UIFullHide");
+
 
     }
     public void QuizMode(bool isTook)
@@ -86,6 +96,7 @@ public class DialogueManager : MonoBehaviour
         currentLine = lines.Dequeue();
 
         characterIcon.sprite = currentLine.character.icon;
+        characterIcon.preserveAspect = true;
         characterName.text = currentLine.character.name;
 
         StopAllCoroutines();
@@ -189,6 +200,17 @@ public class DialogueManager : MonoBehaviour
             feedbackBodyParent.SetActive(false);
             
             DisplayNextDialogueLine();
+        }
+
+        if (!isDialogueActive)
+        {
+            dialogoueParent.gameObject.GetComponent<Image>().enabled = false;
+
+        }
+        else
+        {
+            dialogoueParent.gameObject.GetComponent<Image>().enabled = true;
+
         }
     }
 

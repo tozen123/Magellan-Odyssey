@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
     private CharacterController _characterController;
 
     private Vector3 _playerInput;
+    private Vector3 _playerLookAttackInput;
 
     
     [SerializeField] public float movementSpeed = 5f;
     [SerializeField] private float turningSpeed = 5f;
 
     [SerializeField] private FixedJoystick movementJoystick;
+    [SerializeField] private FixedJoystick lookAttackJoystick;
 
     [Header("Effects")]
     public GameObject walkEffectSmoke;
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         //_playerInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         _playerInput = new Vector3(movementJoystick.Horizontal, 0, movementJoystick.Vertical);
+        _playerLookAttackInput = new Vector3(lookAttackJoystick.Horizontal, 0, lookAttackJoystick.Vertical);
         
     }
     private void Look()
@@ -52,10 +55,21 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
-        if(_playerInput != Vector3.zero)
+        if(_playerLookAttackInput != Vector3.zero)
         {
+            var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
 
+            var newInput = matrix.MultiplyPoint3x4(_playerLookAttackInput);
+
+
+            var relative = (transform.position + newInput) - transform.position;
+            var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turningSpeed * Time.deltaTime);
+        }
+
+        if (_playerInput != Vector3.zero)
+        {
             var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
 
             var newInput = matrix.MultiplyPoint3x4(_playerInput);
@@ -65,6 +79,12 @@ public class PlayerController : MonoBehaviour
             var rot = Quaternion.LookRotation(relative, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turningSpeed * Time.deltaTime);
+        }
+
+        if (_playerInput != Vector3.zero)
+        {
+
+            
 
 
             animator.SetBool("isRunning", true);
