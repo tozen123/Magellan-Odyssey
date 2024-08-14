@@ -39,6 +39,9 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    [Header("Controller Reference")]
+    [SerializeField] private CanvasGroup canvasGroup;
+
     private void Awake()
     {
         if (Instance == null)
@@ -205,12 +208,15 @@ public class DialogueManager : MonoBehaviour
         if (!isDialogueActive)
         {
             dialogoueParent.gameObject.GetComponent<Image>().enabled = false;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
 
         }
         else
         {
             dialogoueParent.gameObject.GetComponent<Image>().enabled = true;
-
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
         }
     }
 

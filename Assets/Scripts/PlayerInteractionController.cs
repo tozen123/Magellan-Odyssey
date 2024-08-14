@@ -53,16 +53,21 @@ public class PlayerInteractionController : MonoBehaviour
                     if (_character.name == "Jan")
                     {
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
+                        return;
                     }
 
                     if (_character.name == "Thomas")
                     {
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
+                        return;
+
                     }
 
                     if (_character.name == "Ttan")
                     {
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
+                        return;
+
                     }
                 }
 

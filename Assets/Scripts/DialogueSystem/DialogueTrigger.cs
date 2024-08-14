@@ -33,6 +33,7 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         DialogueManager.Instance.QuizMode(isTook);
+
         if (isThisQuiz == true)
         {
             DialogueManager.Instance.StartDialogue(dialogue);
