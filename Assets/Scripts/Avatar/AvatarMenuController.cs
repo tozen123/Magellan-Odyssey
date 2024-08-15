@@ -65,7 +65,7 @@ public class AvatarMenuController : MonoBehaviour
 
         DialogMessagePromptAction.Instance
             .SetTitle("Confirmation")
-            .SetMessage("Do you really want to logout?")
+            .SetMessage("Do you really want to clear your avatar, this action is not reversible and all of the progress will be deleted permanently?")
             .SetFadeInDuration(0.5f)
             .OnPositive(ConfirmLogout)
             .Show();

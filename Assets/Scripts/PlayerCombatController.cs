@@ -36,6 +36,11 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private float maxAimDistance = 15f;  // Maximum distance for the raycast
     [SerializeField] private LayerMask aimLayerMask;  // Layer mask to specify which objects the raycast can hit
     [SerializeField] private Color rayColor = Color.red;  // Color of the debug ray
+
+    [Header("Effect")]
+    [SerializeField] private GameObject projectileSmokeLaunch;
+    [SerializeField] private Transform projectileSmokeLaunchPoint;
+
     private void Awake()
     {
    
@@ -54,15 +59,20 @@ public class PlayerCombatController : MonoBehaviour
 
         if (_playerLookAttackInput.magnitude > attackSensitivity && attackTime <= 0)
         {
-            ShootProjectile();
+            //ShootProjectile();
+            playerAnimator.SetTrigger("Shoot");
+            attackTime = attackSpeed;
+
         }
     }
 
     private void ShootProjectile()
     {
-        attackTime = attackSpeed;
 
         Instantiate(playerProjectile, playerProjectileShootPoint.position, playerProjectileShootPoint.rotation);
+        Instantiate(projectileSmokeLaunch, projectileSmokeLaunchPoint.position, projectileSmokeLaunchPoint.rotation);
+
+        
     }
 
     private void UpdateAimLine()

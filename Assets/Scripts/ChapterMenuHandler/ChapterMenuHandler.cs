@@ -15,10 +15,21 @@ public class ChapterMenuHandler : MonoBehaviour
     public Button ButtonChapter2;
     public Button ButtonChapter3;
 
+    [Header("Chapter 1 Level Buttons")]
+    public Button[] ButtonChapter1Levels;
 
     [SerializeField] private int ADP;
     private void Start()
     {
+        Debug.Log("--------------------------------------------------------------");
+        Debug.Log("Chapter1: " + PlayerPrefs.GetString("Chapter1"));
+        Debug.Log("Chapter1Level1: " + PlayerPrefs.GetString("Chapter1Level1"));
+        Debug.Log("Chapter1Level2: " + PlayerPrefs.GetString("Chapter1Level2"));
+        Debug.Log("Chapter1Level3: " + PlayerPrefs.GetString("Chapter1Level3"));
+        Debug.Log("Chapter1Level4: " + PlayerPrefs.GetString("Chapter1Level4"));
+        Debug.Log("Chapter1Level5: " + PlayerPrefs.GetString("Chapter1Level5"));
+        Debug.Log("--------------------------------------------------------------");
+
 
         if (!PlayerPrefs.HasKey("adventure_points"))
         {
@@ -64,6 +75,27 @@ public class ChapterMenuHandler : MonoBehaviour
                 Debug.LogWarning("Unexpected value for adventure_points: " + current_adp);
                 break;
         }
+
+        for (int i = 0; i < ButtonChapter1Levels.Length; i++)
+        {
+            string levelKey = "Chapter1Level" + (i + 1);
+            string levelState = PlayerPrefs.GetString(levelKey);
+
+            if (levelState.Equals("IN_PROGRESS") || levelState.Equals("COMPLETED"))
+            {
+                ButtonChapter1Levels[i].interactable = true;
+            }
+            else if (levelState.Equals("LOCKED"))
+            {
+                ButtonChapter1Levels[i].interactable = false;
+            }
+            else
+            {
+                ButtonChapter1Levels[i].interactable = false;
+                Debug.LogWarning("Unexpected value for " + levelKey + ": " + levelState);
+            }
+        }
+
     }
 
     private void Update()
