@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerProjectile : MonoBehaviour
 {
+    [Header("Damage")]
+    [SerializeField] private float minDamage;
+    [SerializeField] private float maxDamage;
+    
     [Header("Travel Speed")]
     [SerializeField] private float speed = 15f;
 
@@ -13,7 +17,11 @@ public class PlayerProjectile : MonoBehaviour
 
     [Header("References")]
     public GameObject smokePoofEffect;
-  
+
+    private void Awake()
+    {
+        
+    }
 
     void Update()
     {
@@ -26,7 +34,14 @@ public class PlayerProjectile : MonoBehaviour
 
         }
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyController>().currentHealth -= Random.Range(minDamage, maxDamage);
+        }
+        
+    }
     public void Death()
     {
         

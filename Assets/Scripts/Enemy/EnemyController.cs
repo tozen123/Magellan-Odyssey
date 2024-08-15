@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Attributes")]
+
+    public float currentHealth;
+    public float maxHealth;
+
     public float knockbackForce = 5f;
     public float knockbackDuration = 0.1f;
 

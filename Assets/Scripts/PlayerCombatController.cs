@@ -60,8 +60,10 @@ public class PlayerCombatController : MonoBehaviour
         if (_playerLookAttackInput.magnitude > attackSensitivity && attackTime <= 0)
         {
             //ShootProjectile();
-            playerAnimator.SetTrigger("Shoot");
             attackTime = attackSpeed;
+
+
+            playerAnimator.SetTrigger("Shoot");
 
         }
     }
