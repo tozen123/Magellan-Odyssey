@@ -12,6 +12,7 @@ public class PlayerQuestHandler : MonoBehaviour
     [SerializeField] private Vector2 QUEST_HOLDER_ORIGINAL_ANCHOR_POSITION;
     [SerializeField] private Vector2 QUEST_HOLDER_OFF_SIZE;
     [SerializeField] private Vector2 QUEST_HOLDER_OFF_ANCHOR_POSITION;
+    [SerializeField] private TextMeshProUGUI QUEST_BUTTON_TOGGLE;
 
     [Header("Quest Details References")]
     [SerializeField] private GameObject QUEST_DETAILS_TEXT;
@@ -32,7 +33,6 @@ public class PlayerQuestHandler : MonoBehaviour
     private Coroutine animationCoroutine;
     private int currentQuestIndex = 0;
 
-    // Static reference to the current active instance
     private static PlayerQuestHandler _instance;
 
     void Awake()
@@ -68,10 +68,13 @@ public class PlayerQuestHandler : MonoBehaviour
         if (isExpanded)
         {
             animationCoroutine = StartCoroutine(AnimateQuestHolder(QUEST_HOLDER_OFF_SIZE, QUEST_HOLDER_OFF_ANCHOR_POSITION, false));
+            QUEST_BUTTON_TOGGLE.text = "Close Quest Tab";
         }
         else
         {
             animationCoroutine = StartCoroutine(AnimateQuestHolder(QUEST_HOLDER_ORIGINAL_SIZE, QUEST_HOLDER_ORIGINAL_ANCHOR_POSITION, true));
+            QUEST_BUTTON_TOGGLE.text = "Open Quest Tab";
+
         }
 
         isExpanded = !isExpanded;
@@ -122,11 +125,15 @@ public class PlayerQuestHandler : MonoBehaviour
 
         Quest currentQuest = _instance.Level1Quests[_instance.currentQuestIndex];
 
-        // Check if the provided title matches the currently displayed quest's title
         if (currentQuest.QuestTitle.Equals(title, System.StringComparison.OrdinalIgnoreCase))
         {
             currentQuest.MarkAsCompleted();
             _instance.currentQuestIndex++;
+
+            QuestPopCardManager.Instance
+              .SetTitle("Quest Completed\n" + title)
+              .SetMessage(currentQuest.QuestDescription + "\n\n" + "You earned " + currentQuest.QuestADPPoints + " Academic Points")
+              .Show();
 
             if (_instance.currentQuestIndex >= _instance.Level1Quests.Count)
             {

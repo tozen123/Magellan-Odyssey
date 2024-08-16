@@ -5,41 +5,41 @@ using UnityEngine;
 public class ChapterOneLevelOneHandler : MonoBehaviour
 {
     [SerializeField] private GameObject playerCanvas;
-    [SerializeField] private  PlayerQuestHandler playerQuestHandler;
+    [SerializeField] private PlayerQuestHandler playerQuestHandler;
+    [SerializeField] private PlayerQuestListManager playerQuestListManager;
 
     private void Awake()
     {
         playerCanvas.SetActive(false);
-
-        
     }
+
     private void Start()
     {
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("Magellan's childhood was mysterious; historians assumed his life was no different from that of ordinary children at his age. ")
+               .SetMessage("Magellan's childhood was mysterious; historians assumed his life was no different from that of ordinary children at his age.")
                .Show();
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("However, Magellan lost his parents when he was around 10-12 years old. Fortunately, his cousins brought him to Lisbon, the capital of the expanding Portuguese empire. ")
+               .SetMessage("However, Magellan lost his parents when he was around 10-12 years old. Fortunately, his cousins brought him to Lisbon, the capital of the expanding Portuguese empire.")
                .OnClose(OpenPlayerCanvas)
                .Show();
 
-
-
         playerQuestHandler.AddQuest(new Quest("Explore the City of Lisbon",
-                       "In the 15th century, seafaring offered great benefits and rewards such as knighthood promotion, selective tax exemption, and the grant of small annual pensions. In fact, Magellan's relatives mostly pursued a maritime career. ",
+                       "In the 15th century, seafaring offered great benefits and rewards such as knighthood promotion, selective tax exemption, and the grant of small annual pensions. In fact, Magellan's relatives mostly pursued a maritime career.",
                        "Run around the city",
                        25));
 
         playerQuestHandler.AddQuest(new Quest("Meet Ferdinand Magellan",
                          "Magellan, 25 years old, was a seafarer recognized for his courage and heroism during the Portuguese dominion expansion in India against local Moro rulers. " +
-                         "Magellan was then promoted as captain around 1505-1509. ",
+                         "Magellan was then promoted as captain around 1505-1509.",
                          "Interact with Magellan",
                          40));
-      
+
+        playerQuestListManager.PopulateQuestList();
     }
+
     void OpenPlayerCanvas()
     {
         playerCanvas.SetActive(true);
@@ -47,7 +47,7 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             PlayerQuestHandler.CompleteQuest("Explore the City of Lisbon");
         }
