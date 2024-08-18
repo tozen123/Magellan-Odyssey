@@ -25,6 +25,6 @@ public class FloatingNamePanel : MonoBehaviour
 
         ParentCanvas.SetActive(false);
     }
-  
+   
 
 }

@@ -69,6 +69,11 @@ public class PlayerInteractionController : MonoBehaviour
                         return;
 
                     }
+
+                    if (other.gameObject.GetComponent<DialogueTrigger>())
+                    {
+                        dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
+                    }
                 }
 
             }

@@ -1,20 +1,16 @@
+using UnityEngine;
+
 [System.Serializable]
 public class Quest
 {
-    public string QuestTitle { get; private set; }
-    public string QuestDescription { get; private set; }
-    public string QuestWhatToDo { get; private set; }
-    public int QuestADPPoints { get; private set; }
-    public bool IsCompleted { get; private set; }
+    public string QuestTitle;
 
-    public Quest(string title, string description, string whatToDo, int adpPoints)
-    {
-        QuestTitle = title;
-        QuestDescription = description;
-        QuestWhatToDo = whatToDo;
-        QuestADPPoints = adpPoints;
-        IsCompleted = false;
-    }
+    [TextArea(3, 10)]
+    public string QuestDescription;    
+    public string QuestWhatToDo;        
+    public int QuestADPPoints;          
+    public bool IsCompleted { get; private set; }  
+
 
     public void MarkAsCompleted()
     {
