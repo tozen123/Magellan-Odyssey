@@ -9,11 +9,13 @@ public class CameraSystem : MonoBehaviour
     [SerializeField] private float smoothSpeed;
     private Vector3 _currentVelocity = Vector3.zero;
 
-
-    [SerializeField] private WorldObjectFadingHandler _FadingHandler;
+    private WorldObjectFadingHandler _currentFadingHandler;
     [SerializeField] private GameObject _Player;
 
-    private void Awake() => _offset = transform.position - target.position;
+    private void Awake()
+    {
+        _offset = transform.position - target.position;
+    }
 
     private void LateUpdate()
     {
@@ -24,8 +26,8 @@ public class CameraSystem : MonoBehaviour
     private void Start()
     {
         _Player = GameObject.FindGameObjectWithTag("Player");
-
     }
+
     private void Update()
     {
         if (_Player != null)
@@ -36,30 +38,42 @@ public class CameraSystem : MonoBehaviour
             Ray ray = new Ray(cameraPosition, direction);
             RaycastHit hit;
 
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red); 
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+
             if (Physics.Raycast(ray, out hit))
             {
-                if(hit.collider == null)
+                if (hit.collider != null && hit.collider.gameObject != _Player)
                 {
-                    return;
-                }
-                if (hit.collider.gameObject == _Player)
-                {
-                    
-                    if (_FadingHandler != null)
+                    WorldObjectFadingHandler fadingHandler = hit.collider.gameObject.GetComponent<WorldObjectFadingHandler>();
+
+                    if (fadingHandler != null)
                     {
-                        _FadingHandler.activeFade = false;
+                        if (_currentFadingHandler != fadingHandler)
+                        {
+                            if (_currentFadingHandler != null)
+                            {
+                                _currentFadingHandler.activeFade = false;
+                            }
+                            _currentFadingHandler = fadingHandler;
+                            _currentFadingHandler.activeFade = true;
+                        }
                     }
-                    
                 }
                 else
                 {
-
-                    _FadingHandler = hit.collider.gameObject.GetComponent<WorldObjectFadingHandler>();
-                    if (_FadingHandler != null)
+                    if (_currentFadingHandler != null)
                     {
-                        _FadingHandler.activeFade = true;
+                        _currentFadingHandler.activeFade = false;
+                        _currentFadingHandler = null;
                     }
+                }
+            }
+            else
+            {
+                if (_currentFadingHandler != null)
+                {
+                    _currentFadingHandler.activeFade = false;
+                    _currentFadingHandler = null;
                 }
             }
         }

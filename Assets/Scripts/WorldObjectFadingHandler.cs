@@ -4,63 +4,124 @@ using UnityEngine;
 
 public class WorldObjectFadingHandler : MonoBehaviour
 {
-    [SerializeField] private float fadingSpeed;
-    [SerializeField] private float fadingAmount;
+    [SerializeField] private float fadingSpeed = 2.0f;
+    [SerializeField] private float fadingAmount = 0.3f;
 
-    private float _OriginalOpacity;
-    private Material _ObjectMaterial;
+    private Dictionary<Renderer, float> _originalOpacities = new Dictionary<Renderer, float>();
+    private Renderer[] _renderers;
 
     public bool activeFade;
-    private GameObject _Player;
-
-    public float timer = 2f;
+    private float _fadeTimer = 2f;
+    private bool _isFading = false;
 
     void Start()
     {
-        _ObjectMaterial = GetComponent<Renderer>().material;
-        _OriginalOpacity = _ObjectMaterial.color.a;
+        _renderers = GetComponentsInChildren<Renderer>();
+        foreach (var renderer in _renderers)
+        {
+            // Store original opacity
+            _originalOpacities[renderer] = renderer.material.color.a;
 
-
-        _Player = GameObject.FindGameObjectWithTag("Player");
+            // Set material to transparent mode
+            SetMaterialTransparent(renderer.material);
+        }
     }
-
 
     void Update()
     {
-        if(activeFade)
+        if (activeFade)
         {
-            FadeStateTrue();
+            if (!_isFading)
+            {
+                StartFade();
+            }
 
-            timer -= Time.deltaTime;
+            _fadeTimer -= Time.deltaTime;
 
-            if(timer < 0)
+            if (_fadeTimer <= 0f)
             {
                 activeFade = false;
-                timer = 2f;
+                _fadeTimer = 2f;
             }
         }
         else
         {
-            FadeStateReset();
+            if (_isFading)
+            {
+                ResetFade();
+            }
+        }
+    }
+
+    private void StartFade()
+    {
+        _isFading = true;
+        StopAllCoroutines(); // Stop any existing reset coroutine
+        StartCoroutine(FadeTo(fadingAmount));
+    }
+
+    private void ResetFade()
+    {
+        _isFading = false;
+        StopAllCoroutines(); // Stop any existing fade coroutine
+        StartCoroutine(FadeToOriginal());
+    }
+
+    private IEnumerator FadeTo(float targetOpacity)
+    {
+        float elapsed = 0f;
+        while (elapsed < fadingSpeed)
+        {
+            foreach (var renderer in _renderers)
+            {
+                Color currentColor = renderer.material.color;
+                float newAlpha = Mathf.Lerp(currentColor.a, targetOpacity, elapsed / fadingSpeed);
+                renderer.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, newAlpha);
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
         }
 
-
+        // Ensure final alpha is set exactly to target opacity
+        foreach (var renderer in _renderers)
+        {
+            Color currentColor = renderer.material.color;
+            renderer.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, targetOpacity);
+        }
     }
 
-    private void FadeStateTrue()
+    private IEnumerator FadeToOriginal()
     {
-       
-        Color currentColor = _ObjectMaterial.color;
-        Color smoothColor = new Color(currentColor.r, currentColor.g, currentColor.b, Mathf.Lerp(currentColor.a, fadingAmount, fadingSpeed * Time.deltaTime));
-        _ObjectMaterial.color = smoothColor;
+        float elapsed = 0f;
+        while (elapsed < fadingSpeed)
+        {
+            foreach (var renderer in _renderers)
+            {
+                Color currentColor = renderer.material.color;
+                float originalOpacity = _originalOpacities[renderer];
+                float newAlpha = Mathf.Lerp(currentColor.a, originalOpacity, elapsed / fadingSpeed);
+                renderer.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, newAlpha);
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
 
+        // Ensure final alpha is set exactly to the original opacity
+        foreach (var renderer in _renderers)
+        {
+            Color currentColor = renderer.material.color;
+            renderer.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, _originalOpacities[renderer]);
+        }
     }
-    private void FadeStateReset()
+
+    private void SetMaterialTransparent(Material material)
     {
-
-        Color currentColor = _ObjectMaterial.color;
-        Color smoothColor = new Color(currentColor.r, currentColor.g, currentColor.b, Mathf.Lerp(currentColor.a, _OriginalOpacity, fadingSpeed * Time.deltaTime));
-        _ObjectMaterial.color = smoothColor;
-
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        material.SetInt("_ZWrite", 0);
+        material.DisableKeyword("_ALPHATEST_ON");
+        material.EnableKeyword("_ALPHABLEND_ON");
+        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
 }
