@@ -46,35 +46,36 @@ public class ChapterMenuHandler : MonoBehaviour
 
     private void UpdateButtonInteractability()
     {
-        int current_adp = ADP;
+        ButtonChapter1.interactable = true;
+        //int current_adp = ADP;
 
-        switch (current_adp)
-        {
-            case 0:
-                ButtonChapter1.interactable = true;
-                ButtonChapter2.interactable = false;
-                ButtonChapter3.interactable = false;
-                break;
+        //switch (current_adp)
+        //{
+        //    case 0:
+        //        ButtonChapter1.interactable = true;
+        //        ButtonChapter2.interactable = false;
+        //        ButtonChapter3.interactable = false;
+        //        break;
 
-            case 1000:
-                ButtonChapter1.interactable = true;
-                ButtonChapter2.interactable = true;
-                ButtonChapter3.interactable = false;
-                break;
+        //    case 1000:
+        //        ButtonChapter1.interactable = true;
+        //        ButtonChapter2.interactable = true;
+        //        ButtonChapter3.interactable = false;
+        //        break;
 
-            case 2000:
-                ButtonChapter1.interactable = true;
-                ButtonChapter2.interactable = true;
-                ButtonChapter3.interactable = true;
-                break;
+        //    case 2000:
+        //        ButtonChapter1.interactable = true;
+        //        ButtonChapter2.interactable = true;
+        //        ButtonChapter3.interactable = true;
+        //        break;
 
-            default:
-                ButtonChapter1.interactable = false;
-                ButtonChapter2.interactable = false;
-                ButtonChapter3.interactable = false;
-                Debug.LogWarning("Unexpected value for adventure_points: " + current_adp);
-                break;
-        }
+        //    default:
+        //        ButtonChapter1.interactable = false;
+        //        ButtonChapter2.interactable = false;
+        //        ButtonChapter3.interactable = false;
+        //        Debug.LogWarning("Unexpected value for adventure_points: " + current_adp);
+        //        break;
+        //}
 
         for (int i = 0; i < ButtonChapter1Levels.Length; i++)
         {

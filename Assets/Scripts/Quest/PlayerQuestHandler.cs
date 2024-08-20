@@ -45,6 +45,7 @@ public class PlayerQuestHandler : MonoBehaviour
         {
             Debug.LogWarning("Multiple PlayerQuestHandler instances found!");
         }
+        Toggle();
     }
 
     void Start()
@@ -68,12 +69,12 @@ public class PlayerQuestHandler : MonoBehaviour
         if (isExpanded)
         {
             animationCoroutine = StartCoroutine(AnimateQuestHolder(QUEST_HOLDER_OFF_SIZE, QUEST_HOLDER_OFF_ANCHOR_POSITION, false));
-            QUEST_BUTTON_TOGGLE.text = "Close Quest Tab";
+            QUEST_BUTTON_TOGGLE.text = "Open Quest Tab";
         }
         else
         {
             animationCoroutine = StartCoroutine(AnimateQuestHolder(QUEST_HOLDER_ORIGINAL_SIZE, QUEST_HOLDER_ORIGINAL_ANCHOR_POSITION, true));
-            QUEST_BUTTON_TOGGLE.text = "Open Quest Tab";
+            QUEST_BUTTON_TOGGLE.text = "Close Quest Tab";
 
         }
 
