@@ -73,6 +73,7 @@ public class PlayerInteractionController : MonoBehaviour
                     if (other.gameObject.GetComponent<DialogueTrigger>())
                     {
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
+                        return;
                     }
                 }
 
@@ -111,8 +112,11 @@ public class PlayerInteractionController : MonoBehaviour
             ButtonSetState(ButtonInteract, false);
             ResetControllers();
         }
-       
-
+        else
+        {
+            ResetControllers();
+        }
+        
     }
 
     public void ResetControllers()

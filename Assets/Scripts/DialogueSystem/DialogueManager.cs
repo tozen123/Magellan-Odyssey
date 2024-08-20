@@ -59,20 +59,18 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartDialogue(Dialogue dialogue)
     {
-        
-
         isDialogueActive = true;
-
         animator.Play("UIPop");
 
         lines.Clear();
 
-        if (isCompleteQuiz)
+        bool isCurrentDialogueQuiz = dialogue.dialogueLines.Exists(line => line.hasChoices && !line.isSimpleWithChoices);
+
+        if (isCurrentDialogueQuiz && isCompleteQuiz)
         {
             feedbackBodyParent.SetActive(true);
             dialogueBodyParent.SetActive(false);
             feedbackText.text = "You already took the Quiz!";
-
             isAwaitingInput = true;
             return;
         }
@@ -87,6 +85,7 @@ public class DialogueManager : MonoBehaviour
 
         DisplayNextDialogueLine();
     }
+
 
     public void DisplayNextDialogueLine()
     {
@@ -109,6 +108,11 @@ public class DialogueManager : MonoBehaviour
             choiceButtonPanelParent.SetActive(true);
             DisplayChoices(currentLine);
         }
+        else if (currentLine.isSimpleWithChoices)
+        {
+            choiceButtonPanelParent.SetActive(true);
+            DisplaySimpleChoices(currentLine);
+        }
         else
         {
             choiceButtonPanelParent.SetActive(false);
@@ -119,6 +123,33 @@ public class DialogueManager : MonoBehaviour
 
             StartCoroutine(TypeSentence(currentLine.line));
         }
+    }
+
+    void DisplaySimpleChoices(DialogueLine dialogueLine)
+    {
+        dialogueArea.text = dialogueLine.line;
+
+        for (int i = 0; i < choiceButtons.Count; i++)
+        {
+            choiceButtons[i].onClick.RemoveAllListeners(); // Clear previous listeners
+            choiceButtons[i].gameObject.SetActive(false);  // Hide all buttons initially
+
+            if (i < dialogueLine.choices.Count)
+            {
+                choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
+                choiceButtons[i].gameObject.SetActive(true);
+
+                // Adding listener to proceed to the next dialogue line without any feedback
+                choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
+            }
+        }
+    }
+
+    void OnSimpleChoiceSelected()
+    {
+        feedbackBodyParent.SetActive(false);
+        choiceButtonPanelParent.SetActive(false);
+        DisplayNextDialogueLine();
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -135,24 +166,21 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueArea.text = dialogueLine.line;
 
-
-
         for (int i = 0; i < choiceButtons.Count; i++)
         {
-            int correctIndex = i;
-          
+            choiceButtons[i].onClick.RemoveAllListeners(); // Clear previous listeners
+            choiceButtons[i].gameObject.SetActive(false);  // Hide all buttons initially
 
             if (i < dialogueLine.choices.Count)
             {
                 choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
                 choiceButtons[i].gameObject.SetActive(true);
 
-               
+                // Adding listener for quiz choices
+                int correctIndex = i;
                 choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(dialogueLine.choices[correctIndex]));
             }
-
         }
-
     }
 
     void OnChoiceSelected(DialogueChoice choice)
@@ -192,6 +220,7 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         isDialogueActive = false;
+        isCompleteQuiz = false;
         animator.Play("UIHide");
     }
 

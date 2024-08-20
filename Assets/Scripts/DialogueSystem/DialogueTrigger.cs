@@ -9,6 +9,7 @@ public class DialogueCharacter
 }
 
 [System.Serializable]
+
 public class DialogueLine
 {
     public DialogueCharacter character;
@@ -16,6 +17,7 @@ public class DialogueLine
     public string line;
     public List<DialogueChoice> choices = new List<DialogueChoice>();
     public bool hasChoices = false;
+    public bool isSimpleWithChoices = false; // New variable
 }
 
 [System.Serializable]
@@ -34,19 +36,11 @@ public class DialogueTrigger : MonoBehaviour
     {
         DialogueManager.Instance.QuizMode(isTook);
 
-        if (isThisQuiz == true)
+        DialogueManager.Instance.StartDialogue(dialogue);
+        if (isThisQuiz)
         {
-            DialogueManager.Instance.StartDialogue(dialogue);
             isTook = true;
         }
-        else
-        {
-            DialogueManager.Instance.StartDialogue(dialogue);
-        }
-
-       
-            
-       
     }
 
     public int GetRemainingLines()
