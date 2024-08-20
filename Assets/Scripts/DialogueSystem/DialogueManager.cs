@@ -64,9 +64,8 @@ public class DialogueManager : MonoBehaviour
 
         lines.Clear();
 
-        bool isCurrentDialogueQuiz = dialogue.dialogueLines.Exists(line => line.hasChoices && !line.isSimpleWithChoices);
 
-        if (isCurrentDialogueQuiz && isCompleteQuiz)
+        if ( isCompleteQuiz)
         {
             feedbackBodyParent.SetActive(true);
             dialogueBodyParent.SetActive(false);
@@ -107,11 +106,27 @@ public class DialogueManager : MonoBehaviour
         {
             choiceButtonPanelParent.SetActive(true);
             DisplayChoices(currentLine);
+
+            for (int i = 0; i < currentLine.choices.Count; i++)
+            {
+                choiceButtons[i].interactable = true;
+                choiceButtons[i].image.color = Color.white;
+
+                Debug.Log("reset");
+            }
         }
-        else if (currentLine.isSimpleWithChoices)
+        else if (currentLine.isConverstationWithDefinedChoices)
         {
             choiceButtonPanelParent.SetActive(true);
             DisplaySimpleChoices(currentLine);
+
+            for (int i = 0; i < currentLine.choices.Count; i++)
+            {
+                choiceButtons[i].interactable = true;
+                choiceButtons[i].image.color = Color.white;
+
+                Debug.Log("reset");
+            }
         }
         else
         {
@@ -123,6 +138,8 @@ public class DialogueManager : MonoBehaviour
 
             StartCoroutine(TypeSentence(currentLine.line));
         }
+       
+
     }
 
     void DisplaySimpleChoices(DialogueLine dialogueLine)
@@ -131,15 +148,13 @@ public class DialogueManager : MonoBehaviour
 
         for (int i = 0; i < choiceButtons.Count; i++)
         {
-            choiceButtons[i].onClick.RemoveAllListeners(); // Clear previous listeners
-            choiceButtons[i].gameObject.SetActive(false);  // Hide all buttons initially
+            int correctIndex = i;
 
             if (i < dialogueLine.choices.Count)
             {
                 choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
                 choiceButtons[i].gameObject.SetActive(true);
 
-                // Adding listener to proceed to the next dialogue line without any feedback
                 choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
             }
         }
@@ -151,6 +166,8 @@ public class DialogueManager : MonoBehaviour
         choiceButtonPanelParent.SetActive(false);
         DisplayNextDialogueLine();
     }
+
+
 
     IEnumerator TypeSentence(string sentence)
     {
@@ -221,6 +238,14 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         isCompleteQuiz = false;
+
+        if (!string.IsNullOrEmpty(currentLine.targetSceneName))
+        {
+            LoadingScreenManager.Instance.LoadScene(currentLine.targetSceneName);
+        }
+
+        Debug.Log("EndDialogue");
+
         animator.Play("UIHide");
     }
 

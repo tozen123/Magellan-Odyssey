@@ -118,7 +118,26 @@ public class PlayerQuestHandler : MonoBehaviour
             DisplayQuest(quest);
         }
     }
+    public static int GetQuestADPPoints(string title)
+    {
+        if (_instance == null || _instance.Level1Quests.Count == 0) return 0;
 
+        Quest currentQuest = _instance.Level1Quests[_instance.currentQuestIndex];
+
+        if (currentQuest.QuestTitle.Equals(title, System.StringComparison.OrdinalIgnoreCase))
+        {
+            Debug.Log("okay");
+            return currentQuest.GetQuestADPPoints();
+
+
+        }
+        else
+        {
+            Debug.Log("not found");
+            return 0;
+        }
+        
+    }
     public static void CompleteQuest(string title)
     {
         if (_instance == null || _instance.Level1Quests.Count == 0) return;

@@ -50,30 +50,20 @@ public class PlayerInteractionController : MonoBehaviour
 
                     Debug.Log(_character.name);
 
-                    if (_character.name == "Jan")
+                    if(_character.name == "Ferdinand Magellan")
                     {
-                        dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
-                        return;
-                    }
+                        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");
+                        PlayerPrefs.Save();
 
-                    if (_character.name == "Thomas")
-                    {
-                        dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
-                        return;
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
 
-                    }
-
-                    if (_character.name == "Ttan")
-                    {
-                        dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
-                        return;
-
+                        PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
                     }
 
                     if (other.gameObject.GetComponent<DialogueTrigger>())
                     {
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();
-                        return;
                     }
                 }
 

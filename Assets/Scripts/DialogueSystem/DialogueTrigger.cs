@@ -17,7 +17,9 @@ public class DialogueLine
     public string line;
     public List<DialogueChoice> choices = new List<DialogueChoice>();
     public bool hasChoices = false;
-    public bool isSimpleWithChoices = false; // New variable
+    public bool isConverstationWithDefinedChoices = false;
+
+    public string targetSceneName; 
 }
 
 [System.Serializable]
@@ -34,11 +36,13 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
+
         DialogueManager.Instance.QuizMode(isTook);
 
         DialogueManager.Instance.StartDialogue(dialogue);
         if (isThisQuiz)
         {
+            
             isTook = true;
         }
     }

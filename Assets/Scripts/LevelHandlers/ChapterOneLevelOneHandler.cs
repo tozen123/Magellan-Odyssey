@@ -80,6 +80,8 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Explore the City of Lisbon"));
+
             PlayerQuestHandler.CompleteQuest("Explore the City of Lisbon");
         }
     }

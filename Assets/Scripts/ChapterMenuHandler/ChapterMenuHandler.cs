@@ -81,9 +81,14 @@ public class ChapterMenuHandler : MonoBehaviour
             string levelKey = "Chapter1Level" + (i + 1);
             string levelState = PlayerPrefs.GetString(levelKey);
 
-            if (levelState.Equals("IN_PROGRESS") || levelState.Equals("COMPLETED"))
+            if (levelState.Equals("IN_PROGRESS")  )
             {
                 ButtonChapter1Levels[i].interactable = true;
+            }
+            else if (levelState.Equals("COMPLETED"))
+            {
+                ButtonChapter1Levels[i].interactable = false;
+                ButtonChapter1Levels[i].image.color = Color.black;
             }
             else if (levelState.Equals("LOCKED"))
             {
