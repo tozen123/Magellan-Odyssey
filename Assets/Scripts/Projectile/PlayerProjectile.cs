@@ -40,7 +40,10 @@ public class PlayerProjectile : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyController>().currentHealth -= Random.Range(minDamage, maxDamage);
         }
-        
+        if (collision.gameObject.GetComponent<Collider>())
+        {
+            Death();
+        }
     }
     public void Death()
     {
