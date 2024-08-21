@@ -144,8 +144,11 @@ public class DialogueManager : MonoBehaviour
 
     void DisplaySimpleChoices(DialogueLine dialogueLine)
     {
-        dialogueArea.text = dialogueLine.line;
+        isAwaitingInput = false;
 
+
+        //dialogueArea.text = dialogueLine.line;
+        StartCoroutine(TypeSentence(dialogueLine.line));
         for (int i = 0; i < choiceButtons.Count; i++)
         {
             int correctIndex = i;
@@ -157,7 +160,12 @@ public class DialogueManager : MonoBehaviour
 
                 choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
             }
+            else
+            {
+                choiceButtons[i].gameObject.SetActive(false);
+            }
         }
+
     }
 
     void OnSimpleChoiceSelected()
@@ -181,7 +189,8 @@ public class DialogueManager : MonoBehaviour
     }
     void DisplayChoices(DialogueLine dialogueLine)
     {
-        dialogueArea.text = dialogueLine.line;
+        //dialogueArea.text = dialogueLine.line;
+        StartCoroutine(TypeSentence(dialogueLine.line));
 
         for (int i = 0; i < choiceButtons.Count; i++)
         {

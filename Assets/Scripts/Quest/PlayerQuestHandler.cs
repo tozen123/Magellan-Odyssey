@@ -174,8 +174,8 @@ public class PlayerQuestHandler : MonoBehaviour
     private void DisplayQuest(Quest quest)
     {
         QUEST_TITLE.text = quest.QuestTitle;
-        QUEST_DESCRIPTION.text = quest.QuestDescription;
-        QUEST_TASK.text = quest.QuestWhatToDo;
-        QUEST_POINTS.text = quest.QuestADPPoints.ToString();
+        //QUEST_DESCRIPTION.text = quest.QuestDescription;
+        QUEST_TASK.text = "Task: " +  quest.QuestWhatToDo;
+        QUEST_POINTS.text = "Adventure Points: " + quest.QuestADPPoints.ToString();
     }
 }
