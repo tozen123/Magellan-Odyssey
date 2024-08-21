@@ -43,6 +43,11 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
     {
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
+               .SetMessage("Chapter 1: Level 1")
+               .Show();
+
+        DialogMessagePrompt.Instance
+               .SetTitle("System Message")
                .SetMessage("Magellan's childhood was mysterious; historians assumed his life was no different from that of ordinary children at his age.")
                .Show();
 

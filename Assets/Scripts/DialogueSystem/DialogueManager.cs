@@ -70,6 +70,12 @@ public class DialogueManager : MonoBehaviour
             feedbackBodyParent.SetActive(true);
             dialogueBodyParent.SetActive(false);
             feedbackText.text = "You already took the Quiz!";
+
+            foreach (Button button in choiceButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+
             isAwaitingInput = true;
             return;
         }
@@ -141,30 +147,44 @@ public class DialogueManager : MonoBehaviour
        
 
     }
+    bool readyForInput;
 
     void DisplaySimpleChoices(DialogueLine dialogueLine)
     {
-        isAwaitingInput = false;
 
+        //readyForInput = false;
 
-        //dialogueArea.text = dialogueLine.line;
-        StartCoroutine(TypeSentence(dialogueLine.line));
-        for (int i = 0; i < choiceButtons.Count; i++)
+        ////dialogueArea.text = dialogueLine.line;
+        //StartCoroutine(TypeSentence(dialogueLine.line));
+
+        //while(readyForInput)
+        //{
+        //    for (int i = 0; i < choiceButtons.Count; i++)
+        //    {
+        //        int correctIndex = i;
+
+        //        if (i < dialogueLine.choices.Count)
+        //        {
+        //            choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
+        //            choiceButtons[i].gameObject.SetActive(true);
+
+        //            choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
+        //        }
+        //        else
+        //        {
+        //            choiceButtons[i].gameObject.SetActive(false);
+        //        }
+        //    }
+        //    readyForInput = false;
+        //}
+        readyForInput = false;
+        choiceButtonPanelParent.SetActive(false);
+        foreach (Button button in choiceButtons)
         {
-            int correctIndex = i;
-
-            if (i < dialogueLine.choices.Count)
-            {
-                choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
-                choiceButtons[i].gameObject.SetActive(true);
-
-                choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
-            }
-            else
-            {
-                choiceButtons[i].gameObject.SetActive(false);
-            }
+            button.gameObject.SetActive(false);
         }
+
+        StartCoroutine(ShowChoicesAfterTyping(dialogueLine));
 
     }
 
@@ -186,27 +206,37 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
         isAwaitingInput = true;
+
     }
     void DisplayChoices(DialogueLine dialogueLine)
     {
         //dialogueArea.text = dialogueLine.line;
-        StartCoroutine(TypeSentence(dialogueLine.line));
+        //StartCoroutine(TypeSentence(dialogueLine.line));
 
-        for (int i = 0; i < choiceButtons.Count; i++)
+        //for (int i = 0; i < choiceButtons.Count; i++)
+        //{
+        //    choiceButtons[i].onClick.RemoveAllListeners(); // Clear previous listeners
+        //    choiceButtons[i].gameObject.SetActive(false);  // Hide all buttons initially
+
+        //    if (i < dialogueLine.choices.Count)
+        //    {
+        //        choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
+        //        choiceButtons[i].gameObject.SetActive(true);
+
+        //        // Adding listener for quiz choices
+        //        int correctIndex = i;
+        //        choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(dialogueLine.choices[correctIndex]));
+        //    }
+        //}
+
+        readyForInput = false;
+        choiceButtonPanelParent.SetActive(false);
+        foreach (Button button in choiceButtons)
         {
-            choiceButtons[i].onClick.RemoveAllListeners(); // Clear previous listeners
-            choiceButtons[i].gameObject.SetActive(false);  // Hide all buttons initially
-
-            if (i < dialogueLine.choices.Count)
-            {
-                choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
-                choiceButtons[i].gameObject.SetActive(true);
-
-                // Adding listener for quiz choices
-                int correctIndex = i;
-                choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(dialogueLine.choices[correctIndex]));
-            }
+            button.gameObject.SetActive(false);
         }
+
+        StartCoroutine(ShowChoicesAfterTypingForQuiz(dialogueLine));
     }
 
     void OnChoiceSelected(DialogueChoice choice)
@@ -286,5 +316,51 @@ public class DialogueManager : MonoBehaviour
     public int GetRemainingLinesCount()
     {
         return lines.Count;
+    }
+
+    IEnumerator ShowChoicesAfterTyping(DialogueLine dialogueLine)
+    {
+        yield return StartCoroutine(TypeSentence(dialogueLine.line));
+
+        readyForInput = true;
+        choiceButtonPanelParent.SetActive(true);
+
+        for (int i = 0; i < choiceButtons.Count; i++)
+        {
+            if (i < dialogueLine.choices.Count)
+            {
+                choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
+                choiceButtons[i].gameObject.SetActive(true);
+                choiceButtons[i].onClick.RemoveAllListeners(); 
+                choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
+            }
+            else
+            {
+                choiceButtons[i].gameObject.SetActive(false);
+            }
+        }
+    }
+    IEnumerator ShowChoicesAfterTypingForQuiz(DialogueLine dialogueLine)
+    {
+        yield return StartCoroutine(TypeSentence(dialogueLine.line));
+
+        readyForInput = true;
+        choiceButtonPanelParent.SetActive(true);
+
+        for (int i = 0; i < choiceButtons.Count; i++)
+        {
+            if (i < dialogueLine.choices.Count)
+            {
+                choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
+                choiceButtons[i].gameObject.SetActive(true);
+                choiceButtons[i].onClick.RemoveAllListeners(); 
+                int correctIndex = i;
+                choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(dialogueLine.choices[correctIndex]));
+            }
+            else
+            {
+                choiceButtons[i].gameObject.SetActive(false);
+            }
+        }
     }
 }
