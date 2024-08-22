@@ -120,6 +120,7 @@ public class DialogueManager : MonoBehaviour
 
                 Debug.Log("reset");
             }
+            return;
         }
         else if (currentLine.isConverstationWithDefinedChoices)
         {
@@ -133,6 +134,7 @@ public class DialogueManager : MonoBehaviour
 
                 Debug.Log("reset");
             }
+            return;
         }
         else
         {
@@ -142,12 +144,13 @@ public class DialogueManager : MonoBehaviour
                 button.gameObject.SetActive(false);
             }
 
-            StartCoroutine(TypeSentence(currentLine.line));
+            StartCoroutine(DialogueTypeSentence(currentLine.line));
+            return;
         }
        
 
     }
-    bool readyForInput;
+
 
     void DisplaySimpleChoices(DialogueLine dialogueLine)
     {
@@ -177,7 +180,7 @@ public class DialogueManager : MonoBehaviour
         //    }
         //    readyForInput = false;
         //}
-        readyForInput = false;
+      
         choiceButtonPanelParent.SetActive(false);
         foreach (Button button in choiceButtons)
         {
@@ -192,11 +195,23 @@ public class DialogueManager : MonoBehaviour
     {
         feedbackBodyParent.SetActive(false);
         choiceButtonPanelParent.SetActive(false);
+        isAwaitingInput = true; // Now it's safe to await input
         DisplayNextDialogueLine();
     }
 
+    
 
+    IEnumerator DialogueTypeSentence(string sentence)
+    {
+        dialogueArea.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueArea.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
 
+        isAwaitingInput = true;
+    }
     IEnumerator TypeSentence(string sentence)
     {
         dialogueArea.text = "";
@@ -205,7 +220,7 @@ public class DialogueManager : MonoBehaviour
             dialogueArea.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        isAwaitingInput = true;
+     
 
     }
     void DisplayChoices(DialogueLine dialogueLine)
@@ -229,7 +244,7 @@ public class DialogueManager : MonoBehaviour
         //    }
         //}
 
-        readyForInput = false;
+       
         choiceButtonPanelParent.SetActive(false);
         foreach (Button button in choiceButtons)
         {
@@ -237,22 +252,29 @@ public class DialogueManager : MonoBehaviour
         }
 
         StartCoroutine(ShowChoicesAfterTypingForQuiz(dialogueLine));
+
+        
     }
 
     void OnChoiceSelected(DialogueChoice choice)
     {
         isCompleteQuiz = true;
+
+        Debug.Log("Displaying feedback...");
+
         feedbackBodyParent.SetActive(true);
         dialogueBodyParent.SetActive(true);
+
         if (choice.isCorrect)
         {
             feedbackText.text = "Correct";
+            Debug.Log("Correct answer selected");
         }
         else
         {
             feedbackText.text = "Wrong";
+            Debug.Log("Wrong answer selected");
         }
-
 
         for (int i = 0; i < currentLine.choices.Count; i++)
         {
@@ -268,7 +290,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-
+        Debug.Log("Feedback displayed");
 
         isAwaitingInput = true;
     }
@@ -294,7 +316,6 @@ public class DialogueManager : MonoBehaviour
         {
             isAwaitingInput = false;
             feedbackBodyParent.SetActive(false);
-            
             DisplayNextDialogueLine();
         }
 
@@ -303,7 +324,6 @@ public class DialogueManager : MonoBehaviour
             dialogoueParent.gameObject.GetComponent<Image>().enabled = false;
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
-
         }
         else
         {
@@ -322,7 +342,7 @@ public class DialogueManager : MonoBehaviour
     {
         yield return StartCoroutine(TypeSentence(dialogueLine.line));
 
-        readyForInput = true;
+        
         choiceButtonPanelParent.SetActive(true);
 
         for (int i = 0; i < choiceButtons.Count; i++)
@@ -344,7 +364,7 @@ public class DialogueManager : MonoBehaviour
     {
         yield return StartCoroutine(TypeSentence(dialogueLine.line));
 
-        readyForInput = true;
+
         choiceButtonPanelParent.SetActive(true);
 
         for (int i = 0; i < choiceButtons.Count; i++)
@@ -353,7 +373,7 @@ public class DialogueManager : MonoBehaviour
             {
                 choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
                 choiceButtons[i].gameObject.SetActive(true);
-                choiceButtons[i].onClick.RemoveAllListeners(); 
+                choiceButtons[i].onClick.RemoveAllListeners();
                 int correctIndex = i;
                 choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(dialogueLine.choices[correctIndex]));
             }
@@ -362,5 +382,7 @@ public class DialogueManager : MonoBehaviour
                 choiceButtons[i].gameObject.SetActive(false);
             }
         }
+
     }
+
 }
