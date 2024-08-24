@@ -35,16 +35,17 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
             
 
         }
-        
-    }
-  
 
-    private void Start()
+       
+
+    }
+
+    void Dialogs()
     {
         DialogMessagePrompt.Instance
-               .SetTitle("System Message")
-               .SetMessage("Chapter 1: Level 1")
-               .Show();
+             .SetTitle("System Message")
+             .SetMessage("Chapter 1: Level 1")
+             .Show();
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
@@ -57,23 +58,32 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
                .OnClose(OpenPlayerCanvas)
                .Show();
 
-        //playerQuestHandler.AddQuest(new Quest("Explore the City of Lisbon",
-        //               "In the 15th century, seafaring offered great benefits and rewards such as knighthood promotion, selective tax exemption, and the grant of small annual pensions. In fact, Magellan's relatives mostly pursued a maritime career.",
-        //               "Run around the city",
-        //               25));
+      
 
-        //playerQuestHandler.AddQuest(new Quest("Meet Ferdinand Magellan",
-        //                 "Magellan, 25 years old, was a seafarer recognized for his courage and heroism during the Portuguese dominion expansion in India against local Moro rulers. " +
-        //                 "Magellan was then promoted as captain around 1505-1509.",
-        //                 "Interact with Magellan",
-        //                 40));
-
+       
+    }
+    private void Start()
+    {
+    
         foreach (Quest quest in quests)
         {
             playerQuestHandler.AddQuest(quest);
         }
 
         playerQuestListManager.PopulateQuestList();
+
+        ChapterLevelSummaryAnnounceControl.Instance
+    .SetTitle("Chapter 1: Level 1")
+    .SetQuests(quests)
+    .SetFadeInDuration(0.5f)
+    .OnContinue(() =>
+    {
+        // Code to execute after the player taps "Continue"
+        Dialogs();
+    })
+    .Show();
+
+
     }
 
     void OpenPlayerCanvas()

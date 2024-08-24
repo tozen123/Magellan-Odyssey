@@ -19,6 +19,10 @@ public class PlayerInteractionController : MonoBehaviour
 
     public Animator playerAnimator;
 
+
+    [Header("References")]
+    [SerializeField] private CanvasGroup playerMainCanvasControllerGroup;
+
     private void Awake()
     {
         ButtonSetState(ButtonInteract, false);
@@ -26,6 +30,9 @@ public class PlayerInteractionController : MonoBehaviour
 
 
         isDialogueStarted = false;
+
+        playerMainCanvasControllerGroup.alpha = 1;
+        playerMainCanvasControllerGroup.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
