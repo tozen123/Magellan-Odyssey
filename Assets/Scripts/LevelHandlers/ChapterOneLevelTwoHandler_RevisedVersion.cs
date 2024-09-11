@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChapterOneLevelOneHandler : MonoBehaviour
+public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 {
     [Header("Handlers")]
     [SerializeField] private GameObject playerCanvas;
@@ -16,27 +16,27 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
         if (!playerCanvas)
         {
             playerCanvas = GameObject.FindWithTag("PlayerCanvas").gameObject;
-            
+
         }
-        
+
 
         playerCanvas.SetActive(false);
 
         if (!playerQuestHandler)
         {
             playerQuestHandler = GameObject.FindWithTag("Player").GetComponent<PlayerQuestHandler>();
-            
+
         }
-        
+
 
         if (!playerQuestListManager)
         {
             playerQuestListManager = GameObject.FindWithTag("Player").GetComponent<PlayerQuestListManager>();
-            
+
 
         }
 
-       
+
 
     }
 
@@ -55,13 +55,13 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
         //       .OnClose(OpenPlayerCanvas)
         //       .Show();
 
-      
 
-       
+
+
     }
     private void Start()
     {
-    
+
         foreach (Quest quest in quests)
         {
             playerQuestHandler.AddQuest(quest);
@@ -88,17 +88,5 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
         playerCanvas.SetActive(true);
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-        
-
-            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Explore the City of Lisbon"));
-
-            PlayerQuestHandler.CompleteQuest("Explore the City of Lisbon");
-
-            
-        }
-    }
+    
 }
