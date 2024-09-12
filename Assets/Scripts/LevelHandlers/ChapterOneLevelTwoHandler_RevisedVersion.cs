@@ -71,7 +71,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
                 .Show();
         }
     }
-
+    private bool isQuestCompleted = false;
     private void Update()
     {
         int remainingDummies = targetDummies.Count;
@@ -93,10 +93,12 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             }
         }
 
-        if (remainingDummies == 0)
+        if (remainingDummies == 0 && !isQuestCompleted)
         {
             PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Destroy the Dummies"));
             PlayerQuestHandler.CompleteQuest("Destroy the Dummies");
+
+            isQuestCompleted = true;
         }
 
 
