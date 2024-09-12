@@ -6,22 +6,41 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Attributes")]
 
-    public float currentHealth;
-    public float maxHealth;
+    [SerializeField] public float currentHealth;
+    [SerializeField] public float maxHealth;
 
-    public float knockbackForce = 5f;
-    public float knockbackDuration = 0.1f;
+    [SerializeField] private float knockbackForce = 5f;
+    [SerializeField] private float knockbackDuration = 0.1f;
+
+    [SerializeField] private bool knockBackAllowed = true;
 
     private Rigidbody rb;
 
+    public bool isDummyFromCh1L2R = false;
+    private ChapterOneLevelTwoHandler_RevisedVersion handler;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        if (isDummyFromCh1L2R)
+        {
+            handler = GameObject.FindObjectOfType<ChapterOneLevelTwoHandler_RevisedVersion>();
+
+        }
+
     }
 
     void Update()
     {
-
+        if(currentHealth <= 0)
+        {
+            if (isDummyFromCh1L2R)
+            {
+                DestroyDummy();
+            }
+            Destroy(this.gameObject);
+            
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -41,7 +60,11 @@ public class EnemyController : MonoBehaviour
             // Apply knockback force
             if (rb != null)
             {
-                StartCoroutine(ApplyKnockback(knockbackDirection));
+                if (knockBackAllowed)
+                {
+                    StartCoroutine(ApplyKnockback(knockbackDirection));
+
+                }
             }
 
         }
@@ -57,5 +80,11 @@ public class EnemyController : MonoBehaviour
 
         // Stop the enemy's movement
         rb.velocity = Vector3.zero;
+    }
+
+    public void DestroyDummy()
+    {
+        handler.OnDummyDestroyed(gameObject);
+        Destroy(gameObject);
     }
 }

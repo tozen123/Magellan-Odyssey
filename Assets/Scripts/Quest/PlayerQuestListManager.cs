@@ -35,7 +35,7 @@ public class PlayerQuestListManager : MonoBehaviour
             questListWindowPanel.SetActive(false);
         }
     }
-
+ 
     public void PopulateQuestList()
     {
         questList = playerQuestHandler.Level1Quests;

@@ -66,6 +66,11 @@ public class PlayerInteractionController : MonoBehaviour
                         PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
 
                         PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
+
+                        //Revised
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));
+
+                        PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
                     }
 
                     if (other.gameObject.GetComponent<DialogueTrigger>())

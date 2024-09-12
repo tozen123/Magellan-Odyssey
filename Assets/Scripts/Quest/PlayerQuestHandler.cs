@@ -171,7 +171,7 @@ public class PlayerQuestHandler : MonoBehaviour
         }
     }
 
-    private void DisplayQuest(Quest quest)
+    public void DisplayQuest(Quest quest)
     {
         QUEST_TITLE.text = quest.QuestTitle;
         //QUEST_DESCRIPTION.text = quest.QuestDescription;

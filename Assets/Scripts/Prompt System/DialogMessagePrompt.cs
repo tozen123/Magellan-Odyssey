@@ -5,10 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
-
-
 public class DialogMessagePrompt : MonoBehaviour
 {
+    [Header("Main")]
     [SerializeField] GameObject canvas;
     [SerializeField] TextMeshProUGUI titleUIText;
     [SerializeField] TextMeshProUGUI messageUIText;
@@ -23,6 +22,9 @@ public class DialogMessagePrompt : MonoBehaviour
     [HideInInspector] public bool IsActive = false;
     CanvasGroup canvasGroup;
 
+    [Header("Picture")]
+    [SerializeField] private Image imageHolder; // Image holder in the UI
+
     void Awake()
     {
         Instance = this;
@@ -34,6 +36,9 @@ public class DialogMessagePrompt : MonoBehaviour
             Hide();
             SpecificMethod();
         });
+
+        // Hide image by default
+        imageHolder.gameObject.SetActive(false);
     }
 
     void Start()
@@ -59,6 +64,20 @@ public class DialogMessagePrompt : MonoBehaviour
         return Instance;
     }
 
+    public DialogMessagePrompt SetImage(Sprite image)
+    {
+        if (image != null)
+        {
+            dialog.HasImage = true;
+            dialog.Image = image;
+        }
+        else
+        {
+            dialog.HasImage = false; // No image by default
+        }
+        return Instance;
+    }
+
     public DialogMessagePrompt OnClose(UnityAction action)
     {
         dialog.OnClose = action;
@@ -80,6 +99,17 @@ public class DialogMessagePrompt : MonoBehaviour
 
         titleUIText.text = tempDialog.Title;
         messageUIText.text = tempDialog.Message;
+
+        // Show the image if there is one
+        if (tempDialog.HasImage && tempDialog.Image != null)
+        {
+            imageHolder.sprite = tempDialog.Image;
+            imageHolder.gameObject.SetActive(true); // Show the image holder
+        }
+        else
+        {
+            imageHolder.gameObject.SetActive(false); // Hide the image holder if no image
+        }
 
         canvas.SetActive(true);
         IsActive = true;
@@ -118,3 +148,4 @@ public class DialogMessagePrompt : MonoBehaviour
     {
     }
 }
+
