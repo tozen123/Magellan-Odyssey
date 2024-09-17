@@ -55,12 +55,12 @@ public class DialogueManager : MonoBehaviour
     }
     public void QuizMode(bool isTook)
     {
-        PlayerSoundEffectManager.PlayQuizTheme();
 
         isCompleteQuiz = isTook;
     }
     public void StartDialogue(Dialogue dialogue)
     {
+       
         PlayerSoundEffectManager.PlayConvoPopUp();
         isDialogueActive = true;
         animator.Play("UIPop");
@@ -130,6 +130,8 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currentLine.isConverstationWithDefinedChoices)
         {
+            PlayerSoundEffectManager.PlayQuizTheme();
+
             choiceButtonPanelParent.SetActive(true);
             DisplaySimpleChoices(currentLine);
 
