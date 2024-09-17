@@ -24,6 +24,7 @@ public class PlayerMenuHandler : MonoBehaviour
     }
     void MenuSettingsToggleState()
     {
+        SoundEffectManager.PlayButtonClick2();
         isMenuToggledOn = !isMenuToggledOn;
         if (isMenuToggledOn)
         {
@@ -40,6 +41,8 @@ public class PlayerMenuHandler : MonoBehaviour
 
     void GameExit()
     {
+        SoundEffectManager.PlayButtonClick2();
+
         Time.timeScale = 1;
         DialogMessagePromptAction.Instance
             .SetTitle("Exit Confirmation")
@@ -51,6 +54,8 @@ public class PlayerMenuHandler : MonoBehaviour
 
     void FinalExit()
     {
+        SoundEffectManager.PlayButtonClick2();
+
         LoadingScreenManager.Instance.LoadScene("MainMenu-Sequence1");
     }
 

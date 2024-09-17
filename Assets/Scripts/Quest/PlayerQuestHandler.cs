@@ -61,6 +61,7 @@ public class PlayerQuestHandler : MonoBehaviour
 
     public void Toggle()
     {
+        SoundEffectManager.PlayButtonClick2();
         if (animationCoroutine != null)
         {
             StopCoroutine(animationCoroutine);

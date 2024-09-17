@@ -24,11 +24,11 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
     public bool canMove;
-
+    private bool isPlayingWalkingSound;
     private void Start()
     {
         canMove = true;
-
+        isPlayingWalkingSound = false;
         _characterController = GetComponent<CharacterController>();
     }
 
@@ -70,6 +70,12 @@ public class PlayerController : MonoBehaviour
 
         if (_playerInput != Vector3.zero)
         {
+            if (!isPlayingWalkingSound) // Only play sound if not already playing
+            {
+                PlayerSoundEffectManager.PlayPlayerWalking();
+                isPlayingWalkingSound = true; // Set flag to prevent overlapping
+            }
+
             var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
 
             var newInput = matrix.MultiplyPoint3x4(_playerInput);
@@ -80,11 +86,20 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turningSpeed * Time.deltaTime);
         }
+        else
+        {
+            // Stop the walking sound if player stops moving
+            if (isPlayingWalkingSound)
+            {
+                PlayerSoundEffectManager.PlayPlayerWalkingStop();
+                isPlayingWalkingSound = false; // Reset the flag
+            }
+        }
 
         if (_playerInput != Vector3.zero)
         {
 
-            
+
 
 
             animator.SetBool("isRunning", true);
@@ -109,6 +124,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 movement = transform.forward * _playerInput.magnitude * movementSpeed * Time.deltaTime;
             _characterController.Move(movement);
+
         }
        
 

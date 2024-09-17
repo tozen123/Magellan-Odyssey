@@ -24,6 +24,8 @@ public class PlayerQuestListManager : MonoBehaviour
 
     public void Toggle()
     {
+        SoundEffectManager.PlayButtonClick2();
+
         isToggle = !isToggle;
         if (isToggle)
         {

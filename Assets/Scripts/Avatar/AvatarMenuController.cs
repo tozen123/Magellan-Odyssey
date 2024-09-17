@@ -47,12 +47,13 @@ public class AvatarMenuController : MonoBehaviour
 
     public void SetCanvasState(bool state)
     {
+        SoundEffectManager.PlayButtonClick2();
         Canvas.SetActive(state);
     }
 
     public void Logout()
     {
-
+        SoundEffectManager.PlayButtonClick2();
         DialogMessagePromptAction.Instance
             .SetTitle("Confirmation")
             .SetMessage("Do you really want to clear your avatar, this action is not reversible and all of the progress will be deleted permanently?")
@@ -66,6 +67,7 @@ public class AvatarMenuController : MonoBehaviour
 
     void ConfirmLogout()
     {
+        SoundEffectManager.PlayButtonClick2();
         PlayerPrefs.DeleteAll();
         LoadingScreenManager.Instance.LoadScene("Setup-Sequence0");
     }

@@ -111,6 +111,7 @@ public class ChapterMenuHandler : MonoBehaviour
 
     public void SetStateChapter1Map(bool state)
     {
+        SoundEffectManager.PlayButtonClick2();
         if (state == true)
         {
             ChapterScrollViewHandler.SetActive(false);
@@ -128,6 +129,7 @@ public class ChapterMenuHandler : MonoBehaviour
 
     public void LoadChapterLevel(string sceneName)
     {
+        SoundEffectManager.PlayButtonClick2();
         LoadingScreenManager.Instance.LoadScene(sceneName);
     }
 }

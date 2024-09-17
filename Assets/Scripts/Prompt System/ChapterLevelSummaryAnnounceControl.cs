@@ -65,6 +65,8 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
 
     public void Show()
     {
+        SoundEffectManager.PlayNotice();
+
         if (currentSummary == null)
         {
             Debug.LogError("No summary to show. Make sure to set the title, quests, etc., before calling Show().");
@@ -81,6 +83,8 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
 
     public void Hide()
     {
+        SoundEffectManager.PlayButtonClick2();
+
         canvas.SetActive(false);
         IsActive = false;
 

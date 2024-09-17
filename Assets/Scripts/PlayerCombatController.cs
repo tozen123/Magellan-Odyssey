@@ -74,7 +74,8 @@ public class PlayerCombatController : MonoBehaviour
         Instantiate(playerProjectile, playerProjectileShootPoint.position, playerProjectileShootPoint.rotation);
         Instantiate(projectileSmokeLaunch, projectileSmokeLaunchPoint.position, projectileSmokeLaunchPoint.rotation);
 
-        
+            PlayerSoundEffectManager.PlayCrossBowShot();
+
     }
 
     private void UpdateAimLine()

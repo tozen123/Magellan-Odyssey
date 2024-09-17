@@ -23,7 +23,7 @@ public class DialogMessagePrompt : MonoBehaviour
     CanvasGroup canvasGroup;
 
     [Header("Picture")]
-    [SerializeField] private Image imageHolder; // Image holder in the UI
+    [SerializeField] private Image imageHolder = null; // Image holder in the UI
 
     void Awake()
     {
@@ -38,7 +38,11 @@ public class DialogMessagePrompt : MonoBehaviour
         });
 
         // Hide image by default
-        imageHolder.gameObject.SetActive(false);
+        if(imageHolder != null)
+        {
+            imageHolder.gameObject.SetActive(false);
+
+        }
     }
 
     void Start()
@@ -86,6 +90,8 @@ public class DialogMessagePrompt : MonoBehaviour
 
     public void Show()
     {
+        SoundEffectManager.PlayButtonCardPopup();
+
         dialogsQueue.Enqueue(dialog);
         dialog = new DialogPrompt();
 
@@ -95,21 +101,27 @@ public class DialogMessagePrompt : MonoBehaviour
 
     void ShowNextDialog()
     {
+        SoundEffectManager.PlayButtonCardPopup();
+
         tempDialog = dialogsQueue.Dequeue();
 
         titleUIText.text = tempDialog.Title;
         messageUIText.text = tempDialog.Message;
 
-        // Show the image if there is one
-        if (tempDialog.HasImage && tempDialog.Image != null)
+        if (imageHolder != null)
         {
-            imageHolder.sprite = tempDialog.Image;
-            imageHolder.gameObject.SetActive(true); // Show the image holder
+            if (tempDialog.HasImage && tempDialog.Image != null)
+            {
+
+                imageHolder.sprite = tempDialog.Image;
+                imageHolder.gameObject.SetActive(true); // Show the image holder
+            }
+            else
+            {
+                imageHolder.gameObject.SetActive(false); // Hide the image holder if no image
+            }
         }
-        else
-        {
-            imageHolder.gameObject.SetActive(false); // Hide the image holder if no image
-        }
+        
 
         canvas.SetActive(true);
         IsActive = true;
@@ -118,6 +130,8 @@ public class DialogMessagePrompt : MonoBehaviour
 
     public void Hide()
     {
+        SoundEffectManager.PlayButtonClick2();
+
         canvas.SetActive(false);
         IsActive = false;
 

@@ -64,6 +64,9 @@ public class QuestPopCardManager : MonoBehaviour
 
     public void Show()
     {
+        SoundEffectManager.PlayQuestCompleteReward();
+
+
         canvas.SetActive(true);
         IsActive = true;
         StartCoroutine(FadeIn(fadeInDuration));
@@ -71,6 +74,8 @@ public class QuestPopCardManager : MonoBehaviour
 
     public void Hide()
     {
+        SoundEffectManager.PlayButtonClick2();
+
         canvas.SetActive(false);
         IsActive = false;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteractionController : MonoBehaviour
 {
@@ -59,18 +60,28 @@ public class PlayerInteractionController : MonoBehaviour
 
                     if(_character.name == "Ferdinand Magellan")
                     {
-                        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
-                        PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");
-                        PlayerPrefs.Save();
 
-                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level1")
+                        {
+                            PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                            PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");
+                            PlayerPrefs.Save();
 
-                        PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
 
-                        //Revised
-                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));
+                            PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
+                        }
+                       
 
-                        PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
+
+                        if(SceneManager.GetActiveScene().name== "Chapter1Level3")
+                        {
+                            //Revised
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));
+
+                            PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
+                        }
+                        
                     }
 
                     if (other.gameObject.GetComponent<DialogueTrigger>())

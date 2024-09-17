@@ -81,6 +81,8 @@ public class SequenceController : MonoBehaviour
 
     public void AutomaticLogin()
     {
+        SoundEffectManager.PlayReward();
+
         LoadingScreenManager.Instance.LoadScene("MainMenu-Sequence1");
     }
     void ShowLogin()
@@ -91,13 +93,16 @@ public class SequenceController : MonoBehaviour
     }
     void ShowCreationAvatarCanvas()
     {
+        SoundEffectManager.PlayButtonCardPopup();
+
         creationCanvas.SetActive(true);
         StartCoroutine(FadeCanvasGroup(creationCanvasGroup, 0, 1, 1f));
     }
 
     public void Finish()
     {
-        
+
+        SoundEffectManager.PlayReward();
 
         LoadingScreenManager.Instance.LoadScene("MainMenu-Sequence1");
 

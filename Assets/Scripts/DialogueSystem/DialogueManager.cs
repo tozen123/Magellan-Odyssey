@@ -55,10 +55,13 @@ public class DialogueManager : MonoBehaviour
     }
     public void QuizMode(bool isTook)
     {
+        PlayerSoundEffectManager.PlayQuizTheme();
+
         isCompleteQuiz = isTook;
     }
     public void StartDialogue(Dialogue dialogue)
     {
+        PlayerSoundEffectManager.PlayConvoPopUp();
         isDialogueActive = true;
         animator.Play("UIPop");
 
@@ -94,6 +97,9 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextDialogueLine()
     {
+        PlayerSoundEffectManager.PlayNextDialogue();
+
+
         if (lines.Count == 0)
         {
             EndDialogue();
@@ -267,11 +273,15 @@ public class DialogueManager : MonoBehaviour
 
         if (choice.isCorrect)
         {
+            PlayerSoundEffectManager.PlayCorrectQuiz();
+
             feedbackText.text = "Correct";
             Debug.Log("Correct answer selected");
         }
         else
         {
+            PlayerSoundEffectManager.PlayWrongQuiz();
+
             feedbackText.text = "Wrong";
             Debug.Log("Wrong answer selected");
         }
@@ -297,6 +307,9 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        PlayerSoundEffectManager.StopQuizTheme();
+
+
         isDialogueActive = false;
         isCompleteQuiz = false;
 
