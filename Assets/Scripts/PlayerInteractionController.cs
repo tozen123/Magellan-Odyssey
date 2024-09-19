@@ -74,7 +74,7 @@ public class PlayerInteractionController : MonoBehaviour
                        
 
 
-                        if(SceneManager.GetActiveScene().name== "Chapter1Level3")
+                        if(SceneManager.GetActiveScene().name== "Chapter1Level2")
                         {
                             //Revised
                             PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));

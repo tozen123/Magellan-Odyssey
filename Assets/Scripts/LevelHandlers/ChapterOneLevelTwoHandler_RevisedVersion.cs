@@ -75,31 +75,42 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
     private void Update()
     {
         int remainingDummies = targetDummies.Count;
-        foreach (Quest quest in quests)
+        //Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
+        if(playerQuestHandler.Level1Quests.Count > 0)
         {
-            if (quest.QuestTitle == "Destroy the Dummies")
+            Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
+            if (currentQuest.QuestTitle == "Destroy the Dummies")
             {
-                quest.ChangeWhatToDo("Destroy the Dummies", $"Use your weapon to destroy the 5 dummies ({5 - remainingDummies}/5)");
+                foreach (Quest quest in quests)
+                {
+                    if (quest.QuestTitle == "Destroy the Dummies")
+                    {
+                        quest.ChangeWhatToDo("Destroy the Dummies", $"Use your weapon to destroy the 5 dummies ({5 - remainingDummies}/5)");
 
-                playerQuestListManager.PopulateQuestList();
-                playerQuestHandler.DisplayQuest(quest);
+                        playerQuestListManager.PopulateQuestList();
+                        playerQuestHandler.DisplayQuest(quest);
+                    }
+                }
+                foreach (Quest quest in quests)
+                {
+                    if (quest.QuestTitle == "Destroy the Dummies")
+                    {
+                        quest.ChangeWhatToDo("Destroy the Dummies", $"Use your weapon to destroy the 5 dummies ({5 - remainingDummies}/5)");
+                    }
+                }
+
+                if (remainingDummies == 0 && !isQuestCompleted)
+                {
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Destroy the Dummies"));
+                    PlayerQuestHandler.CompleteQuest("Destroy the Dummies");
+
+                    isQuestCompleted = true;
+                }
+
             }
         }
-        foreach (Quest quest in quests)
-        {
-            if (quest.QuestTitle == "Destroy the Dummies")
-            {
-                quest.ChangeWhatToDo("Destroy the Dummies", $"Use your weapon to destroy the 5 dummies ({5 - remainingDummies}/5)");
-            }
-        }
 
-        if (remainingDummies == 0 && !isQuestCompleted)
-        {
-            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Destroy the Dummies"));
-            PlayerQuestHandler.CompleteQuest("Destroy the Dummies");
-
-            isQuestCompleted = true;
-        }
+       
 
 
     }

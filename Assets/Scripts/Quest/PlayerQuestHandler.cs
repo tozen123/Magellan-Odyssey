@@ -31,7 +31,7 @@ public class PlayerQuestHandler : MonoBehaviour
 
     private bool isExpanded = true;
     private Coroutine animationCoroutine;
-    private int currentQuestIndex = 0;
+    public int currentQuestIndex = 0;
 
     private static PlayerQuestHandler _instance;
 

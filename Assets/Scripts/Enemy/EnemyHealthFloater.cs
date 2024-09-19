@@ -12,7 +12,10 @@ public class EnemyHealthFloater : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private EnemyController enemyController;
-    [SerializeField] private Canvas thisCanvas;
+    [SerializeField] private GameObject thisCanvas;
+
+    [Header("Camera Reference")]
+    [SerializeField] private Camera mainCamera;  // Add a reference to the main camera
 
     [Header("Settings")]
     [SerializeField] private float whiteBarDelay = 0.5f;
@@ -27,20 +30,28 @@ public class EnemyHealthFloater : MonoBehaviour
     {
         originalScale = parentBar.rectTransform.localScale;
         lastHealth = enemyController.currentHealth;
+
+        // Get the main camera reference if not set in the inspector
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
     }
 
     private void Update()
     {
+        // Make the canvas face the camera with offset
+        FaceCamera();
 
         float healthPercent = enemyController.currentHealth / enemyController.maxHealth;
 
         if (healthPercent < 1)
         {
-            thisCanvas.enabled = true;
+            thisCanvas.SetActive(true);
         }
         else
         {
-            thisCanvas.enabled = false;
+            thisCanvas.SetActive(false);
 
         }
 
@@ -57,6 +68,12 @@ public class EnemyHealthFloater : MonoBehaviour
         }
 
         lastHealth = enemyController.currentHealth;
+    }
+
+    private void FaceCamera()
+    {
+        // Instead of rotating to face the camera, maintain the fixed isometric rotation
+        transform.rotation = Quaternion.Euler(30, 45, 0);
     }
 
     private IEnumerator LerpWhiteBar(float targetFillAmount)
