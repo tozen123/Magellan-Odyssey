@@ -81,7 +81,15 @@ public class PlayerInteractionController : MonoBehaviour
 
                             PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
                         }
-                        
+
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+                        {
+                            //Revised
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("To Battlefield"));
+
+                            PlayerQuestHandler.CompleteQuest("To Battlefield");
+                        }
+
                     }
 
                     if (other.gameObject.GetComponent<DialogueTrigger>())

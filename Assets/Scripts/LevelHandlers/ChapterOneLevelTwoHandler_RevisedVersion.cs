@@ -13,7 +13,11 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
     [SerializeField] private List<Quest> quests;
 
     [SerializeField] private Sprite targetImage;
-    [SerializeField] private List<GameObject> targetDummies; // Change to a List<GameObject>
+    [SerializeField] private List<GameObject> targetDummies;
+    [SerializeField] private List<GameObject> targetBandit;
+
+    private bool isQuestCompleted = false;
+    private bool isBanditQuestCompleted = false; // Added a flag for the bandit quest
 
     private void Awake()
     {
@@ -45,7 +49,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         playerQuestListManager.PopulateQuestList();
 
         ChapterLevelSummaryAnnounceControl.Instance
-            .SetTitle("Chapter 1: Level 1")
+            .SetTitle("Chapter 1: Level 2")
             .SetQuests(quests)
             .SetFadeInDuration(0.5f)
             .OnContinue(() =>
@@ -71,12 +75,18 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
                 .Show();
         }
     }
-    private bool isQuestCompleted = false;
+
     private void Update()
     {
+        UpdateDummyQuest();
+        UpdateBanditQuest();
+    }
+
+    private void UpdateDummyQuest()
+    {
         int remainingDummies = targetDummies.Count;
-        //Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
-        if(playerQuestHandler.Level1Quests.Count > 0)
+
+        if (playerQuestHandler.Level1Quests.Count > 0)
         {
             Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
             if (currentQuest.QuestTitle == "Destroy the Dummies")
@@ -86,16 +96,8 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
                     if (quest.QuestTitle == "Destroy the Dummies")
                     {
                         quest.ChangeWhatToDo("Destroy the Dummies", $"Use your weapon to destroy the 5 dummies ({5 - remainingDummies}/5)");
-
                         playerQuestListManager.PopulateQuestList();
                         playerQuestHandler.DisplayQuest(quest);
-                    }
-                }
-                foreach (Quest quest in quests)
-                {
-                    if (quest.QuestTitle == "Destroy the Dummies")
-                    {
-                        quest.ChangeWhatToDo("Destroy the Dummies", $"Use your weapon to destroy the 5 dummies ({5 - remainingDummies}/5)");
                     }
                 }
 
@@ -106,20 +108,53 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
                     isQuestCompleted = true;
                 }
-
             }
         }
+    }
 
-       
+    private void UpdateBanditQuest()
+    {
+        int remainingBandits = targetBandit.Count;
 
+        if (playerQuestHandler.Level1Quests.Count > 0)
+        {
+            Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
+            if (currentQuest.QuestTitle == "Fight 5 Arabs")
+            {
+                foreach (Quest quest in quests)
+                {
+                    if (quest.QuestTitle == "Fight 5 Arabs")
+                    {
+                        quest.ChangeWhatToDo("Fight 5 Arabs", $"Defeat the 5 bandits ({5 - remainingBandits}/5)");
+                        playerQuestListManager.PopulateQuestList();
+                        playerQuestHandler.DisplayQuest(quest);
+                    }
+                }
 
+                if (remainingBandits == 0 && !isBanditQuestCompleted)
+                {
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Fight 5 Arabs"));
+                    PlayerQuestHandler.CompleteQuest("Fight 5 Arabs");
+
+                    isBanditQuestCompleted = true;
+                }
+            }
+        }
+    }
+
+    public void OnBanditDestroyed(GameObject bandit)
+    {
+        if (targetBandit.Contains(bandit))
+        {
+            targetBandit.Remove(bandit);
+        }
     }
 
     public void OnDummyDestroyed(GameObject dummy)
     {
         if (targetDummies.Contains(dummy))
         {
-            targetDummies.Remove(dummy); 
+            targetDummies.Remove(dummy);
         }
     }
 }

@@ -28,6 +28,8 @@ public class EnemyCombatController : MonoBehaviour
 
     public GameObject triggerMark;
 
+
+    public BoxCollider attackColliderBox;
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -99,5 +101,15 @@ public class EnemyCombatController : MonoBehaviour
         playerIsAlive = false;
         currentState = EnemyState.Idle; 
         Debug.Log("Player is dead, enemy stopped chasing.");
+    }
+
+    public void ActivateAttackBox()
+    {
+        attackColliderBox.enabled = true;
+    }
+
+    public void DeactivateAttackBox()
+    {
+        attackColliderBox.enabled = false;
     }
 }

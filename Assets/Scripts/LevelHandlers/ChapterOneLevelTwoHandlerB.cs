@@ -11,6 +11,11 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
 
     [Header("Quests")]
     [SerializeField] private List<Quest> quests;
+
+
+    [Header("Modified")]
+    [SerializeField] private ChapterOneLevelTwoHandlerA chapterOneLevelTwoHandlerA;
+
     private void Awake()
     {
         if (!playerCanvas)
@@ -38,6 +43,14 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
 
 
     }
+    private void Dialogs()
+    {
+        DialogMessagePrompt.Instance
+          .SetTitle("System Message")
+          .SetMessage("You accompanied Ferdinand Magellan to the Royal Palace.")
+          .OnClose(chapterOneLevelTwoHandlerA.Game)
+          .Show();
+    }
     private void Start()
     {
         
@@ -47,8 +60,17 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
         }
 
         playerQuestListManager.PopulateQuestList();
-
-        OpenPlayerCanvas();
+        ChapterLevelSummaryAnnounceControl.Instance
+           .SetTitle("Chapter 1: Level 3")
+           .SetQuests(quests)
+           .SetFadeInDuration(0.5f)
+           .OnContinue(() =>
+           {
+               OpenPlayerCanvas();
+               Dialogs();
+           })
+           .Show();
+        //OpenPlayerCanvas();
     }
 
     void OpenPlayerCanvas()

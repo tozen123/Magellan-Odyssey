@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rb;
 
     public bool isDummyFromCh1L2R = false;
+    public bool isBanditFromCh1L2R = false;
+
     private ChapterOneLevelTwoHandler_RevisedVersion handler;
     void Start()
     {
@@ -27,7 +29,11 @@ public class EnemyController : MonoBehaviour
             handler = GameObject.FindObjectOfType<ChapterOneLevelTwoHandler_RevisedVersion>();
 
         }
+        if (isBanditFromCh1L2R)
+        {
+            handler = GameObject.FindObjectOfType<ChapterOneLevelTwoHandler_RevisedVersion>();
 
+        }
     }
 
     void Update()
@@ -37,6 +43,11 @@ public class EnemyController : MonoBehaviour
             if (isDummyFromCh1L2R)
             {
                 DestroyDummy();
+            }
+
+            if (isBanditFromCh1L2R)
+            {
+                DestroyBandit();
             }
             Destroy(this.gameObject);
             
@@ -80,6 +91,11 @@ public class EnemyController : MonoBehaviour
 
         // Stop the enemy's movement
         rb.velocity = Vector3.zero;
+    }
+    public void DestroyBandit()
+    {
+        handler.OnBanditDestroyed(gameObject);
+        Destroy(gameObject);
     }
 
     public void DestroyDummy()

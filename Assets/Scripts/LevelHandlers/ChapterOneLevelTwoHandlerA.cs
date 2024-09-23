@@ -14,25 +14,18 @@ public class ChapterOneLevelTwoHandlerA : MonoBehaviour
     public GameObject player;
     void Start()
     {
-        
 
-        DialogMessagePrompt.Instance
-              .SetTitle("System Message")
-              .SetMessage("Chapter 1: Level 2")
-              .Show();
 
-        DialogMessagePrompt.Instance
-               .SetTitle("System Message")
-               .SetMessage("You accompanied Ferdinand Magellan to the Royal Palace.")
-               .OnClose(Game)
-               .Show();
+       
+
+   
     }
 
     void Update()
     {
         
     }
-    void Game()
+    public void Game()
     {
         cutSceneAnimation.SetTrigger("start");
     }
