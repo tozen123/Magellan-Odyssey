@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,11 +13,13 @@ public class PlayerInventorySystem : MonoBehaviour
     [Header("Animations")]
     public Animator animator;
 
-
     public Transform inventoryBag;
 
     [Header("ActionUpdater")]
     public TextActionUpdateSystem textActionUpdateSystem;
+
+    [Header("UI Controller")]
+    public PlayerInventoryUIController inventoryUIController;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,46 +27,49 @@ public class PlayerInventorySystem : MonoBehaviour
         {
             item = other.gameObject.GetComponent<PickableObject>();
 
-            ButtonPickUp.interactable = true;
+            if (inventoryUIController.CanAddItem())
+            {
+                ButtonPickUp.interactable = true;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         ResetControllers();
-
-
     }
 
     public void PickUpItem()
     {
-        if(item != null)
+        if (item != null && inventoryUIController.CanAddItem())
         {
             animator.SetTrigger("PickUp");
 
-            item.Pick();
             items.Add(item);
-
 
             item.transform.parent = inventoryBag.transform;
             item.transform.position = inventoryBag.transform.position;
             item.gameObject.SetActive(false);
 
-            if(textActionUpdateSystem != null)
+            if (textActionUpdateSystem != null)
             {
                 textActionUpdateSystem.CreateActionUpdateText("You picked up " + item.itemName);
-
             }
+
+            inventoryUIController.UpdateInventoryUI(); // Update the inventory UI
 
             ResetControllers();
         }
+        else
+        {
+            // Handle full inventory case if needed
+            Debug.Log("Inventory is full. Cannot pick up " + item.itemName);
+        }
     }
-
 
     private void ResetControllers()
     {
         item = null;
         ButtonPickUp.interactable = false;
-
     }
 }

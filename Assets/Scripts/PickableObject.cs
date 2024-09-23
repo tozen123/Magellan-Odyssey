@@ -7,8 +7,5 @@ public class PickableObject : MonoBehaviour
     public string itemName;
     public Sprite itemIcon;
 
-   public void Pick()
-    {
-        
-    }
+  
 }

@@ -16,6 +16,10 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
     [SerializeField] private List<GameObject> targetDummies;
     [SerializeField] private List<GameObject> targetBandit;
 
+
+
+    [SerializeField] private GameObject borderAntiMissionCancel;
+
     private bool isQuestCompleted = false;
     private bool isBanditQuestCompleted = false; // Added a flag for the bandit quest
 
@@ -80,6 +84,19 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
     {
         UpdateDummyQuest();
         UpdateBanditQuest();
+
+        if (playerQuestHandler.Level1Quests.Count > 0)
+        {
+            Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
+            if (currentQuest.QuestTitle == "Destroy the Dummies")
+            {
+                borderAntiMissionCancel.SetActive(true);
+            }
+            else
+            {
+                borderAntiMissionCancel.SetActive(false);
+            }
+        }
     }
 
     private void UpdateDummyQuest()

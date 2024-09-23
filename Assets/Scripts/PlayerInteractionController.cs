@@ -24,6 +24,10 @@ public class PlayerInteractionController : MonoBehaviour
     [Header("References")]
     [SerializeField] private CanvasGroup playerMainCanvasControllerGroup;
 
+
+   
+
+
     private void Awake()
     {
         ButtonSetState(ButtonInteract, false);
@@ -104,6 +108,8 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void Update()
     {
+       
+
         if (dialogueTrigger != null)
         {
             if (isDialogueStarted)
