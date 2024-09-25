@@ -35,7 +35,7 @@ public class SoundEffectManager : MonoBehaviour
             }
         }
     }
-
+    
     public static void PlayButtonClick2()
     {
         if (instance != null && instance.ButtonClick2_Clip != null)

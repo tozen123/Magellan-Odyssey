@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChapterOneLevelTwoHandlerB : MonoBehaviour
+public class ChapterOneLevelFourHandler : MonoBehaviour
 {
     [Header("Handlers")]
     [SerializeField] private GameObject playerCanvas;
@@ -11,11 +11,6 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
 
     [Header("Quests")]
     [SerializeField] private List<Quest> quests;
-
-
-    [Header("Modified")]
-    [SerializeField] private ChapterOneLevelTwoHandlerA chapterOneLevelTwoHandlerA;
-
     private void Awake()
     {
         if (!playerCanvas)
@@ -42,40 +37,45 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
         }
 
 
+
     }
-    private void Dialogs()
+    void Dialogs()
     {
-        DialogMessagePrompt.Instance
-          .SetTitle("System Message")
-          .SetMessage("You accompanied Ferdinand Magellan to the Royal Palace.")
-          .Show();
+
 
         DialogMessagePrompt.Instance
-          .SetTitle("System Message")
-          .SetMessage("Magellan ignored the accusations from the soldiers; instead, he went to Lisbon to have an audience with the King without prior notice.")
-          .OnClose(chapterOneLevelTwoHandlerA.Game)
-          .Show();
+               .SetTitle("System Message")
+               .SetMessage("Magellan underwent a humiliating investigation in Morocco. After the court cleared him of the accusations, Magellan returned to Lisbon.")
+               .Show();
+
+
+
+
+
+
     }
     private void Start()
     {
-        
+
         foreach (Quest quest in quests)
         {
             playerQuestHandler.AddQuest(quest);
         }
 
         playerQuestListManager.PopulateQuestList();
+
         ChapterLevelSummaryAnnounceControl.Instance
-           .SetTitle("Chapter 1: Level 3")
-           .SetQuests(quests)
-           .SetFadeInDuration(0.5f)
-           .OnContinue(() =>
-           {
-               OpenPlayerCanvas();
-               Dialogs();
-           })
-           .Show();
-        //OpenPlayerCanvas();
+    .SetTitle("Chapter 1: Level 4")
+    .SetQuests(quests)
+    .SetFadeInDuration(0.5f)
+    .OnContinue(() =>
+    {
+        OpenPlayerCanvas();
+        Dialogs();
+    })
+    .Show();
+
+
     }
 
     void OpenPlayerCanvas()

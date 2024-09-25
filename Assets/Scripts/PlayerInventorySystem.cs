@@ -49,6 +49,7 @@ public class PlayerInventorySystem : MonoBehaviour
     {
         if (item != null && inventoryUIController.CanAddItem())
         {
+            PlayerSoundEffectManager.PlayPickUp();
             animator.SetTrigger("PickUp");
 
             items.Add(item);
@@ -88,5 +89,29 @@ public class PlayerInventorySystem : MonoBehaviour
     {
         item = null;
         ButtonPickUp.interactable = false;
+    }
+    public void RemoveItem(PickableObject itemToRemove)
+    {
+        if (items.Contains(itemToRemove))
+        {
+            items.Remove(itemToRemove);
+            itemToRemove.transform.parent = null; // Unparent the item from the inventory bag
+
+            //// Optional: if you want to make the item visible again in the game world
+            //itemToRemove.transform.position = transform.position + transform.forward; // Drop it in front of the player
+            //itemToRemove.gameObject.SetActive(true);
+
+            if (textActionUpdateSystem != null)
+            {
+                textActionUpdateSystem.CreateActionUpdateText("You removed " + itemToRemove.itemName);
+            }
+
+            inventoryUIController.UpdateInventoryUI(); // Update the inventory UI
+            Debug.Log("Item removed: " + itemToRemove.itemName);
+        }
+        else
+        {
+            Debug.Log("Item not found in inventory: " + itemToRemove.itemName);
+        }
     }
 }

@@ -67,4 +67,13 @@ public class PlayerInventoryUIController : MonoBehaviour
             inventoryPanel.SetActive(false);
         }
     }
+
+    public void RemoveItemFromInventory(int index)
+    {
+        if (index >= 0 && index < playerInventorySystem.items.Count)
+        {
+            PickableObject itemToRemove = playerInventorySystem.items[index];
+            playerInventorySystem.RemoveItem(itemToRemove);
+        }
+    }
 }

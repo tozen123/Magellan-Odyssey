@@ -122,10 +122,18 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             magellan3Battlefield.SetActive(true);
         }
 
-        if (playerQuestHandler.IsQuestCompleted("Pickup the Battle Spoils"))
+        if (playerQuestHandler.IsQuestCompleted("Deliver the crates to Soldier"))
         {
             magellan4Soldier.SetActive(true);
         }
+        if (playerQuestHandler.IsQuestCompleted("Talk to Magellan About the Issues"))
+        {
+            PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+            PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
+            PlayerPrefs.SetString("Chapter1Level3", "IN_PROGRESS");
+            PlayerPrefs.Save();
+        }
+        
     }
 
     private void UpdateDummyQuest()

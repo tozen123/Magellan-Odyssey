@@ -22,6 +22,7 @@ public class PlayerSoundEffectManager : MonoBehaviour
 
 
     public AudioClip PlayerQuizTheme_Clip;
+    public AudioClip PickUp_Clip;
 
 
 
@@ -45,6 +46,14 @@ public class PlayerSoundEffectManager : MonoBehaviour
                 audioSource = gameObject.AddComponent<AudioSource>();
             }
         }
+    }
+    public static void PlayPickUp()
+    {
+        if (instance != null && instance.PickUp_Clip != null)
+        {
+            instance.audioSource.PlayOneShot(instance.PickUp_Clip);
+        }
+
     }
     public static void PlayQuizTheme()
     {
