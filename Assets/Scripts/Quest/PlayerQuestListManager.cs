@@ -42,7 +42,6 @@ public class PlayerQuestListManager : MonoBehaviour
     {
         questList = playerQuestHandler.Level1Quests;
 
-        Debug.Log("Populating quest list with " + questList.Count + " quests.");
 
         foreach (Transform child in questListContainer.transform)
         {

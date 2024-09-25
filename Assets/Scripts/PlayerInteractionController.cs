@@ -92,6 +92,8 @@ public class PlayerInteractionController : MonoBehaviour
                             PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("To Battlefield"));
 
                             PlayerQuestHandler.CompleteQuest("To Battlefield");
+
+
                         }
 
                     }

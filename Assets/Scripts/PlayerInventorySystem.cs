@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInventorySystem : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class PlayerInventorySystem : MonoBehaviour
 
     [Header("UI Controller")]
     public PlayerInventoryUIController inventoryUIController;
+
+
+
+
+    public ChapterOneLevelTwoHandler_RevisedVersion questHandler;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -46,10 +52,21 @@ public class PlayerInventorySystem : MonoBehaviour
             animator.SetTrigger("PickUp");
 
             items.Add(item);
-
             item.transform.parent = inventoryBag.transform;
             item.transform.position = inventoryBag.transform.position;
             item.gameObject.SetActive(false);
+
+            if(SceneManager.GetActiveScene().name == "Chapter1Level2")
+            {
+                Debug.Log("yes");
+
+                if (item.itemName == "Crate")
+                {
+                    questHandler.OnCrateCollected(item.gameObject); 
+                }
+            }
+
+            
 
             if (textActionUpdateSystem != null)
             {

@@ -99,6 +99,11 @@ public class DialogueManager : MonoBehaviour
     {
         PlayerSoundEffectManager.PlayNextDialogue();
 
+        // Stop the quiz theme if it's currently playing and the next line is not part of the quiz
+        if (currentLine != null && (currentLine.hasChoices || currentLine.isConverstationWithDefinedChoices))
+        {
+            PlayerSoundEffectManager.StopQuizTheme();
+        }
 
         if (lines.Count == 0)
         {
@@ -116,6 +121,7 @@ public class DialogueManager : MonoBehaviour
 
         if (currentLine.hasChoices)
         {
+            PlayerSoundEffectManager.PlayQuizTheme(); // Play quiz theme if it's a quiz line
             choiceButtonPanelParent.SetActive(true);
             DisplayChoices(currentLine);
 
@@ -130,7 +136,7 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currentLine.isConverstationWithDefinedChoices)
         {
-            PlayerSoundEffectManager.PlayQuizTheme();
+            
 
             choiceButtonPanelParent.SetActive(true);
             DisplaySimpleChoices(currentLine);
@@ -146,6 +152,8 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            PlayerSoundEffectManager.StopQuizTheme(); // Stop the quiz theme if it's not a quiz line
+
             choiceButtonPanelParent.SetActive(false);
             foreach (Button button in choiceButtons)
             {
@@ -155,9 +163,8 @@ public class DialogueManager : MonoBehaviour
             StartCoroutine(DialogueTypeSentence(currentLine.line));
             return;
         }
-       
-
     }
+
 
 
     void DisplaySimpleChoices(DialogueLine dialogueLine)

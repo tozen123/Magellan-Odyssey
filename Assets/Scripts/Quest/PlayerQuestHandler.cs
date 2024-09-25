@@ -179,4 +179,16 @@ public class PlayerQuestHandler : MonoBehaviour
         QUEST_TASK.text = "Task: " +  quest.QuestWhatToDo;
         QUEST_POINTS.text = "Adventure Points: " + quest.QuestADPPoints.ToString();
     }
+
+    public bool IsQuestCompleted(string title)
+    {
+        foreach (Quest quest in Level1Quests)
+        {
+            if (quest.QuestTitle.Equals(title, System.StringComparison.OrdinalIgnoreCase) && quest.IsCompleted)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

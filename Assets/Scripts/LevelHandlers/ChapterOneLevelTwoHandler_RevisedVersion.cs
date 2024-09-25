@@ -15,16 +15,28 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
     [SerializeField] private Sprite targetImage;
     [SerializeField] private List<GameObject> targetDummies;
     [SerializeField] private List<GameObject> targetBandit;
+    [SerializeField] private List<GameObject> targetCrates; // List of crates to be collected
 
-
+    [Header("Magellans")]
+    [SerializeField] private GameObject magellan1Camp;
+    [SerializeField] private GameObject magellan2Gate;
+    [SerializeField] private GameObject magellan3Battlefield;
+    [SerializeField] private GameObject magellan4Soldier;
 
     [SerializeField] private GameObject borderAntiMissionCancel;
 
     private bool isQuestCompleted = false;
-    private bool isBanditQuestCompleted = false; // Added a flag for the bandit quest
+    private bool isBanditQuestCompleted = false;
+    private bool isCrateQuestCompleted = false;
+
+
 
     private void Awake()
     {
+        magellan2Gate.SetActive(false);
+        magellan3Battlefield.SetActive(false);
+        magellan4Soldier.SetActive(false);
+
         if (!playerCanvas)
         {
             playerCanvas = GameObject.FindWithTag("PlayerCanvas").gameObject;
@@ -68,20 +80,27 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         playerCanvas.SetActive(true);
     }
 
+    bool alreadyGoneToDummy = false;
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (!alreadyGoneToDummy)
         {
-            DialogMessagePrompt.Instance
-                .SetTitle("System Message")
-                .SetMessage("Test")
-                .SetImage(targetImage)
-                .Show();
+            if (other.gameObject.tag == "Player")
+            {
+                DialogMessagePrompt.Instance
+                    .SetTitle("System Message")
+                    .SetMessage("Test")
+                    .SetImage(targetImage)
+                    .Show();
+                alreadyGoneToDummy = true;
+            }
         }
     }
 
     private void Update()
     {
+        UpdateCrateQuest();
+
         UpdateDummyQuest();
         UpdateBanditQuest();
 
@@ -96,6 +115,16 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             {
                 borderAntiMissionCancel.SetActive(false);
             }
+        }
+
+        if (playerQuestHandler.IsQuestCompleted("To Battlefield"))
+        {
+            magellan3Battlefield.SetActive(true);
+        }
+
+        if (playerQuestHandler.IsQuestCompleted("Pickup the Battle Spoils"))
+        {
+            magellan4Soldier.SetActive(true);
         }
     }
 
@@ -122,6 +151,8 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
                 {
                     PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Destroy the Dummies"));
                     PlayerQuestHandler.CompleteQuest("Destroy the Dummies");
+
+                    magellan2Gate.SetActive(true);
 
                     isQuestCompleted = true;
                 }
@@ -159,6 +190,40 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         }
     }
 
+    // Updated Crate Quest Update Method
+    private void UpdateCrateQuest()
+    {
+        int remainingCrates = targetCrates.Count; // Calculate remaining crates to be collected
+
+        if (playerQuestHandler.Level1Quests.Count > 0)
+        {
+            Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
+            if (currentQuest.QuestTitle == "Battle Spoils")
+            {
+                Debug.Log("Battle Spoils MATCHED");
+                foreach (Quest quest in quests)
+                {
+                    if (quest.QuestTitle == "Battle Spoils")
+                    {
+                        Debug.Log("Data");
+
+                        quest.ChangeWhatToDo("Collect 3 Crates", $"Collect 3 crates ({3 - remainingCrates}/3)");
+                        playerQuestListManager.PopulateQuestList();
+                        playerQuestHandler.DisplayQuest(quest);
+                    }
+                }
+
+                if (remainingCrates == 0 && !isCrateQuestCompleted)
+                {
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Battle Spoils"));
+                    PlayerQuestHandler.CompleteQuest("Battle Spoils");
+
+                    isCrateQuestCompleted = true;
+                }
+            }
+        }
+    }
+
     public void OnBanditDestroyed(GameObject bandit)
     {
         if (targetBandit.Contains(bandit))
@@ -172,6 +237,15 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         if (targetDummies.Contains(dummy))
         {
             targetDummies.Remove(dummy);
+        }
+    }
+
+    // Updated method to handle crate collection
+    public void OnCrateCollected(GameObject crate)
+    {
+        if (targetCrates.Contains(crate))
+        {
+            targetCrates.Remove(crate); // Remove the collected crate from the list
         }
     }
 }
