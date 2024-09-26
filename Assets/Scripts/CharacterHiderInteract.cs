@@ -41,7 +41,7 @@ public class CharacterHiderInteract : MonoBehaviour
         }
 
         anim.SetBool("isWalking", false);
-        gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     private void RotateTowardsDirection()

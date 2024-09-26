@@ -59,6 +59,12 @@ public class ChapterOneLevelFourHandler : MonoBehaviour
     private void Start()
     {
 
+        //IN_PROGRESS
+        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+        PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
+        PlayerPrefs.SetString("Chapter1Level3", "COMPLETED"); 
+        PlayerPrefs.SetString("Chapter1Level4", "IN_PROGRESS"); 
+        PlayerPrefs.Save();
         foreach (Quest quest in quests)
         {
             playerQuestHandler.AddQuest(quest);

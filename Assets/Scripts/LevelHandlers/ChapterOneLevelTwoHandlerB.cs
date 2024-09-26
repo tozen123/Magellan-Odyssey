@@ -43,6 +43,8 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
 
 
     }
+
+
     private void Dialogs()
     {
         DialogMessagePrompt.Instance

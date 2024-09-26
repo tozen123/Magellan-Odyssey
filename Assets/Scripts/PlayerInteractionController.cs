@@ -64,6 +64,7 @@ public class PlayerInteractionController : MonoBehaviour
 
                     if(_character.name == "Ferdinand Magellan")
                     {
+                        // -------------------------- CHAPTER 1 LEVEL 1 ---------------------------------
 
                         if (SceneManager.GetActiveScene().name == "Chapter1Level1")
                         {
@@ -75,10 +76,11 @@ public class PlayerInteractionController : MonoBehaviour
 
                             PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
                         }
-                       
+
+                        // -------------------------- CHAPTER 1 LEVEL 2 ---------------------------------
 
 
-                        if(SceneManager.GetActiveScene().name== "Chapter1Level2")
+                        if (SceneManager.GetActiveScene().name== "Chapter1Level2")
                         {
                             //Revised
                             PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));
@@ -106,8 +108,35 @@ public class PlayerInteractionController : MonoBehaviour
 
                         }
 
-                    }
+                        // -------------------------- CHAPTER 1 LEVEL 5 ---------------------------------
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level5")
+                        {  
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to Magellan"));
 
+                            PlayerQuestHandler.CompleteQuest("Go to Magellan");
+                        }
+
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level5")
+                        {
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to Magellan at the fountain"));
+
+                            PlayerQuestHandler.CompleteQuest("Go to Magellan at the fountain");
+                        }
+                        
+
+
+                    }
+                    if (_character.name == "Ruy")
+                    {
+                        // -------------------------- CHAPTER 1 LEVEL 5 ---------------------------------
+
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level5")
+                        {
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ruy Falero"));
+
+                            PlayerQuestHandler.CompleteQuest("Meet Ruy Falero");
+                        }
+                    }
                     if (other.gameObject.GetComponent<DialogueTrigger>())
                     {
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();

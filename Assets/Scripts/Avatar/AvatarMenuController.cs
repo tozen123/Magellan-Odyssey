@@ -8,18 +8,20 @@ public class AvatarMenuController : MonoBehaviour
 {
     [Header("Inputs")]
     public TMP_InputField InputName;
-  
+    public TextMeshProUGUI ADPCount;
 
     [Header("Controls")]
     
     public Button ButtonControlClose;
     public Button ButtonControlLogout;
+
     [Header("Main")]
     public GameObject Canvas;
     bool isEditMode;
     void Start()
     {
-        
+        InputName.text = PlayerPrefs.GetString("userName");
+        ADPCount.text = PlayerPrefs.GetInt("adventure_points").ToString();
     }
 
     void Update()

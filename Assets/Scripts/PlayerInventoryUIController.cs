@@ -57,6 +57,8 @@ public class PlayerInventoryUIController : MonoBehaviour
     private bool isToggle = false;
     public void ToggleInventory()
     {
+        SoundEffectManager.PlayButtonClick2();
+
         isToggle = !isToggle;
         if (isToggle)
         {

@@ -73,7 +73,7 @@ public class PlayerQuestListManager : MonoBehaviour
             else
             {
                 statusText.text = "In Progress";
-                statusText.color = Color.red;
+                statusText.color = Color.white;
                 incompleteQuestsCount++;
             }
         }
