@@ -61,11 +61,10 @@ public class SequenceController : MonoBehaviour
         PlayerPrefs.SetString("Chapter1Level3", "LOCKED");
         PlayerPrefs.SetString("Chapter1Level4", "LOCKED");
         PlayerPrefs.SetString("Chapter1Level5", "LOCKED");
+        PlayerPrefs.SetString("Chapter1Level6", "LOCKED");
+        PlayerPrefs.SetString("Chapter1Level7", "LOCKED");
 
 
-        PlayerPrefs.SetString("Chapter2", "LOCKED");
-
-        PlayerPrefs.SetString("Chapter3", "LOCKED");
 
 
         PlayerPrefs.Save();

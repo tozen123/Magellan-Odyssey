@@ -11,8 +11,12 @@ public class MainMenuController : MonoBehaviour
     [Header("Headers")]
     public TextMeshProUGUI WelcomeText;
 
+    [SerializeField] private GameObject ButtonChapter;
+
     void Start()
     {
+        ButtonChapter.SetActive(true);
+
         if (CreateUser())
         {
             WelcomeText.text = "Welcome, " + user.name;

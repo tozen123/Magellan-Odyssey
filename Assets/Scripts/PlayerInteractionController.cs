@@ -96,6 +96,16 @@ public class PlayerInteractionController : MonoBehaviour
 
                         }
 
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+                        {
+                            //Revised
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Talk to Magellan About the Issues"));
+
+                            PlayerQuestHandler.CompleteQuest("Talk to Magellan About the Issues");
+
+
+                        }
+
                     }
 
                     if (other.gameObject.GetComponent<DialogueTrigger>())

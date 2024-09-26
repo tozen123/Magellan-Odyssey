@@ -43,39 +43,43 @@ public class ChapterMenuHandler : MonoBehaviour
 
         UpdateButtonInteractability();
     }
-
+ 
     private void UpdateButtonInteractability()
     {
-        ButtonChapter1.interactable = true;
-        //int current_adp = ADP;
+        int current_adp = ADP;
 
-        //switch (current_adp)
-        //{
-        //    case 0:
-        //        ButtonChapter1.interactable = true;
-        //        ButtonChapter2.interactable = false;
-        //        ButtonChapter3.interactable = false;
-        //        break;
-
-        //    case 1000:
-        //        ButtonChapter1.interactable = true;
-        //        ButtonChapter2.interactable = true;
-        //        ButtonChapter3.interactable = false;
-        //        break;
-
-        //    case 2000:
-        //        ButtonChapter1.interactable = true;
-        //        ButtonChapter2.interactable = true;
-        //        ButtonChapter3.interactable = true;
-        //        break;
-
-        //    default:
-        //        ButtonChapter1.interactable = false;
-        //        ButtonChapter2.interactable = false;
-        //        ButtonChapter3.interactable = false;
-        //        Debug.LogWarning("Unexpected value for adventure_points: " + current_adp);
-        //        break;
-        //}
+        // Set interactability based on the value of current_adp
+        if (current_adp < 0)
+        {
+            ButtonChapter1.GetComponent<ButtonStateHandler>().SetToUnLockState();
+            ButtonChapter2.GetComponent<ButtonStateHandler>().SetToLockState();
+            ButtonChapter3.GetComponent<ButtonStateHandler>().SetToLockState();
+        }
+        else if (current_adp >= 0 && current_adp < 1000)
+        {
+            ButtonChapter1.GetComponent<ButtonStateHandler>().SetToUnLockState();
+            ButtonChapter2.GetComponent<ButtonStateHandler>().SetToLockState();
+            ButtonChapter3.GetComponent<ButtonStateHandler>().SetToLockState();
+        }
+        else if (current_adp >= 1000 && current_adp < 2000)
+        {
+            ButtonChapter1.GetComponent<ButtonStateHandler>().SetToUnLockState();
+            ButtonChapter2.GetComponent<ButtonStateHandler>().SetToUnLockState();
+            ButtonChapter3.GetComponent<ButtonStateHandler>().SetToLockState();
+        }
+        else if (current_adp >= 2000)
+        {
+            ButtonChapter1.GetComponent<ButtonStateHandler>().SetToUnLockState();
+            ButtonChapter2.GetComponent<ButtonStateHandler>().SetToUnLockState();
+            ButtonChapter3.GetComponent<ButtonStateHandler>().SetToUnLockState();
+        }
+        else
+        {
+            ButtonChapter1.GetComponent<ButtonStateHandler>().SetToLockState();
+            ButtonChapter2.GetComponent<ButtonStateHandler>().SetToLockState();
+            ButtonChapter3.GetComponent<ButtonStateHandler>().SetToLockState();
+            Debug.LogWarning("Unexpected value for adventure_points: " + current_adp);
+        }
 
         for (int i = 0; i < ButtonChapter1Levels.Length; i++)
         {
@@ -84,20 +88,19 @@ public class ChapterMenuHandler : MonoBehaviour
 
             if (levelState.Equals("IN_PROGRESS")  )
             {
-                ButtonChapter1Levels[i].interactable = true;
+                ButtonChapter1Levels[i].GetComponent<ButtonStateHandler>().SetToUnLockState();
             }
             else if (levelState.Equals("COMPLETED"))
             {
-                ButtonChapter1Levels[i].interactable = false;
-                ButtonChapter1Levels[i].image.color = Color.black;
+                ButtonChapter1Levels[i].GetComponent<ButtonStateHandler>().SetToCheckState();
             }
             else if (levelState.Equals("LOCKED"))
             {
-                ButtonChapter1Levels[i].interactable = false;
+                ButtonChapter1Levels[i].GetComponent<ButtonStateHandler>().SetToLockState();
             }
             else
             {
-                ButtonChapter1Levels[i].interactable = false;
+                ButtonChapter1Levels[i].GetComponent<ButtonStateHandler>().SetToLockState();
                 Debug.LogWarning("Unexpected value for " + levelKey + ": " + levelState);
             }
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChapterOneLevelFourHandler : MonoBehaviour
+public class ChapterOneLevelFiveHandler : MonoBehaviour
 {
     [Header("Handlers")]
     [SerializeField] private GameObject playerCanvas;
@@ -45,14 +45,19 @@ public class ChapterOneLevelFourHandler : MonoBehaviour
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("Magellan underwent a humiliating investigation in Morocco. After the court cleared him of the accusations, Magellan returned to Lisbon.")
+               .SetMessage("Magellan began drafting a new image of the world for his dream expedition with the help of pilots who specialized in Asian navigation.")
                .Show();
 
-     
+        DialogMessagePrompt.Instance
+               .SetTitle("System Message")
+               .SetMessage("In October 1517, Magellan left his country, renounced his nationality, and moved to Seville, Spain.")
+               .Show();
 
 
-
-
+        DialogMessagePrompt.Instance
+               .SetTitle("System Message")
+               .SetMessage("A few days after arriving in Seville, Magellan formalized his change of loyalty from Fernao de Magalhaes (Portuguese subject) to Fernando de Magallanes (Spanish subject).")
+               .Show();
 
 
     }
@@ -67,7 +72,7 @@ public class ChapterOneLevelFourHandler : MonoBehaviour
         playerQuestListManager.PopulateQuestList();
 
         ChapterLevelSummaryAnnounceControl.Instance
-    .SetTitle("Chapter 1: Level 4")
+    .SetTitle("Chapter 1: Level 5")
     .SetQuests(quests)
     .SetFadeInDuration(0.5f)
     .OnContinue(() =>
