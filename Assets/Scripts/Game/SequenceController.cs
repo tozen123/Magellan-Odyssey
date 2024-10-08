@@ -21,6 +21,7 @@ public class SequenceController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        LoadGraphicsQuality();
 
         creationCanvasGroup = creationCanvas.GetComponent<CanvasGroup>();
         loginCanvasGroup = loginCanvas.GetComponent<CanvasGroup>();
@@ -48,6 +49,14 @@ public class SequenceController : MonoBehaviour
                 .SetMessage("Hello, Player. Before you start the game, you need to have an avatar.")
                 .OnClose(ShowCreationAvatarCanvas)
                 .Show();
+        }
+    }
+    private void LoadGraphicsQuality()
+    {
+        if (PlayerPrefs.HasKey("GraphicsQuality"))
+        {
+            int savedQuality = PlayerPrefs.GetInt("GraphicsQuality");
+            QualitySettings.SetQualityLevel(savedQuality);
         }
     }
     public void Register()
