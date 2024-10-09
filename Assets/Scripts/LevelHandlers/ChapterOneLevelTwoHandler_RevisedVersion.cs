@@ -30,7 +30,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
     private bool isCrateQuestCompleted = false;
 
 
-
+    public GameObject CH1L2_GotoCenterTrainingField;
     private void Awake()
     {
         magellan2Gate.SetActive(false);
@@ -57,6 +57,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
     private void Start()
     {
+
         foreach (Quest quest in quests)
         {
             playerQuestHandler.AddQuest(quest);
@@ -134,6 +135,15 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             PlayerPrefs.Save();
         }
         
+        if(playerQuestHandler.IsQuestCompleted("Go to the Center of the Training Field"))
+        {
+            CH1L2_GotoCenterTrainingField.SetActive(false);
+        } 
+        else
+        {
+            CH1L2_GotoCenterTrainingField.SetActive(true);
+
+        }
     }
 
     private void UpdateDummyQuest()

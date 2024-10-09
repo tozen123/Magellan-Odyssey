@@ -58,7 +58,14 @@ public class SequenceController : MonoBehaviour
             int savedQuality = PlayerPrefs.GetInt("GraphicsQuality");
             QualitySettings.SetQualityLevel(savedQuality);
         }
+        else
+        {
+            QualitySettings.SetQualityLevel(1);
+            PlayerPrefs.SetInt("GraphicsQuality", 1);
+            PlayerPrefs.Save();
+        }
     }
+
     public void Register()
     {
         PlayerPrefs.SetString("userName", inputName.text.ToString());

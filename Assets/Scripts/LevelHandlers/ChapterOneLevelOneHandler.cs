@@ -11,6 +11,9 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
 
     [Header("Quests")]
     [SerializeField] private List<Quest> quests;
+
+
+    public GameObject CH1L1_ToMagellan;
     private void Awake()
     {
         if (!playerCanvas)
@@ -39,7 +42,10 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
        
 
     }
-
+    private void Update()
+    {
+    
+    }
     void Dialogs()
     {
 
@@ -97,8 +103,9 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
             PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Explore the City of Lisbon"));
 
             PlayerQuestHandler.CompleteQuest("Explore the City of Lisbon");
+            CH1L1_ToMagellan.SetActive(true);
 
-            
+
         }
     }
 }
