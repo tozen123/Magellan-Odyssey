@@ -13,6 +13,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
     [SerializeField] private List<Quest> quests;
 
     [SerializeField] private Sprite targetImage;
+    [SerializeField] private Sprite banditImage;
     [SerializeField] private List<GameObject> targetDummies;
     [SerializeField] private List<GameObject> targetBandit;
     [SerializeField] private List<GameObject> targetCrates; // List of crates to be collected
@@ -29,8 +30,11 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
     private bool isBanditQuestCompleted = false;
     private bool isCrateQuestCompleted = false;
 
+    [Header("Tracers")]
 
     public GameObject CH1L2_GotoCenterTrainingField;
+    public GameObject CH1L2_GotoEntrance;
+    public GameObject CH1L2_ToDeliver;
     private void Awake()
     {
         magellan2Gate.SetActive(false);
@@ -90,14 +94,14 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             {
                 DialogMessagePrompt.Instance
                     .SetTitle("System Message")
-                    .SetMessage("Test")
+                    .SetMessage("Look for this object around the outpost. This objects can be destroy and attacked safely.")
                     .SetImage(targetImage)
                     .Show();
                 alreadyGoneToDummy = true;
             }
         }
     }
-
+    private bool hasShownBanditDialog = false;
     private void Update()
     {
         UpdateCrateQuest();
@@ -118,9 +122,17 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             }
         }
 
-        if (playerQuestHandler.IsQuestCompleted("To Battlefield"))
+        if (playerQuestHandler.IsCurrentQuest("To Battlefield") && !hasShownBanditDialog)
         {
             magellan3Battlefield.SetActive(true);
+
+            DialogMessagePrompt.Instance
+                .SetTitle("System Message")
+                .SetMessage("Look for the bandits around the outside of the outpost by following the dirt roads. They are mostly in group so be careful!")
+                .SetImage(banditImage)
+                .Show();
+
+            hasShownBanditDialog = true; 
         }
 
         if (playerQuestHandler.IsQuestCompleted("Deliver the crates to Soldier"))
@@ -135,15 +147,36 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             PlayerPrefs.Save();
         }
         
-        if(playerQuestHandler.IsQuestCompleted("Go to the Center of the Training Field"))
+        if(playerQuestHandler.IsCurrentQuest("Go to the Center of the Training Field"))
         {
-            CH1L2_GotoCenterTrainingField.SetActive(false);
+            CH1L2_GotoCenterTrainingField.SetActive(true);
         } 
         else
         {
-            CH1L2_GotoCenterTrainingField.SetActive(true);
+            CH1L2_GotoCenterTrainingField.SetActive(false);
 
         }
+        if (playerQuestHandler.IsCurrentQuest("To Battlefield"))
+        {
+            CH1L2_GotoEntrance.SetActive(true);
+        }
+        else
+        {
+            CH1L2_GotoEntrance.SetActive(false);
+
+        }
+
+        if (playerQuestHandler.IsCurrentQuest("Deliver the crates to Soldier"))
+        {
+            CH1L2_ToDeliver.SetActive(true);
+        }
+        else
+        {
+            CH1L2_ToDeliver.SetActive(false);
+
+        }
+
+
     }
 
     private void UpdateDummyQuest()

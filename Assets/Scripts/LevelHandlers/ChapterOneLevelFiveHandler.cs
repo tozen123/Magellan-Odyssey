@@ -30,6 +30,11 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
     [Header("Chars1")]
     [SerializeField] private GameObject ruy1;
     [SerializeField] private GameObject mag1;
+
+    [Header("Tracers")]
+    public GameObject CH1L5_ToMagellan1;
+    public GameObject CH1L5_MeetRuy1;
+
     private void Awake()
     {
         if (!playerCanvas)
@@ -147,6 +152,26 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
         {
             ruy1.SetActive(true);
             mag1.SetActive(true);
+        }
+
+        if (playerQuestHandler.IsCurrentQuest("Go to Magellan"))
+        {
+            CH1L5_ToMagellan1.SetActive(true);
+        }
+        else
+        {
+            CH1L5_ToMagellan1.SetActive(false);
+
+        }
+
+        if (playerQuestHandler.IsCurrentQuest("Meet Ruy Falero"))
+        {
+            CH1L5_MeetRuy1.SetActive(true);
+        }
+        else
+        {
+            CH1L5_MeetRuy1.SetActive(false);
+
         }
 
     }

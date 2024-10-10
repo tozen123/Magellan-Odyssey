@@ -24,9 +24,14 @@ public class PlayerInteractionController : MonoBehaviour
     [Header("References")]
     [SerializeField] private CanvasGroup playerMainCanvasControllerGroup;
 
+    PlayerQuestHandler playerQuestHandler;
 
-   
 
+
+    private void Start()
+    {
+        playerQuestHandler = GetComponent<PlayerQuestHandler>();
+    }
 
     private void Awake()
     {
@@ -122,8 +127,22 @@ public class PlayerInteractionController : MonoBehaviour
 
                             PlayerQuestHandler.CompleteQuest("Go to Magellan at the fountain");
                         }
-                        
 
+                        // -------------------------- CHAPTER 1 LEVEL 6 ---------------------------------
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level6")
+                        {
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to Magellan"));
+
+                            PlayerQuestHandler.CompleteQuest("Go to Magellan");
+                        }
+
+                        // -------------------------- CHAPTER 1 LEVEL 6 ---------------------------------
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level6")
+                        {
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Report to Magellan"));
+
+                            PlayerQuestHandler.CompleteQuest("Report to Magellan");
+                        }
 
                     }
                     if (_character.name == "Ruy")
@@ -137,6 +156,26 @@ public class PlayerInteractionController : MonoBehaviour
                             PlayerQuestHandler.CompleteQuest("Meet Ruy Falero");
                         }
                     }
+
+                    if (_character.name == "Ship Master Martinez")
+                    {
+                        // -------------------------- CHAPTER 1 LEVEL 6 ---------------------------------
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level6")
+                        {
+                            if (!playerQuestHandler.IsCurrentQuest("Special Quiz: Talk to the Ship Master"))
+                            {
+                                DialogMessagePrompt.Instance
+                                    .SetTitle("System Message")
+                                    .SetMessage("You cannot interact with the ship master at the moment. you first need to complete other quest first.")
+                                    .Show();
+                                return;
+                            }
+                            
+                        }
+                        
+                       
+                    }
+
                     if (other.gameObject.GetComponent<DialogueTrigger>())
                     {
                         dialogueTrigger = other.gameObject.GetComponent<DialogueTrigger>();

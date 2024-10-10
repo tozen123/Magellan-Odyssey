@@ -15,9 +15,10 @@ public class LoadingScreenManager : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f;
     [SerializeField] private float staticDuration = 2.0f;
 
+    private bool errorOccurred = false; // To track if the error occurred
+
     private void Awake()
     {
-
         if (Instance == null)
         {
             Instance = this;
@@ -31,12 +32,20 @@ public class LoadingScreenManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        StartCoroutine(LoadSceneAsync(sceneName));
+        // Check if the scene exists before attempting to load it
+        if (IsSceneValid(sceneName))
+        {
+            StartCoroutine(LoadSceneAsync(sceneName));
+        }
+        else
+        {
+            // Display error message if the scene does not exist
+            StartCoroutine(ShowErrorMessage("Encountered a Game Error: Scene Not Found"));
+        }
     }
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
-
         yield return StartCoroutine(FadeIn());
 
         loadingScreen.SetActive(true);
@@ -54,6 +63,25 @@ public class LoadingScreenManager : MonoBehaviour
         yield return StartCoroutine(FadeOut());
 
         loadingScreen.SetActive(false);
+    }
+
+    private IEnumerator ShowErrorMessage(string message)
+    {
+        yield return StartCoroutine(FadeIn());
+
+        loadingScreen.SetActive(true);
+        loadingText.text = message;
+        errorOccurred = true;
+
+        // Wait for a click input to proceed to MainMenu-Sequence1
+        while (!Input.GetMouseButtonDown(0))
+        {
+            yield return null;
+        }
+
+        // Reset error state and load fallback scene
+        errorOccurred = false;
+        LoadScene("MainMenu-Sequence1");
     }
 
     private IEnumerator FadeIn()
@@ -84,5 +112,29 @@ public class LoadingScreenManager : MonoBehaviour
         }
 
         canvasGroup.alpha = 0f;
+    }
+
+    // Utility method to check if the scene is valid
+    private bool IsSceneValid(string sceneName)
+    {
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string scene = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+            if (scene.Equals(sceneName, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void Update()
+    {
+        // If error has occurred, wait for a click to go to MainMenu-Sequence1
+        if (errorOccurred && Input.GetMouseButtonDown(0))
+        {
+            LoadScene("MainMenu-Sequence1");
+        }
     }
 }

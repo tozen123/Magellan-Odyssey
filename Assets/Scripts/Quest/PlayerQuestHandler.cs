@@ -191,4 +191,22 @@ public class PlayerQuestHandler : MonoBehaviour
         }
         return false;
     }
+
+    public bool IsCurrentQuest(string title)
+    {
+        if (Level1Quests.Count == 0) return false;
+
+        Quest currentQuest = Level1Quests[currentQuestIndex];
+
+        if (currentQuest.QuestTitle.Equals(title, System.StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+   
 }

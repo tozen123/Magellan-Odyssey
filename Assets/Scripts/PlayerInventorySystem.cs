@@ -26,6 +26,7 @@ public class PlayerInventorySystem : MonoBehaviour
 
 
     public ChapterOneLevelTwoHandler_RevisedVersion questHandler;
+    public ChapterOneLevelSixHandler questHandlerL6;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -66,8 +67,16 @@ public class PlayerInventorySystem : MonoBehaviour
                     questHandler.OnCrateCollected(item.gameObject); 
                 }
             }
+            if (SceneManager.GetActiveScene().name == "Chapter1Level6")
+            {
+                Debug.Log("yes");
 
-            
+                if (item.itemName == "Provision Crate")
+                {
+                    questHandlerL6.OnCrateCollected(item.gameObject);
+                }
+            }
+
 
             if (textActionUpdateSystem != null)
             {

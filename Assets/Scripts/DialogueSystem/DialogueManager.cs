@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour
 
     public bool isDialogueActive = false;
     public bool isCompleteQuiz = false;
-    public float typingSpeed = 0.03f;
+    public float typingSpeed = 0.025f;
 
 
     private bool isAwaitingInput = false;
@@ -42,6 +42,10 @@ public class DialogueManager : MonoBehaviour
     [Header("Controller Reference")]
     [SerializeField] private CanvasGroup canvasGroup;
 
+    private int correctAnswersCount = 0;
+    private int dialogueWithChoicesCount = 0; // Keeps track of dialogues that have choices
+
+    private bool chapQuiz;
     private void Awake()
     {
         if (Instance == null)
@@ -53,10 +57,11 @@ public class DialogueManager : MonoBehaviour
 
 
     }
-    public void QuizMode(bool isTook)
+    public void QuizMode(bool isTook, bool _chapQuiz)
     {
 
         isCompleteQuiz = isTook;
+        chapQuiz = _chapQuiz;
     }
     public void StartDialogue(Dialogue dialogue)
     {
@@ -86,6 +91,11 @@ public class DialogueManager : MonoBehaviour
         foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
         {
             lines.Enqueue(dialogueLine);
+
+            if (dialogueLine.hasChoices || dialogueLine.isConverstationWithDefinedChoices)
+            {
+                dialogueWithChoicesCount++;
+            }
         }
 
         feedbackBodyParent.SetActive(false);
@@ -286,6 +296,8 @@ public class DialogueManager : MonoBehaviour
 
             feedbackText.text = "Correct";
             Debug.Log("Correct answer selected");
+
+            correctAnswersCount++;
         }
         else
         {
@@ -318,6 +330,31 @@ public class DialogueManager : MonoBehaviour
     {
         PlayerSoundEffectManager.StopQuizTheme();
 
+        if (chapQuiz)
+        {
+            if(SceneManager.GetActiveScene().name == "Chapter1Level6")
+            {
+                PlayerPrefs.SetInt("Chapter1QuizScore", correctAnswersCount);
+                PlayerPrefs.Save();
+            }
+            if (SceneManager.GetActiveScene().name == "Chapter1Level4")
+            {
+                PlayerPrefs.SetInt("Chapter2QuizScore", correctAnswersCount);
+                PlayerPrefs.Save();
+            }
+            if (SceneManager.GetActiveScene().name == "Chapter1Level4")
+            {
+                PlayerPrefs.SetInt("Chapter3QuizScore", correctAnswersCount);
+                PlayerPrefs.Save();
+            }
+
+        }
+
+        // Debug the number of correct answers
+        //Debug.Log("Quiz completed. Total correct answers: " + correctAnswersCount);
+        //Debug.Log("Dialogue ended. Total lines with choices: " + dialogueWithChoicesCount);
+        // Reset the correct answers count for the next dialogue
+        correctAnswersCount = 0;
 
         isDialogueActive = false;
         isCompleteQuiz = false;

@@ -20,6 +20,7 @@ public class MapControlSystem : MonoBehaviour
     [SerializeField] private Sprite SevillMap;
     [SerializeField] private Sprite OutpostMap;
     [SerializeField] private Sprite RoyalPalaceMap;
+    [SerializeField] private Sprite PortMap;
 
     void SetMap()
     {
@@ -42,6 +43,10 @@ public class MapControlSystem : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Chapter1Level5")
         {
             Holder.sprite = SevillMap;
+        }
+        if (SceneManager.GetActiveScene().name == "Chapter1Level6")
+        {
+            Holder.sprite = PortMap;
         }
     }
 
