@@ -20,20 +20,22 @@ public class PlayerHealthManager : MonoBehaviour
         UpdateForegroundHealthBar();
         UpdateBackgroundHealthBar();
     }
-
+    private bool defeatDialogShown = false;
     void Update()
     {
         if (backgroundHealthBar.fillAmount > foregroundHealthBar.fillAmount)
         {
             backgroundHealthBar.fillAmount = Mathf.Lerp(backgroundHealthBar.fillAmount, foregroundHealthBar.fillAmount, Time.deltaTime * backgroundHealthBarLerpSpeed);
         }
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !defeatDialogShown)
         {
             DialogMessagePrompt.Instance
                 .SetTitle("System Message")
                 .SetMessage("You have been defeated. The level will restart.")
                 .OnClose(RestartScene) 
                 .Show();
+
+            defeatDialogShown = true;
         }
     }
 

@@ -103,15 +103,7 @@ public class PlayerInteractionController : MonoBehaviour
 
                         }
 
-                        if (SceneManager.GetActiveScene().name == "Chapter1Level2")
-                        {
-                            //Revised
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Talk to Magellan About the Issues"));
-
-                            PlayerQuestHandler.CompleteQuest("Talk to Magellan About the Issues");
-
-
-                        }
+                       
 
                         // -------------------------- CHAPTER 1 LEVEL 5 ---------------------------------
                         if (SceneManager.GetActiveScene().name == "Chapter1Level5")
@@ -242,6 +234,17 @@ public class PlayerInteractionController : MonoBehaviour
     {
         if (dialogueTrigger != null)
         {
+            if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+            {
+                if(playerQuestHandler.IsCurrentQuest("Talk to Magellan About the Issues"))
+                {
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Talk to Magellan About the Issues"));
+
+                    PlayerQuestHandler.CompleteQuest("Talk to Magellan About the Issues");
+                }
+                
+            }
+
             dialogueTrigger.TriggerDialogue();
 
             isDialogueStarted = true;
