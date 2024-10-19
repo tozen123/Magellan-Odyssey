@@ -54,4 +54,9 @@ public class MainMenuController : MonoBehaviour
     {
         
     }
+
+    void Tutorial()
+    {
+
+    }
 }

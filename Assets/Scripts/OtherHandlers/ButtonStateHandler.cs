@@ -5,42 +5,23 @@ using UnityEngine.UI;
 
 public class ButtonStateHandler : MonoBehaviour
 {
-    [SerializeField] private Image ChildImage; // Reference to the image component that displays the lock icon
-
-    private Sprite lockImage; // Sprite for the lock icon
-    private Sprite doneImage; // Sprite for the lock icon
+    [SerializeField] private Image ChildImage; // Reference to the Image component
+    [SerializeField] private Sprite lockImage; // Sprite for the lock icon
+    [SerializeField] private Sprite doneImage; // Sprite for the completed icon
+    [SerializeField] private Sprite checkImage; // Sprite for the completed icon
 
     private Button thisButton; // Reference to the Button component
-
+ 
     void Start()
     {
-        // Load the lock image sprite
-        Sprite loadedSprite1 = Resources.Load<Sprite>("Images/lock_icon");
-        Sprite loadedSprite2 = Resources.Load<Sprite>("Images/check_icon");
-        if (loadedSprite1 != null)
-        {
-            lockImage = loadedSprite1;
-        }
-        else
-        {
-            Debug.LogWarning("Lock image not found in Resources folder");
-        }
-         if (loadedSprite2 != null)
-        {
-            doneImage = loadedSprite2;
-        }
-        else
-        {
-            Debug.LogWarning("Lock image not found in Resources folder");
-        }
+        doneImage = transform.GetChild(0).GetComponent<Image>().sprite;
 
         // Get the Button component attached to this game object
         thisButton = this.gameObject.GetComponent<Button>();
-
         // Check for null references
         if (ChildImage == null)
         {
-            Debug.LogWarning("ChildImage is not assigned in the Inspector on " + gameObject.name);
+            Debug.LogWarning("ChildImage (Image component) is not assigned in the Inspector on " + gameObject.name);
         }
         if (thisButton == null)
         {
@@ -54,13 +35,10 @@ public class ButtonStateHandler : MonoBehaviour
         if (ChildImage != null && lockImage != null)
         {
             ChildImage.sprite = lockImage;
-            ChildImage.preserveAspect = true;
-
-       
 
             if (thisButton != null)
             {
-                thisButton.interactable = false;
+                thisButton.interactable = false; // Disable interaction
             }
         }
         else
@@ -74,39 +52,35 @@ public class ButtonStateHandler : MonoBehaviour
     {
         if (ChildImage != null)
         {
-            ChildImage.sprite = null;
-            ChildImage.preserveAspect = true;
+            ChildImage.sprite = doneImage; // Remove the lock image
         }
-
-        
         else
         {
-            Debug.LogWarning("Text GameObject is not assigned in the Inspector on " + gameObject.name);
+            Debug.LogWarning("ChildImage (Image component) is not assigned in the Inspector on " + gameObject.name);
         }
 
         if (thisButton != null)
         {
-            thisButton.interactable = true;
+            thisButton.interactable = true; // Enable interaction
         }
     }
 
+    // Method to set the button to a completed state
     public void SetToCheckState()
     {
-        if (ChildImage != null)
-        {
-            ChildImage.sprite = doneImage;
-            ChildImage.preserveAspect = true;
-        }
 
-        
+        if (ChildImage != null && doneImage != null)
+        {
+            ChildImage.sprite = checkImage; // Set the completed image
+        }
         else
         {
-            Debug.LogWarning("Text GameObject is not assigned in the Inspector on " + gameObject.name);
+            Debug.LogWarning("Cannot set to check state. Either ChildImage or doneImage is null on " + gameObject.name);
         }
 
         if (thisButton != null)
         {
-            thisButton.interactable = false;
+            thisButton.interactable = false; // Disable interaction for completed state
         }
     }
 }
