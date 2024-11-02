@@ -102,6 +102,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         }
     }
     private bool hasShownBanditDialog = false;
+    public GameObject soldier;
     private void Update()
     {
         UpdateCrateQuest();
@@ -168,11 +169,12 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
         if (playerQuestHandler.IsCurrentQuest("Deliver the crates to Soldier"))
         {
-            CH1L2_ToDeliver.SetActive(true);
+            soldier.SetActive(true);
+
         }
         else
         {
-            CH1L2_ToDeliver.SetActive(false);
+            soldier.SetActive(false);
 
         }
 

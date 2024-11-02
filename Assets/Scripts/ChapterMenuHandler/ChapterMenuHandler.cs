@@ -82,7 +82,7 @@ public class ChapterMenuHandler : MonoBehaviour
 
     public void LoadChapterLevel(string sceneName)
     {
-
+         
         SoundEffectManager.PlayButtonClick2();
         LoadingScreenManager.Instance.LoadScene(sceneName);
     }

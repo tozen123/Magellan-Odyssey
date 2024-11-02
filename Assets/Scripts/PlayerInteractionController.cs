@@ -15,7 +15,7 @@ public class PlayerInteractionController : MonoBehaviour
     [Header("Variables DialogueSystem")]
     [SerializeField] private FixedJoystick movementJoystick;
     [SerializeField] private DialogueTrigger dialogueTrigger;
-    [SerializeField] private bool isDialogueStarted;
+    [SerializeField] public bool isDialogueStarted;
 
 
     public Animator playerAnimator;

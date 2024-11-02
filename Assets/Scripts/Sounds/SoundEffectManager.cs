@@ -9,6 +9,7 @@ public class SoundEffectManager : MonoBehaviour
     private AudioSource audioSource;
 
     public AudioClip ButtonClick2_Clip;
+    public AudioClip ButtonSwipeSound_Clip;
     public AudioClip CardPopUp_Clip;
     public AudioClip Reward_Clip;
     public AudioClip Notice_Clip;
@@ -16,15 +17,22 @@ public class SoundEffectManager : MonoBehaviour
 
     private void Awake()
     {
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(gameObject); 
+        //}
+        //else
+        //{
+        //    Destroy(gameObject); 
+        //}
+
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); 
         }
-        else
-        {
-            Destroy(gameObject); 
-        }
+        
+
 
         if (audioSource == null)
         {
@@ -35,7 +43,14 @@ public class SoundEffectManager : MonoBehaviour
             }
         }
     }
-    
+    public static void PlayButtonSwipeSound()
+    {
+        if (instance != null && instance.ButtonSwipeSound_Clip != null)
+        {
+            instance.audioSource.PlayOneShot(instance.ButtonSwipeSound_Clip);
+        }
+
+    }
     public static void PlayButtonClick2()
     {
         if (instance != null && instance.ButtonClick2_Clip != null)
