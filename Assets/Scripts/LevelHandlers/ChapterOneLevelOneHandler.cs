@@ -12,6 +12,7 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
     [Header("Quests")]
     [SerializeField] private List<Quest> quests;
 
+    public Sprite legendMinimap;
 
     public GameObject CH1L1_ToMagellan;
     private void Awake()
@@ -105,6 +106,12 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
             PlayerQuestHandler.CompleteQuest("Explore the City of Lisbon");
             CH1L1_ToMagellan.SetActive(true);
 
+
+            DialogMessagePrompt.Instance
+                    .SetTitle("System Message")
+                    .SetMessage("This is the game minimap legend")
+                    .SetImage(legendMinimap)
+                    .Show();
 
         }
     }

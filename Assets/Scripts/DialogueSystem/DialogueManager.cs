@@ -14,6 +14,8 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueArea;
     public List<Button> choiceButtons;
     public GameObject choiceButtonPanelParent;
+    public GameObject panelFG;
+
 
     [Header("Parents")]
     [SerializeField] private GameObject dialogoueParent;
@@ -54,7 +56,7 @@ public class DialogueManager : MonoBehaviour
         lines = new Queue<DialogueLine>();
 
         animator.Play("UIFullHide");
-
+        panelFG.SetActive(false);
 
     }
     public void QuizMode(bool isTook, bool _chapQuiz)
@@ -69,6 +71,7 @@ public class DialogueManager : MonoBehaviour
         PlayerSoundEffectManager.PlayConvoPopUp();
         isDialogueActive = true;
         animator.Play("UIPop");
+        panelFG.SetActive(true);
 
         lines.Clear();
 
@@ -169,10 +172,12 @@ public class DialogueManager : MonoBehaviour
             {
                 button.gameObject.SetActive(false);
             }
-
+            
             StartCoroutine(DialogueTypeSentence(currentLine.line));
             return;
         }
+
+        
     }
 
 
@@ -328,32 +333,124 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        panelFG.SetActive(false);
+
         PlayerSoundEffectManager.StopQuizTheme();
 
+        int acp;
+        acp = correctAnswersCount * 10;
+
+        int adp = 0;
+
+        int quizlength = 0;
         if (chapQuiz)
         {
-            if(SceneManager.GetActiveScene().name == "Chapter1Level6")
+            if(SceneManager.GetActiveScene().name == "Chapter1Level1")
             {
+
+                int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+
                 PlayerPrefs.SetInt("Chapter1QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
+
+                if (correctAnswersCount == 5)
+                {
+                    adp = 50;
+                }
+                quizlength = 5;
+
+
             }
-            if (SceneManager.GetActiveScene().name == "Chapter1Level4")
+            if (SceneManager.GetActiveScene().name == "Chapter1Level2")
             {
+                
+                int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+
+
                 PlayerPrefs.SetInt("Chapter2QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
             }
-            if (SceneManager.GetActiveScene().name == "Chapter1Level4")
+            if (SceneManager.GetActiveScene().name == "Chapter1Level3")
             {
+
+                int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+
                 PlayerPrefs.SetInt("Chapter3QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
             }
+            if (SceneManager.GetActiveScene().name == "Chapter1Level4")
+            {
 
+                int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+
+                PlayerPrefs.SetInt("Chapter4QuizScore", correctAnswersCount);
+                PlayerPrefs.Save();
+            }
+            if (SceneManager.GetActiveScene().name == "Chapter1Level5")
+            {
+
+                int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+
+                PlayerPrefs.SetInt("Chapter5QuizScore", correctAnswersCount);
+                PlayerPrefs.Save();
+            }
+            if (SceneManager.GetActiveScene().name == "Chapter1Level6")
+            {
+
+                int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+
+                PlayerPrefs.SetInt("Chapter6QuizScore", correctAnswersCount);
+                PlayerPrefs.Save();
+            }
+
+            if (adp > 0) 
+            {
+
+                DialogMessagePrompt.Instance
+                    .SetTitle("System Message")
+                    .SetMessage(correctAnswersCount + " / " + quizlength + " Ikaw ay nakakuha ka ng Adventure Points na " + adp + " at Academic Points na " + acp )
+                    .OnClose(Close)
+                    .Show();
+            }
+            else
+            {
+                DialogMessagePrompt.Instance
+                    .SetTitle("System Message")
+                    .SetMessage(correctAnswersCount + " / " + quizlength + " Ikaw ay akakuha ka ng Academic Points na " + acp)
+                    .OnClose(Close)
+                    .Show();
+            }
+
+            return;
         }
 
         // Debug the number of correct answers
         //Debug.Log("Quiz completed. Total correct answers: " + correctAnswersCount);
         //Debug.Log("Dialogue ended. Total lines with choices: " + dialogueWithChoicesCount);
         // Reset the correct answers count for the next dialogue
+        correctAnswersCount = 0;
+
+        isDialogueActive = false;
+        isCompleteQuiz = false;
+
+        if (!string.IsNullOrEmpty(currentLine.targetSceneName))
+        {
+            LoadingScreenManager.Instance.LoadScene(currentLine.targetSceneName);
+        }
+
+        Debug.Log("EndDialogue");
+
+        animator.Play("UIHide");
+    }
+
+    public void Close()
+    {
         correctAnswersCount = 0;
 
         isDialogueActive = false;

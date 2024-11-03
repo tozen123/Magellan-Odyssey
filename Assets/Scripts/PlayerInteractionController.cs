@@ -27,6 +27,7 @@ public class PlayerInteractionController : MonoBehaviour
     PlayerQuestHandler playerQuestHandler;
 
 
+    [SerializeField] public string interactingWith;
 
     private void Start()
     {
@@ -66,44 +67,45 @@ public class PlayerInteractionController : MonoBehaviour
                     ButtonSetState(ButtonInteract, true);
 
                     Debug.Log(_character.name);
+                    interactingWith = _character.name;
 
-                    if(_character.name == "Ferdinand Magellan")
+                    if (_character.name == "Ferdinand Magellan")
                     {
                         // -------------------------- CHAPTER 1 LEVEL 1 ---------------------------------
 
-                        if (SceneManager.GetActiveScene().name == "Chapter1Level1")
-                        {
-                            PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
-                            PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");
-                            PlayerPrefs.Save();
+                        //if (SceneManager.GetActiveScene().name == "Chapter1Level1")
+                        //{
+                        //    PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                        //    PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");
+                        //    PlayerPrefs.Save();
 
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
+                        //    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
 
-                            PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
-                        }
+                        //    PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
+                        //}
 
                         // -------------------------- CHAPTER 1 LEVEL 2 ---------------------------------
 
 
-                        if (SceneManager.GetActiveScene().name== "Chapter1Level2")
-                        {
-                            //Revised
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));
+                        //if (SceneManager.GetActiveScene().name== "Chapter1Level2")
+                        //{
+                        //    //Revised
+                        //    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));
 
-                            PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
-                        }
+                        //    PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
+                        //}
 
-                        if (SceneManager.GetActiveScene().name == "Chapter1Level2")
-                        {
-                            //Revised
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("To Battlefield"));
+                        //if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+                        //{
+                        //    //Revised
+                        //    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("To Battlefield"));
 
-                            PlayerQuestHandler.CompleteQuest("To Battlefield");
+                        //    PlayerQuestHandler.CompleteQuest("To Battlefield");
 
 
-                        }
+                        //}
 
-                       
+
 
                         // -------------------------- CHAPTER 1 LEVEL 5 ---------------------------------
                         if (SceneManager.GetActiveScene().name == "Chapter1Level5")
@@ -198,9 +200,11 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        interactingWith = "";
+
         if (other.gameObject.tag == "NPC")
         {
-
+            interactingWith = "";
             GameObject floaterUI = other.transform.GetChild(0).gameObject;
             if (floaterUI != null)
             {
@@ -234,18 +238,109 @@ public class PlayerInteractionController : MonoBehaviour
     {
         if (dialogueTrigger != null)
         {
-            if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+            if(interactingWith == "Ferdinand Magellan")
             {
-                if(playerQuestHandler.IsCurrentQuest("Talk to Magellan About the Issues"))
+                if (SceneManager.GetActiveScene().name == "Chapter1Level1")
                 {
-                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Talk to Magellan About the Issues"));
+                    if (playerQuestHandler.IsCurrentQuest("Meet Ferdinand Magellan"))
+                    {
+                 
 
-                    PlayerQuestHandler.CompleteQuest("Talk to Magellan About the Issues");
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
+
+                        PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+
+                    
+
+                }
+
+
+
+                if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+                {
+                    if (playerQuestHandler.IsCurrentQuest("Talk to Magellan About the Issues"))
+                    {
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Talk to Magellan About the Issues"));
+
+                        PlayerQuestHandler.CompleteQuest("Talk to Magellan About the Issues");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+
                 }
                 
+
             }
 
-            dialogueTrigger.TriggerDialogue();
+
+            if(interactingWith == "Henry (Old Man)")
+            {
+                if (SceneManager.GetActiveScene().name == "Chapter1Level1")
+                {
+                    if (playerQuestHandler.IsCurrentQuest("Kilalanin si Ferdinand Magellan"))
+                    {
+
+
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Kilalanin si Ferdinand Magellan"));
+
+                        PlayerQuestHandler.CompleteQuest("Kilalanin si Ferdinand Magellan");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+                }
+                    
+            }
+            if (interactingWith == "Antonio Pigafetta")
+            {
+                if (SceneManager.GetActiveScene().name == "Chapter1Level1")
+                {
+                    if (playerQuestHandler.IsCurrentQuest("Quiz Master Chapter 1"))
+                    {
+                        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");
+                        PlayerPrefs.Save();
+
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Quiz Master Chapter 1"));
+
+                        PlayerQuestHandler.CompleteQuest("Quiz Master Chapter 1");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+                }
+            }
+
+
+
+
+
+                dialogueTrigger.TriggerDialogue();
 
             isDialogueStarted = true;
 
