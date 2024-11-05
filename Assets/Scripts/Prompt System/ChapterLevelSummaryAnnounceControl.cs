@@ -10,6 +10,7 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
     [Header("References")]
     [SerializeField] private TextMeshProUGUI questHeader;
     [SerializeField] private TextMeshProUGUI chapterHeader;
+    [SerializeField] private TextMeshProUGUI chapterSummary;
     [SerializeField] private Button buttonContinue;
     [SerializeField] private Transform headerParent;
 
@@ -20,6 +21,7 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
 
     private ChapterSummary currentSummary;
+    private string announcement;
 
     [HideInInspector] public bool IsActive = false;
 
@@ -42,10 +44,17 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
         return Instance;
     }
 
-    public ChapterLevelSummaryAnnounceControl SetQuests(List<Quest> quests)
+    //public ChapterLevelSummaryAnnounceControl SetQuests(List<Quest> quests)
+    //{
+    //    if (currentSummary == null) currentSummary = new ChapterSummary();
+    //    currentSummary.Quests = quests;
+    //    return Instance;
+    //}
+
+
+    public ChapterLevelSummaryAnnounceControl SetAnnounce(string announce)
     {
-        if (currentSummary == null) currentSummary = new ChapterSummary();
-        currentSummary.Quests = quests;
+        announcement = announce;
         return Instance;
     }
 
@@ -74,7 +83,8 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
         }
 
         chapterHeader.text = currentSummary.Title;
-        Populate(currentSummary.Quests);
+        chapterSummary.text = announcement.ToString();
+        //Populate(currentSummary.Quests);
 
         canvas.SetActive(true);
         IsActive = true;

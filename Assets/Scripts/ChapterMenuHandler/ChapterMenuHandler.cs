@@ -20,6 +20,7 @@ public class ChapterMenuHandler : MonoBehaviour
 
     [SerializeField] private int ADP;
 
+    public bool undertutorial;
     private void Start()
     {
         Debug.Log("--------------------------------------------------------------");
@@ -75,7 +76,14 @@ public class ChapterMenuHandler : MonoBehaviour
 
     private void Update()
     {
-        UpdateAllButtonsInteractability();
+        if (!undertutorial)
+        {
+            UpdateAllButtonsInteractability();
+
+        }else
+        {
+            ButtonChapter1.interactable = false;
+        }
     }
 
 

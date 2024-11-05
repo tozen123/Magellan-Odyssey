@@ -71,9 +71,24 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
         }
 
         playerQuestListManager.PopulateQuestList();
+        //ChapterLevelSummaryAnnounceControl.Instance
+        //   .SetTitle("Chapter 1: Level 3")
+        //   .SetQuests(quests)
+        //   .SetFadeInDuration(0.5f)
+        //   .OnContinue(() =>
+        //   {
+        //       OpenPlayerCanvas();
+        //       Dialogs();
+        //   })
+        //   .Show();
+
+
         ChapterLevelSummaryAnnounceControl.Instance
-           .SetTitle("Chapter 1: Level 3")
-           .SetQuests(quests)
+           .SetTitle("Chapter 3")
+           .SetAnnounce("\n" +
+                            "Kilalanin si Haring Manoel I ng Portugal \n\n" +
+                            "Ang mapagmatigas at walang utang na loob na pagkatao ni Haring Manoel I \n\n" +
+                            "\n")
            .SetFadeInDuration(0.5f)
            .OnContinue(() =>
            {
@@ -81,6 +96,7 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
                Dialogs();
            })
            .Show();
+
         //OpenPlayerCanvas();
     }
 

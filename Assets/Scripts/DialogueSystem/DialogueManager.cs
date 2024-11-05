@@ -45,9 +45,12 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
 
     private int correctAnswersCount = 0;
-    private int dialogueWithChoicesCount = 0; // Keeps track of dialogues that have choices
+    private int dialogueWithChoicesCount = 0;
 
     private bool chapQuiz;
+
+
+    public TextMeshProUGUI acpCount;
     private void Awake()
     {
         if (Instance == null)
@@ -67,7 +70,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartDialogue(Dialogue dialogue)
     {
-       
+
         PlayerSoundEffectManager.PlayConvoPopUp();
         isDialogueActive = true;
         animator.Play("UIPop");
@@ -76,7 +79,7 @@ public class DialogueManager : MonoBehaviour
         lines.Clear();
 
 
-        if ( isCompleteQuiz)
+        if (isCompleteQuiz)
         {
             feedbackBodyParent.SetActive(true);
             dialogueBodyParent.SetActive(false);
@@ -149,7 +152,7 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currentLine.isConverstationWithDefinedChoices)
         {
-            
+
 
             choiceButtonPanelParent.SetActive(true);
             DisplaySimpleChoices(currentLine);
@@ -172,12 +175,12 @@ public class DialogueManager : MonoBehaviour
             {
                 button.gameObject.SetActive(false);
             }
-            
+
             StartCoroutine(DialogueTypeSentence(currentLine.line));
             return;
         }
 
-        
+
     }
 
 
@@ -210,7 +213,7 @@ public class DialogueManager : MonoBehaviour
         //    }
         //    readyForInput = false;
         //}
-      
+
         choiceButtonPanelParent.SetActive(false);
         foreach (Button button in choiceButtons)
         {
@@ -229,7 +232,7 @@ public class DialogueManager : MonoBehaviour
         DisplayNextDialogueLine();
     }
 
-    
+
 
     IEnumerator DialogueTypeSentence(string sentence)
     {
@@ -250,7 +253,7 @@ public class DialogueManager : MonoBehaviour
             dialogueArea.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-     
+
 
     }
     void DisplayChoices(DialogueLine dialogueLine)
@@ -274,7 +277,7 @@ public class DialogueManager : MonoBehaviour
         //    }
         //}
 
-       
+
         choiceButtonPanelParent.SetActive(false);
         foreach (Button button in choiceButtons)
         {
@@ -283,7 +286,7 @@ public class DialogueManager : MonoBehaviour
 
         StartCoroutine(ShowChoicesAfterTypingForQuiz(dialogueLine));
 
-        
+
     }
 
     void OnChoiceSelected(DialogueChoice choice)
@@ -345,8 +348,10 @@ public class DialogueManager : MonoBehaviour
         int quizlength = 0;
         if (chapQuiz)
         {
-            if(SceneManager.GetActiveScene().name == "Chapter1Level1")
+            if (SceneManager.GetActiveScene().name == "Chapter1Level1")
             {
+
+                PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
                 PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
@@ -364,7 +369,9 @@ public class DialogueManager : MonoBehaviour
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level2")
             {
-                
+                PlayerPrefs.SetInt("Kabanata2BookOfTrivia_IsLock", 1);
+
+
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
                 PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
 
@@ -374,6 +381,7 @@ public class DialogueManager : MonoBehaviour
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level3")
             {
+                PlayerPrefs.SetInt("Kabanata3BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
                 PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
@@ -383,6 +391,7 @@ public class DialogueManager : MonoBehaviour
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level4")
             {
+                PlayerPrefs.SetInt("Kabanata4BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
                 PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
@@ -392,6 +401,7 @@ public class DialogueManager : MonoBehaviour
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level5")
             {
+                PlayerPrefs.SetInt("Kabanata5BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
                 PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
@@ -401,6 +411,7 @@ public class DialogueManager : MonoBehaviour
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level6")
             {
+                PlayerPrefs.SetInt("Kabanata6BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
                 PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
@@ -409,12 +420,12 @@ public class DialogueManager : MonoBehaviour
                 PlayerPrefs.Save();
             }
 
-            if (adp > 0) 
+            if (adp > 0)
             {
 
                 DialogMessagePrompt.Instance
                     .SetTitle("System Message")
-                    .SetMessage(correctAnswersCount + " / " + quizlength + " Ikaw ay nakakuha ka ng Adventure Points na " + adp + " at Academic Points na " + acp )
+                    .SetMessage(correctAnswersCount + " / " + quizlength + " Ikaw ay nakakuha ka ng Adventure Points na " + adp + " at Academic Points na " + acp)
                     .OnClose(Close)
                     .Show();
             }
@@ -426,6 +437,7 @@ public class DialogueManager : MonoBehaviour
                     .OnClose(Close)
                     .Show();
             }
+            AddACP();
 
             return;
         }
@@ -498,7 +510,7 @@ public class DialogueManager : MonoBehaviour
     {
         yield return StartCoroutine(TypeSentence(dialogueLine.line));
 
-        
+
         choiceButtonPanelParent.SetActive(true);
 
         for (int i = 0; i < choiceButtons.Count; i++)
@@ -507,7 +519,7 @@ public class DialogueManager : MonoBehaviour
             {
                 choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
                 choiceButtons[i].gameObject.SetActive(true);
-                choiceButtons[i].onClick.RemoveAllListeners(); 
+                choiceButtons[i].onClick.RemoveAllListeners();
                 choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
             }
             else
@@ -538,6 +550,13 @@ public class DialogueManager : MonoBehaviour
                 choiceButtons[i].gameObject.SetActive(false);
             }
         }
+
+    }
+
+    public void AddACP()
+    {
+        int count = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+        acpCount.text = count.ToString();
 
     }
 

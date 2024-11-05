@@ -108,9 +108,26 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
 
         playerQuestListManager.PopulateQuestList();
 
+        //ChapterLevelSummaryAnnounceControl.Instance
+        //    .SetTitle("Chapter 1: Level 5")
+        //    .SetQuests(quests)
+        //    .SetFadeInDuration(0.5f)
+        //    .OnContinue(() =>
+        //    {
+        //        OpenPlayerCanvas();
+        //        Dialogs();
+        //    })
+        //    .Show();
+
         ChapterLevelSummaryAnnounceControl.Instance
-            .SetTitle("Chapter 1: Level 5")
-            .SetQuests(quests)
+            .SetTitle("Chapter 5")
+            .SetAnnounce("\n" +
+                            "Explore the city of Seville, Spain \n\n" +
+                            "Magellan formed a family in Seville with Beatriz Barbosa \n\n" +
+                            "Magellan and Falero’s expedition meeting with the royal council of Spain \n\n" +
+                            "King Charles I of Spain’s consent and royal approval for the Magellan's Expedition \n\n" +
+                            "The instructions or guidelines of King Charles I for the Magellan Expedition \n\n" +
+                            "\n")
             .SetFadeInDuration(0.5f)
             .OnContinue(() =>
             {
@@ -118,7 +135,6 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
                 Dialogs();
             })
             .Show();
-
 
     }
 

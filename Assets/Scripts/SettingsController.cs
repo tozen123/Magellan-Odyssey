@@ -63,7 +63,7 @@ public class SettingsController : MonoBehaviour
 
         int qualityLevel = QualitySettings.GetQualityLevel();
         string qualityLevelString = GetQualityLevelString(qualityLevel);
-
+        label.text = "Graphics Quality: " + GetQualityLevelString(qualityLevel);
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
                .SetMessage("You have successfully changed the Game Graphics Quality to " + qualityLevelString)

@@ -69,9 +69,24 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
         playerQuestListManager.PopulateQuestList();
 
+        //ChapterLevelSummaryAnnounceControl.Instance
+        //    .SetTitle("Chapter 1: Level 2")
+        //    .SetQuests(quests)
+        //    .SetFadeInDuration(0.5f)
+        //    .OnContinue(() =>
+        //    {
+        //        OpenPlayerCanvas();
+        //    })
+        //    .Show();
+
+
         ChapterLevelSummaryAnnounceControl.Instance
-            .SetTitle("Chapter 1: Level 2")
-            .SetQuests(quests)
+            .SetTitle("Chapter 2")
+            .SetAnnounce("\n" +
+                            "Ang pagsasanay para sa labanan sa Portugal Outposts \n\n" +
+                            "Ang malubhang pinsala sa tuhod at panghabang buhay na pagka-pilay ni Magellan \n\n" +
+                            "Ang alitan sa pagitan ni Magellan at ng mga sundalo sa pabuya (war spoils) ng digmaan \n\n" +
+                            "\n")
             .SetFadeInDuration(0.5f)
             .OnContinue(() =>
             {

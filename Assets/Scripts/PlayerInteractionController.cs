@@ -267,12 +267,20 @@ public class PlayerInteractionController : MonoBehaviour
 
                 if (SceneManager.GetActiveScene().name == "Chapter1Level2")
                 {
-                    if (playerQuestHandler.IsCurrentQuest("Talk to Magellan About the Issues"))
+                    if (playerQuestHandler.IsCurrentQuest("Go to the Center of the Training Field"))
+                    {
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));
+
+                        PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
+                    }
+
+                    else if (playerQuestHandler.IsCurrentQuest("Talk to Magellan About the Issues"))
                     {
                         PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Talk to Magellan About the Issues"));
 
                         PlayerQuestHandler.CompleteQuest("Talk to Magellan About the Issues");
                     }
+
                     else
                     {
                         DialogMessagePrompt.Instance
@@ -281,6 +289,9 @@ public class PlayerInteractionController : MonoBehaviour
                                .Show();
                         return;
                     }
+
+
+                  
 
                 }
                 

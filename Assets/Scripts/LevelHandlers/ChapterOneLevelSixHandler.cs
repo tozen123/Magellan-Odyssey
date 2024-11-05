@@ -136,18 +136,31 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
 
         playerQuestListManager.PopulateQuestList();
 
+        //ChapterLevelSummaryAnnounceControl.Instance
+        //    .SetTitle("Chapter 1: Level 6")
+        //    .SetQuests(quests)
+        //    .SetFadeInDuration(0.5f)
+        //    .OnContinue(() =>
+        //    {
+        //        OpenPlayerCanvas();
+        //        Dialogs();
+        //    })
+        //    .Show();
+
+
         ChapterLevelSummaryAnnounceControl.Instance
-    .SetTitle("Chapter 1: Level 6")
-    .SetQuests(quests)
-    .SetFadeInDuration(0.5f)
-    .OnContinue(() =>
-    {
-        OpenPlayerCanvas();
-        Dialogs();
-    })
-    .Show();
-
-
+            .SetTitle("Chapter 6")
+            .SetAnnounce("\n" +
+                            "The preparation and provisions of the Magellan Expedition \n\n" +
+                            "The five ships of the Magellan Expedition \n\n" +
+                            "\n")
+            .SetFadeInDuration(0.5f)
+            .OnContinue(() =>
+            {
+                OpenPlayerCanvas();
+                Dialogs();
+            })
+            .Show();
     }
     [SerializeField] private List<GameObject> targetCrates; // List of crates to be collected
 

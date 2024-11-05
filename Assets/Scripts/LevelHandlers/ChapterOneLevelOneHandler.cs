@@ -76,17 +76,31 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
 
         playerQuestListManager.PopulateQuestList();
 
-        ChapterLevelSummaryAnnounceControl.Instance
-    .SetTitle("Chapter 1: Level 1")
-    .SetQuests(quests)
-    .SetFadeInDuration(0.5f)
-    .OnContinue(() =>
-    {
-        OpenPlayerCanvas();
-        Dialogs();
-    })
-    .Show();
+        //ChapterLevelSummaryAnnounceControl.Instance
+        //    .SetTitle("Chapter 1: Level 1")
+        //    .SetQuests(quests)
+        //    .SetFadeInDuration(0.5f)
+        //    .OnContinue(() =>
+        //    {
+        //        OpenPlayerCanvas();
+        //        Dialogs();
+        //    })
+        //    .Show();
 
+        ChapterLevelSummaryAnnounceControl.Instance
+            .SetTitle("Chapter 1")
+            .SetAnnounce("\n" +
+            "Tuklasin ang bayan ni Magellan - Lisbon, Portugal \n\n" +
+            "Kilalanin si Ferdinand Magellan, ang Kapitan ng Ekspedisyon \n\n" +
+            "Ang isyu sa pagtaas ng sweldo sa pagitcan nina Magellan at King Manoel I ng Portugal \n\n" +
+            "\n")
+            .SetFadeInDuration(0.5f)
+            .OnContinue(() =>
+            {
+                OpenPlayerCanvas();
+                Dialogs();
+            })
+            .Show();
 
     }
 

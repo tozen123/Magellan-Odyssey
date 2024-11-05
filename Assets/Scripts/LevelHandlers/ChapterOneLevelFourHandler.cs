@@ -72,17 +72,30 @@ public class ChapterOneLevelFourHandler : MonoBehaviour
 
         playerQuestListManager.PopulateQuestList();
 
-        ChapterLevelSummaryAnnounceControl.Instance
-    .SetTitle("Chapter 1: Level 4")
-    .SetQuests(quests)
-    .SetFadeInDuration(0.5f)
-    .OnContinue(() =>
-    {
-        OpenPlayerCanvas();
-        Dialogs();
-    })
-    .Show();
+        //ChapterLevelSummaryAnnounceControl.Instance
+        //    .SetTitle("Chapter 1: Level 4")
+        //    .SetQuests(quests)
+        //    .SetFadeInDuration(0.5f)
+        //    .OnContinue(() =>
+        //    {
+        //        OpenPlayerCanvas();
+        //        Dialogs();
+        //    })
+        //    .Show();
 
+        ChapterLevelSummaryAnnounceControl.Instance
+            .SetTitle("Chapter 4")
+            .SetAnnounce("\n" +
+                            "Ang pagpasiya ni Magellan na lumipat mula sa Portugal patungo sa Espanya \n\n" +
+                            "Ang pagsisimula ng pangarap na ekspedisyon ni Magellan \n\n" +
+                            "\n")
+            .SetFadeInDuration(0.5f)
+            .OnContinue(() =>
+            {
+                OpenPlayerCanvas();
+                Dialogs();
+            })
+            .Show();
 
     }
 
