@@ -14,11 +14,13 @@ public class ChapterMenuHandler : MonoBehaviour
     public Button ButtonChapter1;
     public Button ButtonChapter2;
     public Button ButtonChapter3;
-
-    [Header("Chapter 1 Level Buttons")]
-    public Button[] ButtonChapter1Levels;
+    public Button ButtonChapter4;
+    public Button ButtonChapter5;
+    public Button ButtonChapter6;
 
     [SerializeField] private int ADP;
+
+    public bool undertutorial;
     private void Start()
     {
         Debug.Log("--------------------------------------------------------------");
@@ -30,104 +32,66 @@ public class ChapterMenuHandler : MonoBehaviour
         Debug.Log("Chapter1Level5: " + PlayerPrefs.GetString("Chapter1Level5"));
         Debug.Log("--------------------------------------------------------------");
 
-
         if (!PlayerPrefs.HasKey("adventure_points"))
         {
             PlayerPrefs.SetInt("adventure_points", 0);
-        } 
+        }
         else
         {
             ADP = PlayerPrefs.GetInt("adventure_points");
-
         }
 
-        UpdateButtonInteractability();
+        UpdateAllButtonsInteractability();
     }
 
-    private void UpdateButtonInteractability()
+    private void UpdateAllButtonsInteractability()
     {
-        ButtonChapter1.interactable = true;
-        //int current_adp = ADP;
+        // Update all buttons based on their chapter level progress
+        UpdateButtonState(ButtonChapter1, "Chapter1Level1");
+        UpdateButtonState(ButtonChapter2, "Chapter1Level2");
+        UpdateButtonState(ButtonChapter3, "Chapter1Level3");
+        UpdateButtonState(ButtonChapter4, "Chapter1Level4");
+        UpdateButtonState(ButtonChapter5, "Chapter1Level5");
+        UpdateButtonState(ButtonChapter6, "Chapter1Level6");
+    }
 
-        //switch (current_adp)
-        //{
-        //    case 0:
-        //        ButtonChapter1.interactable = true;
-        //        ButtonChapter2.interactable = false;
-        //        ButtonChapter3.interactable = false;
-        //        break;
+    private void UpdateButtonState(Button button, string chapterLevelKey)
+    {
+        string state = PlayerPrefs.GetString(chapterLevelKey); 
 
-        //    case 1000:
-        //        ButtonChapter1.interactable = true;
-        //        ButtonChapter2.interactable = true;
-        //        ButtonChapter3.interactable = false;
-        //        break;
-
-        //    case 2000:
-        //        ButtonChapter1.interactable = true;
-        //        ButtonChapter2.interactable = true;
-        //        ButtonChapter3.interactable = true;
-        //        break;
-
-        //    default:
-        //        ButtonChapter1.interactable = false;
-        //        ButtonChapter2.interactable = false;
-        //        ButtonChapter3.interactable = false;
-        //        Debug.LogWarning("Unexpected value for adventure_points: " + current_adp);
-        //        break;
-        //}
-
-        for (int i = 0; i < ButtonChapter1Levels.Length; i++)
+        switch (state)
         {
-            string levelKey = "Chapter1Level" + (i + 1);
-            string levelState = PlayerPrefs.GetString(levelKey);
-
-            if (levelState.Equals("IN_PROGRESS")  )
-            {
-                ButtonChapter1Levels[i].interactable = true;
-            }
-            else if (levelState.Equals("COMPLETED"))
-            {
-                ButtonChapter1Levels[i].interactable = false;
-                ButtonChapter1Levels[i].image.color = Color.black;
-            }
-            else if (levelState.Equals("LOCKED"))
-            {
-                ButtonChapter1Levels[i].interactable = false;
-            }
-            else
-            {
-                ButtonChapter1Levels[i].interactable = false;
-                Debug.LogWarning("Unexpected value for " + levelKey + ": " + levelState);
-            }
+            case "IN_PROGRESS":
+                button.GetComponent<ButtonStateHandler>().SetToUnLockState();
+                break;
+            case "COMPLETED":
+                button.GetComponent<ButtonStateHandler>().SetToCheckState();
+                break;
+            case "LOCKED":
+            default:
+                button.GetComponent<ButtonStateHandler>().SetToLockState();
+                break;
         }
-
     }
 
     private void Update()
     {
-        UpdateButtonInteractability();
+        if (!undertutorial)
+        {
+            UpdateAllButtonsInteractability();
+
+        }else
+        {
+            ButtonChapter1.interactable = false;
+        }
     }
 
-    public void SetStateChapter1Map(bool state)
-    {
-        if (state == true)
-        {
-            ChapterScrollViewHandler.SetActive(false);
-
-        }
-        else
-        {
-            ChapterScrollViewHandler.SetActive(true);
-
-        }
-
-        Chapter1Map.SetActive(state);
-    }
 
 
     public void LoadChapterLevel(string sceneName)
     {
+         
+        SoundEffectManager.PlayButtonClick2();
         LoadingScreenManager.Instance.LoadScene(sceneName);
     }
 }

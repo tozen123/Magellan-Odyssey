@@ -24,6 +24,8 @@ public class PlayerQuestListManager : MonoBehaviour
 
     public void Toggle()
     {
+        SoundEffectManager.PlayButtonClick2();
+
         isToggle = !isToggle;
         if (isToggle)
         {
@@ -35,12 +37,11 @@ public class PlayerQuestListManager : MonoBehaviour
             questListWindowPanel.SetActive(false);
         }
     }
-
+ 
     public void PopulateQuestList()
     {
         questList = playerQuestHandler.Level1Quests;
 
-        Debug.Log("Populating quest list with " + questList.Count + " quests.");
 
         foreach (Transform child in questListContainer.transform)
         {
@@ -72,7 +73,7 @@ public class PlayerQuestListManager : MonoBehaviour
             else
             {
                 statusText.text = "In Progress";
-                statusText.color = Color.red;
+                statusText.color = Color.white;
                 incompleteQuestsCount++;
             }
         }

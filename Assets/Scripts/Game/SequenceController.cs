@@ -21,6 +21,7 @@ public class SequenceController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        LoadGraphicsQuality();
 
         creationCanvasGroup = creationCanvas.GetComponent<CanvasGroup>();
         loginCanvasGroup = loginCanvas.GetComponent<CanvasGroup>();
@@ -50,6 +51,21 @@ public class SequenceController : MonoBehaviour
                 .Show();
         }
     }
+    private void LoadGraphicsQuality()
+    {
+        if (PlayerPrefs.HasKey("GraphicsQuality"))
+        {
+            int savedQuality = PlayerPrefs.GetInt("GraphicsQuality");
+            QualitySettings.SetQualityLevel(savedQuality);
+        }
+        else
+        {
+            QualitySettings.SetQualityLevel(1);
+            PlayerPrefs.SetInt("GraphicsQuality", 1);
+            PlayerPrefs.Save();
+        }
+    }
+
     public void Register()
     {
         PlayerPrefs.SetString("userName", inputName.text.ToString());
@@ -61,11 +77,10 @@ public class SequenceController : MonoBehaviour
         PlayerPrefs.SetString("Chapter1Level3", "LOCKED");
         PlayerPrefs.SetString("Chapter1Level4", "LOCKED");
         PlayerPrefs.SetString("Chapter1Level5", "LOCKED");
+        PlayerPrefs.SetString("Chapter1Level6", "LOCKED");
+        PlayerPrefs.SetString("Chapter1Level7", "LOCKED");
 
 
-        PlayerPrefs.SetString("Chapter2", "LOCKED");
-
-        PlayerPrefs.SetString("Chapter3", "LOCKED");
 
 
         PlayerPrefs.Save();
@@ -81,6 +96,8 @@ public class SequenceController : MonoBehaviour
 
     public void AutomaticLogin()
     {
+        SoundEffectManager.PlayReward();
+
         LoadingScreenManager.Instance.LoadScene("MainMenu-Sequence1");
     }
     void ShowLogin()
@@ -91,13 +108,16 @@ public class SequenceController : MonoBehaviour
     }
     void ShowCreationAvatarCanvas()
     {
+        SoundEffectManager.PlayButtonCardPopup();
+
         creationCanvas.SetActive(true);
         StartCoroutine(FadeCanvasGroup(creationCanvasGroup, 0, 1, 1f));
     }
 
     public void Finish()
     {
-        
+
+        SoundEffectManager.PlayReward();
 
         LoadingScreenManager.Instance.LoadScene("MainMenu-Sequence1");
 

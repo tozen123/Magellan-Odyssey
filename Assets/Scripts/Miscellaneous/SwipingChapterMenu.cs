@@ -6,16 +6,14 @@ using UnityEngine.UI;
 public class SwipingChapterMenu : MonoBehaviour
 {
     public GameObject scrollbar;
-    float scroll_pos = 0;
-    float[] pos;
-
+    private float scroll_pos = 0;
+    private float[] pos;
+    private bool isSwiping = false; // To track if the player is swiping
 
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         pos = new float[transform.childCount];
@@ -27,11 +25,22 @@ public class SwipingChapterMenu : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            scroll_pos = scrollbar.GetComponent<Scrollbar>().value;
+            if (!isSwiping)
+            {
+                // Play swiping sound when user starts swiping
+                SoundEffectManager.PlayButtonSwipeSound(); // Make sure this method exists
+                isSwiping = true; // User is swiping
+            }
 
+            scroll_pos = scrollbar.GetComponent<Scrollbar>().value;
         }
         else
         {
+            if (isSwiping)
+            {
+                isSwiping = false; // Swiping has stopped
+            }
+
             for (int i = 0; i < pos.Length; i++)
             {
                 if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2f))
@@ -46,16 +55,14 @@ public class SwipingChapterMenu : MonoBehaviour
             if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2f))
             {
                 transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, new Vector2(1f, 1f), 0.1f);
-                for (int a = 0;a < pos.Length; a++)
+                for (int a = 0; a < pos.Length; a++)
                 {
-                    if(a != i)
+                    if (a != i)
                     {
                         transform.GetChild(a).localScale = Vector2.Lerp(transform.GetChild(a).localScale, new Vector2(0.8f, 0.8f), 0.1f);
                     }
                 }
             }
-
-
         }
     }
 }

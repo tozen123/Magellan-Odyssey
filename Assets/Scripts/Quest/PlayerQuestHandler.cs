@@ -31,7 +31,7 @@ public class PlayerQuestHandler : MonoBehaviour
 
     private bool isExpanded = true;
     private Coroutine animationCoroutine;
-    private int currentQuestIndex = 0;
+    public int currentQuestIndex = 0;
 
     private static PlayerQuestHandler _instance;
 
@@ -61,6 +61,7 @@ public class PlayerQuestHandler : MonoBehaviour
 
     public void Toggle()
     {
+        SoundEffectManager.PlayButtonClick2();
         if (animationCoroutine != null)
         {
             StopCoroutine(animationCoroutine);
@@ -171,11 +172,41 @@ public class PlayerQuestHandler : MonoBehaviour
         }
     }
 
-    private void DisplayQuest(Quest quest)
+    public void DisplayQuest(Quest quest)
     {
         QUEST_TITLE.text = quest.QuestTitle;
-        QUEST_DESCRIPTION.text = quest.QuestDescription;
-        QUEST_TASK.text = quest.QuestWhatToDo;
-        QUEST_POINTS.text = quest.QuestADPPoints.ToString();
+        //QUEST_DESCRIPTION.text = quest.QuestDescription;
+        QUEST_TASK.text = "Task: " +  quest.QuestWhatToDo;
+        QUEST_POINTS.text = "Adventure Points: " + quest.QuestADPPoints.ToString();
     }
+
+    public bool IsQuestCompleted(string title)
+    {
+        foreach (Quest quest in Level1Quests)
+        {
+            if (quest.QuestTitle.Equals(title, System.StringComparison.OrdinalIgnoreCase) && quest.IsCompleted)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsCurrentQuest(string title)
+    {
+        if (Level1Quests.Count == 0) return false;
+
+        Quest currentQuest = Level1Quests[currentQuestIndex];
+
+        if (currentQuest.QuestTitle.Equals(title, System.StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+   
 }

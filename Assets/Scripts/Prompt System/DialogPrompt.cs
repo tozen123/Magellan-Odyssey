@@ -1,4 +1,5 @@
 
+using UnityEngine;
 using UnityEngine.Events;
 
 public class DialogPrompt
@@ -10,4 +11,7 @@ public class DialogPrompt
     public UnityAction OnClose = null;
     public UnityAction OnPositive = null;
     public UnityAction OnNegative = null;
+
+    public bool HasImage = false; 
+    public Sprite Image = null;   
 }
