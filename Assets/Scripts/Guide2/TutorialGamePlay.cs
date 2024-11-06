@@ -32,6 +32,42 @@ public class TutorialGamePlay : MonoBehaviour
 
     void Start()
     {
+
+        if (PlayerPrefs.HasKey("HasSeenTutorial2"))
+        {
+            if (PlayerPrefs.GetString("HasSeenTutorial2", "No") == "No")
+            {
+                Debug.Log("YEAH: 1");
+
+       
+                PlayerPrefs.SetString("HasSeenTutorial2", "Yes");
+                PlayerPrefs.Save();
+
+
+            }
+            else
+            {
+                Debug.Log("YEAH: 2");
+
+           
+
+                return;
+
+            }
+
+        }
+        else
+        {
+            Debug.Log("YEAH: 3");
+
+            PlayerPrefs.SetString("HasSeenTutorial2", "Yes");
+            PlayerPrefs.Save();
+
+        }
+
+
+
+
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
                .SetMessage("Before we start our adventure, lets introduce you to the controls and gameplay.")

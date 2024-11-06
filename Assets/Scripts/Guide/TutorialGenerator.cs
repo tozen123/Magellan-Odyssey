@@ -27,13 +27,11 @@ public class TutorialGenerator : MonoBehaviour
     private bool isAvatarProfileClicked = false;
     private void Awake()
     {
-        ChapterMenuHandler.undertutorial = true;
+        ChapterMenuHandler.undertutorial = false;
 
     }
     void Start()
     {
-        // Debug: Reset tutorial for testing
-        Debug.Log(PlayerPrefs.GetString("HasSeenTutorial", "No"));
         if (PlayerPrefs.HasKey("HasSeenTutorial"))
         {
             if (PlayerPrefs.GetString("HasSeenTutorial", "No") == "No")

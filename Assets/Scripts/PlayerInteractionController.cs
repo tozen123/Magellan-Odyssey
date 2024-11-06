@@ -106,15 +106,15 @@ public class PlayerInteractionController : MonoBehaviour
                         //    PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
                         //}
 
-                        //if (SceneManager.GetActiveScene().name == "Chapter1Level2")
-                        //{
-                        //    //Revised
-                        //    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("To Battlefield"));
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+                        {
+                            //Revised
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("To Battlefield"));
 
-                        //    PlayerQuestHandler.CompleteQuest("To Battlefield");
+                            PlayerQuestHandler.CompleteQuest("To Battlefield");
 
 
-                        //}
+                        }
 
 
 
@@ -307,6 +307,8 @@ public class PlayerInteractionController : MonoBehaviour
                         PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Talk to Magellan About the Issues"));
 
                         PlayerQuestHandler.CompleteQuest("Talk to Magellan About the Issues");
+
+                        PlayerPrefs.SetInt("Kabanata2BookOfTrivia_IsLock", 0);
                     }
 
                     else

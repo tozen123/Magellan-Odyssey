@@ -21,6 +21,8 @@ public class PlayerMenuHandler : MonoBehaviour
 
     private bool isMenuToggledOn = false;
 
+
+
     void Start()
     {
         menuButton.onClick.AddListener(MenuSettingsToggleState);
@@ -74,6 +76,7 @@ public class PlayerMenuHandler : MonoBehaviour
 
     void FinalExit()
     {
+        PlayerPointingSystem.Instance.ResetGatheredPoints();
         SoundEffectManager.PlayButtonClick2();
         LoadingScreenManager.Instance.LoadScene("MainMenu-Sequence1");
     }
