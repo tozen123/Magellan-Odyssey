@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
+
+
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
@@ -51,6 +54,74 @@ public class DialogueManager : MonoBehaviour
 
 
     public TextMeshProUGUI acpCount;
+
+
+
+
+    public void StartRandomizedDialogue(Dialogue dialogue)
+    {
+        PlayerSoundEffectManager.PlayConvoPopUp();
+        isDialogueActive = true;
+        animator.Play("UIPop");
+        panelFG.SetActive(true);
+
+        if (isCompleteQuiz)
+        {
+            feedbackBodyParent.SetActive(true);
+            dialogueBodyParent.SetActive(false);
+            feedbackText.text = "You already took the Quiz!";
+
+            foreach (Button button in choiceButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+
+            isAwaitingInput = true;
+            return;
+        }
+
+        List<DialogueLine> dialoguesWithChoices = dialogue.dialogueLines
+            .Where(line => line.hasChoices)
+            .OrderBy(_ => Random.value)
+            .ToList();
+
+        List<DialogueLine> dialoguesWithoutChoices = dialogue.dialogueLines
+            .Where(line => !line.hasChoices && !line.line.Contains("Napakagaling Mo"))
+            .ToList();
+
+        DialogueLine endLine = dialogue.dialogueLines
+            .FirstOrDefault(line => line.line.Contains("Napakagaling Mo"));
+
+        foreach (DialogueLine line in dialoguesWithChoices)
+        {
+            line.choices = line.choices.OrderBy(_ => Random.value).ToList();
+        }
+
+        lines.Clear();
+        foreach (DialogueLine line in dialoguesWithoutChoices)
+        {
+            lines.Enqueue(line);
+        }
+        foreach (DialogueLine shuffledLine in dialoguesWithChoices)
+        {
+            lines.Enqueue(shuffledLine);
+        }
+
+        if (endLine != null)
+        {
+            lines.Enqueue(endLine);
+        }
+
+        feedbackBodyParent.SetActive(false);
+        dialogueBodyParent.SetActive(true);
+
+        DisplayNextDialogueLine();
+    }
+
+
+
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -115,7 +186,6 @@ public class DialogueManager : MonoBehaviour
     {
         PlayerSoundEffectManager.PlayNextDialogue();
 
-        // Stop the quiz theme if it's currently playing and the next line is not part of the quiz
         if (currentLine != null && (currentLine.hasChoices || currentLine.isConverstationWithDefinedChoices))
         {
             PlayerSoundEffectManager.StopQuizTheme();
@@ -137,7 +207,7 @@ public class DialogueManager : MonoBehaviour
 
         if (currentLine.hasChoices)
         {
-            PlayerSoundEffectManager.PlayQuizTheme(); // Play quiz theme if it's a quiz line
+            PlayerSoundEffectManager.PlayQuizTheme(); 
             choiceButtonPanelParent.SetActive(true);
             DisplayChoices(currentLine);
 
@@ -168,7 +238,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            PlayerSoundEffectManager.StopQuizTheme(); // Stop the quiz theme if it's not a quiz line
+            PlayerSoundEffectManager.StopQuizTheme(); 
 
             choiceButtonPanelParent.SetActive(false);
             foreach (Button button in choiceButtons)
@@ -188,31 +258,7 @@ public class DialogueManager : MonoBehaviour
     void DisplaySimpleChoices(DialogueLine dialogueLine)
     {
 
-        //readyForInput = false;
-
-        ////dialogueArea.text = dialogueLine.line;
-        //StartCoroutine(TypeSentence(dialogueLine.line));
-
-        //while(readyForInput)
-        //{
-        //    for (int i = 0; i < choiceButtons.Count; i++)
-        //    {
-        //        int correctIndex = i;
-
-        //        if (i < dialogueLine.choices.Count)
-        //        {
-        //            choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
-        //            choiceButtons[i].gameObject.SetActive(true);
-
-        //            choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
-        //        }
-        //        else
-        //        {
-        //            choiceButtons[i].gameObject.SetActive(false);
-        //        }
-        //    }
-        //    readyForInput = false;
-        //}
+        
 
         choiceButtonPanelParent.SetActive(false);
         foreach (Button button in choiceButtons)
@@ -228,7 +274,7 @@ public class DialogueManager : MonoBehaviour
     {
         feedbackBodyParent.SetActive(false);
         choiceButtonPanelParent.SetActive(false);
-        isAwaitingInput = true; // Now it's safe to await input
+        isAwaitingInput = true; 
         DisplayNextDialogueLine();
     }
 
@@ -258,24 +304,7 @@ public class DialogueManager : MonoBehaviour
     }
     void DisplayChoices(DialogueLine dialogueLine)
     {
-        //dialogueArea.text = dialogueLine.line;
-        //StartCoroutine(TypeSentence(dialogueLine.line));
-
-        //for (int i = 0; i < choiceButtons.Count; i++)
-        //{
-        //    choiceButtons[i].onClick.RemoveAllListeners(); // Clear previous listeners
-        //    choiceButtons[i].gameObject.SetActive(false);  // Hide all buttons initially
-
-        //    if (i < dialogueLine.choices.Count)
-        //    {
-        //        choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
-        //        choiceButtons[i].gameObject.SetActive(true);
-
-        //        // Adding listener for quiz choices
-        //        int correctIndex = i;
-        //        choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(dialogueLine.choices[correctIndex]));
-        //    }
-        //}
+        
 
 
         choiceButtonPanelParent.SetActive(false);
@@ -442,10 +471,6 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // Debug the number of correct answers
-        //Debug.Log("Quiz completed. Total correct answers: " + correctAnswersCount);
-        //Debug.Log("Dialogue ended. Total lines with choices: " + dialogueWithChoicesCount);
-        // Reset the correct answers count for the next dialogue
         correctAnswersCount = 0;
 
         isDialogueActive = false;

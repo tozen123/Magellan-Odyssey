@@ -24,12 +24,19 @@ public class MiniMapMaximize : MonoBehaviour
 
     public RawImage image;
 
+
+    private GameObject cameraMiniMapFull;
+
     void Start()
     {
         originalSize = panel.sizeDelta;
         originalAnchorMin = panel.anchorMin;
         originalAnchorMax = panel.anchorMax;
         panelTap.onClick.AddListener(TogglePanel);
+
+        cameraMiniMapFull = GameObject.FindGameObjectWithTag("MiniMapCameraFullMapView").gameObject;
+        cameraMiniMapFull.SetActive(false);
+
     }
 
     private void TogglePanel()
@@ -40,6 +47,7 @@ public class MiniMapMaximize : MonoBehaviour
         if (isToggled)
         {
             image.texture = minimapfull;
+            cameraMiniMapFull.SetActive(true);
 
             panel.sizeDelta = resizeSize;
             panel.anchorMin = maximizedAnchorMin;
@@ -50,6 +58,7 @@ public class MiniMapMaximize : MonoBehaviour
         {
             image.texture = minimap;
 
+            cameraMiniMapFull.SetActive(false);
 
             panel.sizeDelta = originalSize;
             panel.anchorMin = minimizedAnchorMin;

@@ -29,9 +29,19 @@ public class PlayerInteractionController : MonoBehaviour
 
     [SerializeField] public string interactingWith;
 
+
+    private Vector3 interactOriginalScale;
+    private Vector3 pickUpOriginalScale;
+    private bool isPulsing = false;
+    private float pulseSpeed = 1f;
+    private float scaleAmount = 0.2f;
+
     private void Start()
     {
         playerQuestHandler = GetComponent<PlayerQuestHandler>();
+
+        interactOriginalScale = ButtonInteract.transform.localScale;
+        pickUpOriginalScale = ButtonPickUp.transform.localScale;
     }
 
     private void Awake()
@@ -50,6 +60,7 @@ public class PlayerInteractionController : MonoBehaviour
     {
         if(other.gameObject.tag == "NPC")
         {
+
             if (other.gameObject.GetComponent<Character>())
             {
                 Character _character = other.gameObject.GetComponent<Character>();
@@ -180,6 +191,19 @@ public class PlayerInteractionController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "NPC")
+        {
+            if (other.gameObject.GetComponent<Character>())
+            { 
+                PulsateButton(ButtonInteract, interactOriginalScale);
+
+            }
+
+
+        }
+    }
     private void Update()
     {
        
@@ -211,6 +235,8 @@ public class PlayerInteractionController : MonoBehaviour
                 floaterUI.SetActive(false);
             }
 
+
+            ButtonInteract.transform.localScale = interactOriginalScale;
 
             ButtonSetState(ButtonInteract, false);
             ResetControllers();
@@ -249,6 +275,8 @@ public class PlayerInteractionController : MonoBehaviour
                         PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
 
                         PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
+
+                        PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 0); 
                     }
                     else
                     {
@@ -361,7 +389,14 @@ public class PlayerInteractionController : MonoBehaviour
     }
 
   
+    public void PulsateButton(Button button, Vector3 originalScale)
+    {
 
+        Transform targetTransform = button.transform;
+
+        float scale = 1 + Mathf.PingPong(Time.time * pulseSpeed, scaleAmount);
+        targetTransform.localScale = originalScale * scale;
+    }
 
    
 }
