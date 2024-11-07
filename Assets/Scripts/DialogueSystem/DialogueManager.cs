@@ -201,7 +201,15 @@ public class DialogueManager : MonoBehaviour
 
         characterIcon.sprite = currentLine.character.icon;
         characterIcon.preserveAspect = true;
+
+
         characterName.text = currentLine.character.name;
+        if (characterName.text.Equals("Avatar"))
+        {
+
+            characterName.text = PlayerPrefs.GetString("userName").ToString();
+        }
+
 
         StopAllCoroutines();
 
@@ -383,7 +391,7 @@ public class DialogueManager : MonoBehaviour
                 PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
-                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + acp);
 
                 PlayerPrefs.SetInt("Chapter1QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
@@ -402,21 +410,33 @@ public class DialogueManager : MonoBehaviour
 
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
-                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + acp);
 
 
                 PlayerPrefs.SetInt("Chapter2QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
+
+                if (correctAnswersCount == 7)
+                {
+                    adp = 70;
+                }
+                quizlength = 7;
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level3")
             {
                 PlayerPrefs.SetInt("Kabanata3BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
-                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + acp);
 
                 PlayerPrefs.SetInt("Chapter3QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
+
+                if (correctAnswersCount == 3)
+                {
+                    adp = 30;
+                }
+                quizlength = 3;
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level4")
             {
@@ -448,6 +468,7 @@ public class DialogueManager : MonoBehaviour
                 PlayerPrefs.SetInt("Chapter6QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
             }
+            AddACP();
 
             if (adp > 0)
             {
@@ -466,7 +487,6 @@ public class DialogueManager : MonoBehaviour
                     .OnClose(Close)
                     .Show();
             }
-            AddACP();
 
             return;
         }

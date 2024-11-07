@@ -36,7 +36,6 @@ public class BookOfTriviaManager : MonoBehaviour
     {
         defaultColor = kabanata1.GetComponent<Image>().color;
 
-        buttonBookOfTrivia.onClick.AddListener(TogglePanel);
 
         kabanata1.onClick.AddListener(() => Kabanata(kabanata1, "Kabanata1BookOfTrivia_IsLock", 1));
         kabanata2.onClick.AddListener(() => Kabanata(kabanata2, "Kabanata2BookOfTrivia_IsLock", 2));

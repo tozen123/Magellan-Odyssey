@@ -19,7 +19,7 @@ public class DialogueLine
     public bool hasChoices = false;
     public bool isConverstationWithDefinedChoices = false;
 
-    public string targetSceneName; 
+    public string targetSceneName;
 }
 
 [System.Serializable]

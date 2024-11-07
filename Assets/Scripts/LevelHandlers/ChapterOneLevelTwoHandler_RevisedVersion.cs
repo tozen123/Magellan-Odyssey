@@ -81,11 +81,11 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
 
         ChapterLevelSummaryAnnounceControl.Instance
-            .SetTitle("Chapter 2")
+            .SetTitle("Kabanata 2")
             .SetAnnounce("\n" +
-                            "Ang pagsasanay para sa labanan sa Portugal Outposts \n\n" +
-                            "Ang malubhang pinsala sa tuhod at panghabang buhay na pagka-pilay ni Magellan \n\n" +
-                            "Ang alitan sa pagitan ni Magellan at ng mga sundalo sa pabuya (war spoils) ng digmaan \n\n" +
+                            "- Ang pagsasanay para sa labanan sa Portugal Outposts \n\n" +
+                            "- Ang malubhang pinsala sa tuhod at panghabang buhay na pagka-pilay ni Magellan \n\n" +
+                            "- Ang alitan sa pagitan ni Magellan at ng mga sundalo sa pabuya (war spoils) ng digmaan \n\n" +
                             "\n")
             .SetFadeInDuration(0.5f)
             .OnContinue(() =>
@@ -128,7 +128,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         if (playerQuestHandler.Level1Quests.Count > 0)
         {
             Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
-            if (currentQuest.QuestTitle == "Destroy the Dummies")
+            if (currentQuest.QuestTitle == "Sirain ang mga Practice Dummies")
             {
                 borderAntiMissionCancel.SetActive(true);
             }
@@ -138,7 +138,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             }
         }
 
-        if (playerQuestHandler.IsCurrentQuest("To Battlefield") && !hasShownBanditDialog)
+        if (playerQuestHandler.IsCurrentQuest("Ang Digmaan sa Outposts") && !hasShownBanditDialog)
         {
             magellan3Battlefield.SetActive(true);
 
@@ -151,11 +151,11 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             hasShownBanditDialog = true; 
         }
 
-        if (playerQuestHandler.IsQuestCompleted("Deliver the crates to Soldier"))
+        if (playerQuestHandler.IsQuestCompleted("Ipamahagi ang mga Pabuya sa mga Sundalo"))
         {
             magellan4Soldier.SetActive(true);
         }
-        if (playerQuestHandler.IsQuestCompleted("Talk to Magellan About the Issues"))
+        if (playerQuestHandler.IsQuestCompleted("Ipagtanggol si Magellan laban sa mga Sundalo"))
         {
             PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
             PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
@@ -163,7 +163,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             PlayerPrefs.Save();
         }
         
-        if(playerQuestHandler.IsCurrentQuest("Go to the Center of the Training Field"))
+        if(playerQuestHandler.IsCurrentQuest("Pumunta kay Magellan sa Training Field"))
         {
             CH1L2_GotoCenterTrainingField.SetActive(true);
         } 
@@ -172,8 +172,17 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
             CH1L2_GotoCenterTrainingField.SetActive(false);
 
         }
-        if (playerQuestHandler.IsCurrentQuest("To Battlefield"))
+        if (playerQuestHandler.IsCurrentQuest("Ang Digmaan sa Outposts"))
         {
+            if (!showGuide1)
+            {
+                DialogMessagePrompt.Instance
+                    .SetTitle("System Message")
+                    .SetMessage("Some of the quest can be completed by approaching only the said character in the information of the quest.")
+                    .Show();
+                showGuide1 = true;
+            }
+            
             CH1L2_GotoEntrance.SetActive(true);
         }
         else
@@ -182,7 +191,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
         }
 
-        if (playerQuestHandler.IsCurrentQuest("Deliver the crates to Soldier"))
+        if (playerQuestHandler.IsCurrentQuest("Ipamahagi ang mga Pabuya sa mga Sundalo"))
         {
             soldier.SetActive(true);
 
@@ -195,7 +204,7 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
 
     }
-
+    bool showGuide1 = false;
     private void UpdateDummyQuest()
     {
         int remainingDummies = targetDummies.Count;
@@ -203,13 +212,13 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         if (playerQuestHandler.Level1Quests.Count > 0)
         {
             Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
-            if (currentQuest.QuestTitle == "Destroy the Dummies")
+            if (currentQuest.QuestTitle == "Sirain ang mga Practice Dummies")
             {
                 foreach (Quest quest in quests)
                 {
-                    if (quest.QuestTitle == "Destroy the Dummies")
+                    if (quest.QuestTitle == "Sirain ang mga Practice Dummies")
                     {
-                        quest.ChangeWhatToDo("Destroy the Dummies", $"Use your weapon to destroy the 5 dummies ({5 - remainingDummies}/5)");
+                        quest.ChangeWhatToDo("Sirain ang mga Practice Dummies", $"Gamitin ang iyong weapon para sirain ang 5 na dummies ({5 - remainingDummies}/5)");
                         playerQuestListManager.PopulateQuestList();
                         playerQuestHandler.DisplayQuest(quest);
                     }
@@ -217,8 +226,8 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
                 if (remainingDummies == 0 && !isQuestCompleted)
                 {
-                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Destroy the Dummies"));
-                    PlayerQuestHandler.CompleteQuest("Destroy the Dummies");
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Sirain ang mga Practice Dummies"));
+                    PlayerQuestHandler.CompleteQuest("Sirain ang mga Practice Dummies");
 
                     magellan2Gate.SetActive(true);
 
@@ -235,13 +244,13 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         if (playerQuestHandler.Level1Quests.Count > 0)
         {
             Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
-            if (currentQuest.QuestTitle == "Fight 5 Arabs")
+            if (currentQuest.QuestTitle == "Kalabanin ang mga Arabo")
             {
                 foreach (Quest quest in quests)
                 {
-                    if (quest.QuestTitle == "Fight 5 Arabs")
+                    if (quest.QuestTitle == "Kalabanin ang mga Arabo")
                     {
-                        quest.ChangeWhatToDo("Fight 5 Arabs", $"Defeat the 5 bandits ({5 - remainingBandits}/5)");
+                        quest.ChangeWhatToDo("Kalabanin ang mga Arabo", $"Kalabanin ang 5 na Arabo ({5 - remainingBandits}/5)");
                         playerQuestListManager.PopulateQuestList();
                         playerQuestHandler.DisplayQuest(quest);
                     }
@@ -249,8 +258,8 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
                 if (remainingBandits == 0 && !isBanditQuestCompleted)
                 {
-                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Fight 5 Arabs"));
-                    PlayerQuestHandler.CompleteQuest("Fight 5 Arabs");
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Kalabanin ang mga Arabo"));
+                    PlayerQuestHandler.CompleteQuest("Kalabanin ang mga Arabo");
 
                     isBanditQuestCompleted = true;
                 }
@@ -266,16 +275,16 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
         if (playerQuestHandler.Level1Quests.Count > 0)
         {
             Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
-            if (currentQuest.QuestTitle == "Battle Spoils")
+            if (currentQuest.QuestTitle == "Mini-Game: Kolektahin ang mga Crates")
             {
                 Debug.Log("Battle Spoils MATCHED");
                 foreach (Quest quest in quests)
                 {
-                    if (quest.QuestTitle == "Battle Spoils")
+                    if (quest.QuestTitle == "Mini-Game: Kolektahin ang mga Crates")
                     {
                         Debug.Log("Data");
 
-                        quest.ChangeWhatToDo("Collect 3 Crates", $"Collect 3 crates ({3 - remainingCrates}/3)");
+                        quest.ChangeWhatToDo("Mini-Game: Kolektahin ang mga Crates", $"Kolektahin ang 3 na Crates ({3 - remainingCrates}/3)");
                         playerQuestListManager.PopulateQuestList();
                         playerQuestHandler.DisplayQuest(quest);
                     }
@@ -283,8 +292,8 @@ public class ChapterOneLevelTwoHandler_RevisedVersion : MonoBehaviour
 
                 if (remainingCrates == 0 && !isCrateQuestCompleted)
                 {
-                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Battle Spoils"));
-                    PlayerQuestHandler.CompleteQuest("Battle Spoils");
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Mini-Game: Kolektahin ang mga Crates"));
+                    PlayerQuestHandler.CompleteQuest("Mini-Game: Kolektahin ang mga Crates");
 
                     isCrateQuestCompleted = true;
                 }

@@ -11,8 +11,8 @@ public class SpecialQuestControllerCH1LVL2 : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Deliver the crates to Soldier"));
-            PlayerQuestHandler.CompleteQuest("Deliver the crates to Soldier");
+            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Ipamahagi ang mga Pabuya sa mga Sundalo"));
+            PlayerQuestHandler.CompleteQuest("Ipamahagi ang mga Pabuya sa mga Sundalo");
 
             // Remove all items that have the name "Crate"
             RemoveAllCratesFromInventory();

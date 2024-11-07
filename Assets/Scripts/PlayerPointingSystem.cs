@@ -12,6 +12,7 @@ public class PlayerPointingSystem : MonoBehaviour
 
     [Header("UI REFERENCES")]
     [SerializeField] private TextMeshProUGUI ADP;
+    [SerializeField] private TextMeshProUGUI ACP;
     [SerializeField] private RectTransform ADP_Parent;
 
     [Header("Animation Settings")]
@@ -40,7 +41,11 @@ public class PlayerPointingSystem : MonoBehaviour
             ADP.text = PLAYER_CURRENT_ADP.ToString();
         }
     }
-
+    void Update()
+    {
+        int count = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+        ACP.text = count.ToString();
+    }
     public void AddPoints(int points)
     {
         totalGatheredPoints += points;  
