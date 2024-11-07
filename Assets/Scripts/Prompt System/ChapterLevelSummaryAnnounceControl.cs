@@ -25,6 +25,11 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
 
     [HideInInspector] public bool IsActive = false;
 
+    public AudioSource audioSource;
+
+    public AudioClip audioClip_Kabanata1_Buod;
+    public AudioClip audioClip_Kabanata2_Buod;
+
     void Awake()
     {
         Instance = this;
@@ -84,6 +89,20 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
 
         chapterHeader.text = currentSummary.Title;
         chapterSummary.text = announcement.ToString();
+
+        if (chapterHeader.text.Equals("Kabanata 1"))
+        {
+            audioSource.clip = audioClip_Kabanata1_Buod;
+            audioSource.Play();
+        }
+
+
+        if (chapterHeader.text.Equals("Kabanata 2"))
+        {
+            audioSource.clip = audioClip_Kabanata2_Buod;
+            audioSource.Play();
+        }
+
         //Populate(currentSummary.Quests);
 
         canvas.SetActive(true);
@@ -94,6 +113,8 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
     public void Hide()
     {
         SoundEffectManager.PlayButtonClick2();
+
+        audioSource.Stop();
 
         canvas.SetActive(false);
         IsActive = false;

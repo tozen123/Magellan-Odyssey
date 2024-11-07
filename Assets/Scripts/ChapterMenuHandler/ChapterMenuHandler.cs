@@ -23,6 +23,8 @@ public class ChapterMenuHandler : MonoBehaviour
     public bool undertutorial;
     private void Start()
     {
+        UnlockMode();
+
         Debug.Log("--------------------------------------------------------------");
         Debug.Log("Chapter1: " + PlayerPrefs.GetString("Chapter1"));
         Debug.Log("Chapter1Level1: " + PlayerPrefs.GetString("Chapter1Level1"));
@@ -43,7 +45,28 @@ public class ChapterMenuHandler : MonoBehaviour
 
         UpdateAllButtonsInteractability();
     }
+    void UnlockMode()
+    {
+        PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 0);
+        PlayerPrefs.SetInt("Kabanata2BookOfTrivia_IsLock", 0);
+        PlayerPrefs.SetInt("Kabanata3BookOfTrivia_IsLock", 0);
+        PlayerPrefs.SetInt("Kabanata4BookOfTrivia_IsLock", 0);
+        PlayerPrefs.SetInt("Kabanata5BookOfTrivia_IsLock", 0);
+        PlayerPrefs.SetInt("Kabanata6BookOfTrivia_IsLock", 0);
 
+        PlayerPrefs.SetInt("adventure_points", 999);
+        PlayerPrefs.SetInt("Chapter1TotalQuizScore", 999);
+
+        PlayerPrefs.SetString("Chapter1Level1", "IN_PROGRESS");
+        PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");
+        PlayerPrefs.SetString("Chapter1Level3", "IN_PROGRESS");
+        PlayerPrefs.SetString("Chapter1Level4", "IN_PROGRESS");
+        PlayerPrefs.SetString("Chapter1Level5", "IN_PROGRESS");
+        PlayerPrefs.SetString("Chapter1Level6", "IN_PROGRESS");
+
+        PlayerPrefs.Save();
+
+    }
     private void UpdateAllButtonsInteractability()
     {
         // Update all buttons based on their chapter level progress

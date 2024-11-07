@@ -55,7 +55,7 @@ public class DialogueManager : MonoBehaviour
 
     public TextMeshProUGUI acpCount;
 
-
+    public AudioSource audioSource;
 
 
     public void StartRandomizedDialogue(Dialogue dialogue)
@@ -212,6 +212,15 @@ public class DialogueManager : MonoBehaviour
 
 
         StopAllCoroutines();
+
+
+        if (currentLine.audioClip != null)
+        {
+            audioSource.Stop(); 
+            audioSource.clip = currentLine.audioClip;
+            audioSource.Play();
+        }
+
 
         if (currentLine.hasChoices)
         {

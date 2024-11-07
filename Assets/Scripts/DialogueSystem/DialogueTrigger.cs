@@ -20,6 +20,8 @@ public class DialogueLine
     public bool isConverstationWithDefinedChoices = false;
 
     public string targetSceneName;
+
+    public AudioClip audioClip;
 }
 
 [System.Serializable]
