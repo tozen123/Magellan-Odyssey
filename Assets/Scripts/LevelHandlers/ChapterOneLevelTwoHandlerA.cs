@@ -12,6 +12,9 @@ public class ChapterOneLevelTwoHandlerA : MonoBehaviour
     public GameObject introAnimItems;
     public GameObject mag;
     public GameObject player;
+
+
+
     void Start()
     {
 
@@ -39,13 +42,16 @@ public class ChapterOneLevelTwoHandlerA : MonoBehaviour
     {
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("In the 15th century, seafaring offered great benefits and rewards, such as knighthood promotion, selective tax exemption, and the grant of small annual pensions.")
+               .SetMessage("Ikaw at si Ferdinand Magellan ay nag luhod sa harap ni King Manoel I")
                .OnClose(BackToGame)
                .Show();
     }
 
     void BackToGame()
     {
+
+
+    
         mag.SetActive(true);
         player.SetActive(true);
 

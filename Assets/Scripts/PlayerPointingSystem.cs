@@ -12,13 +12,16 @@ public class PlayerPointingSystem : MonoBehaviour
 
     [Header("UI REFERENCES")]
     [SerializeField] private TextMeshProUGUI ADP;
+    [SerializeField] private TextMeshProUGUI ACP;
     [SerializeField] private RectTransform ADP_Parent;
 
     [Header("Animation Settings")]
     [SerializeField] private float scaleDuration = 0.2f;
     [SerializeField] private float scaleFactor = 0.8f;
-    [SerializeField] private float incrementSpeed = 50f;  // Speed at which points will increment
+    [SerializeField] private float incrementSpeed = 50f;
 
+
+    private int totalGatheredPoints = 0;
     void Awake()
     {
         if (Instance == null)
@@ -38,10 +41,23 @@ public class PlayerPointingSystem : MonoBehaviour
             ADP.text = PLAYER_CURRENT_ADP.ToString();
         }
     }
-
+    void Update()
+    {
+        int count = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
+        ACP.text = count.ToString();
+    }
     public void AddPoints(int points)
     {
+        totalGatheredPoints += points;  
         StartCoroutine(AnimateAddPoints(points));
+    }
+
+    public void ResetGatheredPoints()
+    {
+        int oldPoints = PlayerPrefs.GetInt("adventure_points", 0);
+        PlayerPrefs.SetInt("adventure_points", oldPoints - totalGatheredPoints);
+        totalGatheredPoints = 0;
+        PlayerPrefs.Save();
     }
 
     private IEnumerator AnimateAddPoints(int points)

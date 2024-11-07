@@ -29,9 +29,19 @@ public class PlayerInteractionController : MonoBehaviour
 
     [SerializeField] public string interactingWith;
 
+
+    private Vector3 interactOriginalScale;
+    private Vector3 pickUpOriginalScale;
+    private bool isPulsing = false;
+    private float pulseSpeed = 1f;
+    private float scaleAmount = 0.2f;
+
     private void Start()
     {
         playerQuestHandler = GetComponent<PlayerQuestHandler>();
+
+        interactOriginalScale = ButtonInteract.transform.localScale;
+        pickUpOriginalScale = ButtonPickUp.transform.localScale;
     }
 
     private void Awake()
@@ -50,6 +60,7 @@ public class PlayerInteractionController : MonoBehaviour
     {
         if(other.gameObject.tag == "NPC")
         {
+
             if (other.gameObject.GetComponent<Character>())
             {
                 Character _character = other.gameObject.GetComponent<Character>();
@@ -95,16 +106,40 @@ public class PlayerInteractionController : MonoBehaviour
                         //    PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
                         //}
 
-                        //if (SceneManager.GetActiveScene().name == "Chapter1Level2")
-                        //{
-                        //    //Revised
-                        //    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("To Battlefield"));
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+                        {
+                            //Revised
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Ang Digmaan sa Outposts"));
 
-                        //    PlayerQuestHandler.CompleteQuest("To Battlefield");
+                            PlayerQuestHandler.CompleteQuest("Ang Digmaan sa Outposts");
 
 
-                        //}
+                        }
 
+
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level3")
+                        {
+
+                            if (playerQuestHandler.IsCurrentQuest("Kilalanin si Haring Manoel I"))
+                            {
+
+
+                                PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Kilalanin si Haring Manoel I"));
+
+                                PlayerQuestHandler.CompleteQuest("Kilalanin si Haring Manoel I");
+
+                                //PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 0);
+                            }
+                            else
+                            {
+                                DialogMessagePrompt.Instance
+                                       .SetTitle("System Message")
+                                       .SetMessage("You must complete the other quest before interacting with this character.")
+                                       .Show();
+                                return;
+                            }
+
+                        }
 
 
                         // -------------------------- CHAPTER 1 LEVEL 5 ---------------------------------
@@ -180,6 +215,19 @@ public class PlayerInteractionController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "NPC")
+        {
+            if (other.gameObject.GetComponent<Character>())
+            { 
+                PulsateButton(ButtonInteract, interactOriginalScale);
+
+            }
+
+
+        }
+    }
     private void Update()
     {
        
@@ -212,6 +260,8 @@ public class PlayerInteractionController : MonoBehaviour
             }
 
 
+            ButtonInteract.transform.localScale = interactOriginalScale;
+
             ButtonSetState(ButtonInteract, false);
             ResetControllers();
         }
@@ -240,6 +290,16 @@ public class PlayerInteractionController : MonoBehaviour
         {
             if(interactingWith == "Ferdinand Magellan")
             {
+
+
+                /*
+                     * 
+                     * 
+                     *                          Chapter1Level1
+                     * 
+                     * 
+                     */
+
                 if (SceneManager.GetActiveScene().name == "Chapter1Level1")
                 {
                     if (playerQuestHandler.IsCurrentQuest("Meet Ferdinand Magellan"))
@@ -249,6 +309,8 @@ public class PlayerInteractionController : MonoBehaviour
                         PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ferdinand Magellan"));
 
                         PlayerQuestHandler.CompleteQuest("Meet Ferdinand Magellan");
+
+                        PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 0); 
                     }
                     else
                     {
@@ -264,21 +326,32 @@ public class PlayerInteractionController : MonoBehaviour
                 }
 
 
+                /*
+                     * 
+                     * 
+                     *                          Chapter1Level2
+                     * 
+                     * 
+                     */
+
+
 
                 if (SceneManager.GetActiveScene().name == "Chapter1Level2")
                 {
-                    if (playerQuestHandler.IsCurrentQuest("Go to the Center of the Training Field"))
+                    if (playerQuestHandler.IsCurrentQuest("Pumunta kay Magellan sa Training Field"))
                     {
-                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to the Center of the Training Field"));
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta kay Magellan sa Training Field"));
 
-                        PlayerQuestHandler.CompleteQuest("Go to the Center of the Training Field");
+                        PlayerQuestHandler.CompleteQuest("Pumunta kay Magellan sa Training Field");
                     }
 
-                    else if (playerQuestHandler.IsCurrentQuest("Talk to Magellan About the Issues"))
+                    else if (playerQuestHandler.IsCurrentQuest("Ipagtanggol si Magellan laban sa mga Sundalo"))
                     {
-                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Talk to Magellan About the Issues"));
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Ipagtanggol si Magellan laban sa mga Sundalo"));
 
-                        PlayerQuestHandler.CompleteQuest("Talk to Magellan About the Issues");
+                        PlayerQuestHandler.CompleteQuest("Ipagtanggol si Magellan laban sa mga Sundalo");
+
+                        PlayerPrefs.SetInt("Kabanata2BookOfTrivia_IsLock", 0);
                     }
 
                     else
@@ -290,11 +363,39 @@ public class PlayerInteractionController : MonoBehaviour
                         return;
                     }
 
+                    /*
+                     * 
+                     * 
+                     *                          Chapter1Level3
+                     * 
+                     * 
+                     */
 
-                  
 
+                    if (SceneManager.GetActiveScene().name == "Chapter1Level3")
+                    {
+
+                        if (playerQuestHandler.IsCurrentQuest("Kilalanin si Haring Manoel I"))
+                        {
+
+
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Kilalanin si Haring Manoel I"));
+
+                            PlayerQuestHandler.CompleteQuest("Kilalanin si Haring Manoel I");
+
+                            //PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 0);
+                        }
+                        else
+                        {
+                            DialogMessagePrompt.Instance
+                                   .SetTitle("System Message")
+                                   .SetMessage("You must complete the other quest before interacting with this character.")
+                                   .Show();
+                            return;
+                        }
+
+                    }
                 }
-                
 
             }
 
@@ -326,15 +427,62 @@ public class PlayerInteractionController : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().name == "Chapter1Level1")
                 {
-                    if (playerQuestHandler.IsCurrentQuest("Quiz Master Chapter 1"))
+                    if (playerQuestHandler.IsCurrentQuest("Pumunta sa Quiz Master"))
                     {
                         PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
                         PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");
                         PlayerPrefs.Save();
 
-                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Quiz Master Chapter 1"));
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta sa Quiz Master"));
 
-                        PlayerQuestHandler.CompleteQuest("Quiz Master Chapter 1");
+                        PlayerQuestHandler.CompleteQuest("Pumunta sa Quiz Master");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+                }
+
+                if (SceneManager.GetActiveScene().name == "Chapter1Level2")
+                {
+                    if (playerQuestHandler.IsCurrentQuest("Quiz Master Kabanata 2"))
+                    {
+                        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level3", "IN_PROGRESS");
+                        PlayerPrefs.Save();
+
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta sa Quiz Master"));
+
+                        PlayerQuestHandler.CompleteQuest("Pumunta sa Quiz Master");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+                }
+
+                if (SceneManager.GetActiveScene().name == "Chapter1Level3")
+                {
+                    if (playerQuestHandler.IsCurrentQuest("Pumunta sa Quiz Master"))
+                    {
+                        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level3", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level4", "IN_PROGRESS");
+                        PlayerPrefs.Save();
+
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta sa Quiz Master"));
+
+                        PlayerQuestHandler.CompleteQuest("Pumunta sa Quiz Master");
                     }
                     else
                     {
@@ -361,7 +509,14 @@ public class PlayerInteractionController : MonoBehaviour
     }
 
   
+    public void PulsateButton(Button button, Vector3 originalScale)
+    {
 
+        Transform targetTransform = button.transform;
+
+        float scale = 1 + Mathf.PingPong(Time.time * pulseSpeed, scaleAmount);
+        targetTransform.localScale = originalScale * scale;
+    }
 
    
 }

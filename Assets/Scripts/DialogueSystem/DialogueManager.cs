@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
+
+
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
@@ -51,6 +54,74 @@ public class DialogueManager : MonoBehaviour
 
 
     public TextMeshProUGUI acpCount;
+
+    public AudioSource audioSource;
+
+
+    public void StartRandomizedDialogue(Dialogue dialogue)
+    {
+        PlayerSoundEffectManager.PlayConvoPopUp();
+        isDialogueActive = true;
+        animator.Play("UIPop");
+        panelFG.SetActive(true);
+
+        if (isCompleteQuiz)
+        {
+            feedbackBodyParent.SetActive(true);
+            dialogueBodyParent.SetActive(false);
+            feedbackText.text = "You already took the Quiz!";
+
+            foreach (Button button in choiceButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+
+            isAwaitingInput = true;
+            return;
+        }
+
+        List<DialogueLine> dialoguesWithChoices = dialogue.dialogueLines
+            .Where(line => line.hasChoices)
+            .OrderBy(_ => Random.value)
+            .ToList();
+
+        List<DialogueLine> dialoguesWithoutChoices = dialogue.dialogueLines
+            .Where(line => !line.hasChoices && !line.line.Contains("Napakagaling Mo"))
+            .ToList();
+
+        DialogueLine endLine = dialogue.dialogueLines
+            .FirstOrDefault(line => line.line.Contains("Napakagaling Mo"));
+
+        foreach (DialogueLine line in dialoguesWithChoices)
+        {
+            line.choices = line.choices.OrderBy(_ => Random.value).ToList();
+        }
+
+        lines.Clear();
+        foreach (DialogueLine line in dialoguesWithoutChoices)
+        {
+            lines.Enqueue(line);
+        }
+        foreach (DialogueLine shuffledLine in dialoguesWithChoices)
+        {
+            lines.Enqueue(shuffledLine);
+        }
+
+        if (endLine != null)
+        {
+            lines.Enqueue(endLine);
+        }
+
+        feedbackBodyParent.SetActive(false);
+        dialogueBodyParent.SetActive(true);
+
+        DisplayNextDialogueLine();
+    }
+
+
+
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -115,7 +186,6 @@ public class DialogueManager : MonoBehaviour
     {
         PlayerSoundEffectManager.PlayNextDialogue();
 
-        // Stop the quiz theme if it's currently playing and the next line is not part of the quiz
         if (currentLine != null && (currentLine.hasChoices || currentLine.isConverstationWithDefinedChoices))
         {
             PlayerSoundEffectManager.StopQuizTheme();
@@ -131,13 +201,30 @@ public class DialogueManager : MonoBehaviour
 
         characterIcon.sprite = currentLine.character.icon;
         characterIcon.preserveAspect = true;
+
+
         characterName.text = currentLine.character.name;
+        if (characterName.text.Equals("Avatar"))
+        {
+
+            characterName.text = PlayerPrefs.GetString("userName").ToString();
+        }
+
 
         StopAllCoroutines();
 
+
+        if (currentLine.audioClip != null)
+        {
+            audioSource.Stop(); 
+            audioSource.clip = currentLine.audioClip;
+            audioSource.Play();
+        }
+
+
         if (currentLine.hasChoices)
         {
-            PlayerSoundEffectManager.PlayQuizTheme(); // Play quiz theme if it's a quiz line
+            PlayerSoundEffectManager.PlayQuizTheme(); 
             choiceButtonPanelParent.SetActive(true);
             DisplayChoices(currentLine);
 
@@ -168,7 +255,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            PlayerSoundEffectManager.StopQuizTheme(); // Stop the quiz theme if it's not a quiz line
+            PlayerSoundEffectManager.StopQuizTheme(); 
 
             choiceButtonPanelParent.SetActive(false);
             foreach (Button button in choiceButtons)
@@ -188,31 +275,7 @@ public class DialogueManager : MonoBehaviour
     void DisplaySimpleChoices(DialogueLine dialogueLine)
     {
 
-        //readyForInput = false;
-
-        ////dialogueArea.text = dialogueLine.line;
-        //StartCoroutine(TypeSentence(dialogueLine.line));
-
-        //while(readyForInput)
-        //{
-        //    for (int i = 0; i < choiceButtons.Count; i++)
-        //    {
-        //        int correctIndex = i;
-
-        //        if (i < dialogueLine.choices.Count)
-        //        {
-        //            choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
-        //            choiceButtons[i].gameObject.SetActive(true);
-
-        //            choiceButtons[i].onClick.AddListener(() => OnSimpleChoiceSelected());
-        //        }
-        //        else
-        //        {
-        //            choiceButtons[i].gameObject.SetActive(false);
-        //        }
-        //    }
-        //    readyForInput = false;
-        //}
+        
 
         choiceButtonPanelParent.SetActive(false);
         foreach (Button button in choiceButtons)
@@ -228,7 +291,7 @@ public class DialogueManager : MonoBehaviour
     {
         feedbackBodyParent.SetActive(false);
         choiceButtonPanelParent.SetActive(false);
-        isAwaitingInput = true; // Now it's safe to await input
+        isAwaitingInput = true; 
         DisplayNextDialogueLine();
     }
 
@@ -258,24 +321,7 @@ public class DialogueManager : MonoBehaviour
     }
     void DisplayChoices(DialogueLine dialogueLine)
     {
-        //dialogueArea.text = dialogueLine.line;
-        //StartCoroutine(TypeSentence(dialogueLine.line));
-
-        //for (int i = 0; i < choiceButtons.Count; i++)
-        //{
-        //    choiceButtons[i].onClick.RemoveAllListeners(); // Clear previous listeners
-        //    choiceButtons[i].gameObject.SetActive(false);  // Hide all buttons initially
-
-        //    if (i < dialogueLine.choices.Count)
-        //    {
-        //        choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = dialogueLine.choices[i].choiceText;
-        //        choiceButtons[i].gameObject.SetActive(true);
-
-        //        // Adding listener for quiz choices
-        //        int correctIndex = i;
-        //        choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(dialogueLine.choices[correctIndex]));
-        //    }
-        //}
+        
 
 
         choiceButtonPanelParent.SetActive(false);
@@ -354,7 +400,7 @@ public class DialogueManager : MonoBehaviour
                 PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
-                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + acp);
 
                 PlayerPrefs.SetInt("Chapter1QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
@@ -373,21 +419,33 @@ public class DialogueManager : MonoBehaviour
 
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
-                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + acp);
 
 
                 PlayerPrefs.SetInt("Chapter2QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
+
+                if (correctAnswersCount == 7)
+                {
+                    adp = 70;
+                }
+                quizlength = 7;
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level3")
             {
                 PlayerPrefs.SetInt("Kabanata3BookOfTrivia_IsLock", 1);
 
                 int oldcount = PlayerPrefs.GetInt("Chapter1TotalQuizScore", 0);
-                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + correctAnswersCount);
+                PlayerPrefs.SetInt("Chapter1TotalQuizScore", oldcount + acp);
 
                 PlayerPrefs.SetInt("Chapter3QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
+
+                if (correctAnswersCount == 3)
+                {
+                    adp = 30;
+                }
+                quizlength = 3;
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level4")
             {
@@ -419,6 +477,7 @@ public class DialogueManager : MonoBehaviour
                 PlayerPrefs.SetInt("Chapter6QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
             }
+            AddACP();
 
             if (adp > 0)
             {
@@ -437,15 +496,10 @@ public class DialogueManager : MonoBehaviour
                     .OnClose(Close)
                     .Show();
             }
-            AddACP();
 
             return;
         }
 
-        // Debug the number of correct answers
-        //Debug.Log("Quiz completed. Total correct answers: " + correctAnswersCount);
-        //Debug.Log("Dialogue ended. Total lines with choices: " + dialogueWithChoicesCount);
-        // Reset the correct answers count for the next dialogue
         correctAnswersCount = 0;
 
         isDialogueActive = false;

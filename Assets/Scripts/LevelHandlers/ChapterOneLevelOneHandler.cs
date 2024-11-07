@@ -88,11 +88,11 @@ public class ChapterOneLevelOneHandler : MonoBehaviour
         //    .Show();
 
         ChapterLevelSummaryAnnounceControl.Instance
-            .SetTitle("Chapter 1")
+            .SetTitle("Kabanata 1")
             .SetAnnounce("\n" +
-            "Tuklasin ang bayan ni Magellan - Lisbon, Portugal \n\n" +
-            "Kilalanin si Ferdinand Magellan, ang Kapitan ng Ekspedisyon \n\n" +
-            "Ang isyu sa pagtaas ng sweldo sa pagitcan nina Magellan at King Manoel I ng Portugal \n\n" +
+            " - Tuklasin ang bayan ni Magellan - Lisbon, Portugal \n\n" +
+            " - Kilalanin si Ferdinand Magellan, ang Kapitan ng Ekspedisyon \n\n" +
+            " - Ang isyu sa pagtaas ng sweldo sa pagitcan nina Magellan at King Manoel I ng Portugal \n\n" +
             "\n")
             .SetFadeInDuration(0.5f)
             .OnContinue(() =>

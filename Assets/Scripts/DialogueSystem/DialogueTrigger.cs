@@ -19,7 +19,9 @@ public class DialogueLine
     public bool hasChoices = false;
     public bool isConverstationWithDefinedChoices = false;
 
-    public string targetSceneName; 
+    public string targetSceneName;
+
+    public AudioClip audioClip;
 }
 
 [System.Serializable]
@@ -40,7 +42,16 @@ public class DialogueTrigger : MonoBehaviour
 
         DialogueManager.Instance.QuizMode(isTook, chapterQuiz);
 
-        DialogueManager.Instance.StartDialogue(dialogue);
+
+        if (isThisQuiz)
+        {
+            DialogueManager.Instance.StartRandomizedDialogue(dialogue); 
+        }
+        else
+        {
+            DialogueManager.Instance.StartDialogue(dialogue); 
+        }
+
         if (isThisQuiz)
         {
             

@@ -27,24 +27,52 @@ public class TutorialGenerator : MonoBehaviour
     private bool isAvatarProfileClicked = false;
     private void Awake()
     {
-        ChapterMenuHandler.undertutorial = true;
+        ChapterMenuHandler.undertutorial = false;
 
     }
     void Start()
     {
-        // Debug: Reset tutorial for testing
-
-        if (PlayerPrefs.GetInt("HasSeenTutorial", 0) == 0)
+        if (PlayerPrefs.HasKey("HasSeenTutorial"))
         {
+            if (PlayerPrefs.GetString("HasSeenTutorial", "No") == "No")
+            {
+                Debug.Log("YEAH: 1");
+
+                DeleteButton.interactable = false;
+                KabanataButton.interactable = false;
+                SettingsButton.interactable = false;
+                PlayerPrefs.SetString("HasSeenTutorial", "Yes");
+                PlayerPrefs.Save();
+
+                ShowTutorial();
+
+            }
+            else
+            {
+                Debug.Log("YEAH: 2");
+                ChapterMenuHandler.undertutorial = false;
+                DeleteButton.interactable = true;
+                KabanataButton.interactable = true;
+                SettingsButton.interactable = true;
+
+            }
+
+        }
+        else
+        {
+            Debug.Log("YEAH: 3");
+
             DeleteButton.interactable = false;
             KabanataButton.interactable = false;
             SettingsButton.interactable = false;
+            PlayerPrefs.SetString("HasSeenTutorial", "Yes");
+            PlayerPrefs.Save();
 
             ShowTutorial();
-            PlayerPrefs.SetInt("HasSeenTutorial", 1);
-            PlayerPrefs.Save();
         }
-      
+        
+
+
     }
 
     private void ShowTutorial()

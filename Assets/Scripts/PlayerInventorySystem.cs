@@ -28,6 +28,23 @@ public class PlayerInventorySystem : MonoBehaviour
     public ChapterOneLevelTwoHandler_RevisedVersion questHandler;
     public ChapterOneLevelSixHandler questHandlerL6;
 
+    private Vector3 pickUpOriginalScale;
+    private bool isPulsing = false;
+    private float pulseSpeed = 1f;
+    private float scaleAmount = 0.2f;
+    private void Start()
+    {
+
+        pickUpOriginalScale = ButtonPickUp.transform.localScale;
+    }
+    public void PulsateButton(Button button, Vector3 originalScale)
+    {
+
+        Transform targetTransform = button.transform;
+
+        float scale = 1 + Mathf.PingPong(Time.time * pulseSpeed, scaleAmount);
+        targetTransform.localScale = originalScale * scale;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<PickableObject>())
@@ -40,7 +57,13 @@ public class PlayerInventorySystem : MonoBehaviour
             }
         }
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.GetComponent<PickableObject>())
+        {
+            PulsateButton(ButtonPickUp, pickUpOriginalScale);
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         ResetControllers();
@@ -96,6 +119,8 @@ public class PlayerInventorySystem : MonoBehaviour
 
     private void ResetControllers()
     {
+        ButtonPickUp.transform.localScale = pickUpOriginalScale;
+
         item = null;
         ButtonPickUp.interactable = false;
     }

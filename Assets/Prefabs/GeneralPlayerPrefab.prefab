@@ -2258,7 +2258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7433963, g: 0.45136496, b: 0.2959558, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2287,7 +2287,7 @@ GameObject:
   - component: {fileID: 484937258465988344}
   - component: {fileID: 7668232586705532749}
   - component: {fileID: 683508661884370968}
-  - component: {fileID: 4024384396859228001}
+  - component: {fileID: 1739880430609521317}
   m_Layer: 5
   m_Name: ButtonInteract
   m_TagString: Untagged
@@ -2307,6 +2307,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 952206955268538559}
+  - {fileID: 8661145555028831430}
   - {fileID: 8320518431378464922}
   - {fileID: 9146990970916780854}
   m_Father: {fileID: 3684742995310105524}
@@ -2337,7 +2339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8235294}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2410,7 +2412,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4024384396859228001
+--- !u!114 &1739880430609521317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2423,7 +2425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 30
-  image: {fileID: 939646566711505427}
+  image: {fileID: 7668232586705532749}
 --- !u!1 &586770244155877244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3241,7 +3243,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 8, y: 8}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5680873372510977422
 Canvas:
@@ -3261,7 +3263,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -4212,10 +4214,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6294922296987050897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -125}
-  m_SizeDelta: {x: 950, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5451927085882686324
 CanvasRenderer:
@@ -4857,13 +4859,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8836824365102550778}
   m_Father: {fileID: 1664294242592765629}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 30}
-  m_SizeDelta: {x: 8, y: 8}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &244444386852533711
 CanvasRenderer:
@@ -5414,6 +5417,96 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1586199930308924852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6317163362846884589}
+  - component: {fileID: 6491226864220416819}
+  - component: {fileID: 7594268165034638275}
+  - component: {fileID: 8615723396502944022}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6317163362846884589
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586199930308924852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6803426063597848929}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 115, y: 115}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6491226864220416819
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586199930308924852}
+  m_CullTransparentMesh: 1
+--- !u!114 &7594268165034638275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586199930308924852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.645283, g: 0.30343083, b: 0.1984549, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8615723396502944022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586199930308924852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 30
+  image: {fileID: 7594268165034638275}
 --- !u!1 &1627707091183727308
 GameObject:
   m_ObjectHideFlags: 0
@@ -5554,7 +5647,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: '.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -5765,9 +5860,9 @@ RectTransform:
   m_Father: {fileID: 4549934307280731995}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2038590418008664954
 CanvasRenderer:
@@ -6554,9 +6649,9 @@ RectTransform:
   - {fileID: 5295907734903214959}
   m_Father: {fileID: 1051211145877449589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -400}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3517193762415456752
@@ -6960,6 +7055,81 @@ MonoBehaviour:
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &2258888184245657439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2164972181610494096}
+  - component: {fileID: 6883541941817318564}
+  - component: {fileID: 3241018986929766127}
+  m_Layer: 5
+  m_Name: Handle (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2164972181610494096
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258888184245657439}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1451941431252344699}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 132, y: 132}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6883541941817318564
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258888184245657439}
+  m_CullTransparentMesh: 0
+--- !u!114 &3241018986929766127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258888184245657439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6301887, g: 0.4185404, b: 0.31271625, a: 0.7372549}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 010a6e5305fa7004f89c5d317b7b47d4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2264917403368587844
 GameObject:
   m_ObjectHideFlags: 0
@@ -6995,9 +7165,9 @@ RectTransform:
   - {fileID: 6273787095976990914}
   m_Father: {fileID: 1051211145877449589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -283.3333}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3037178282494393900
@@ -8970,7 +9140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1522986358875279387
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9611,9 +9781,9 @@ RectTransform:
   - {fileID: 662840797012774828}
   m_Father: {fileID: 1051211145877449589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -166.66666}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8168420411925394167
@@ -10837,10 +11007,10 @@ RectTransform:
   - {fileID: 4429675821186115336}
   m_Father: {fileID: 6294922296987050897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -55}
-  m_SizeDelta: {x: 950, y: 60}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5556149909101883543
 CanvasRenderer:
@@ -11403,7 +11573,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: "1. Ilang araw pagkatapos dumating sa Seville, pormal na pinaltan ni Magellan
+    ang kanyang pangalan, mula Fernao de Magalhaes (Portuges) naging Fernando de
+    Magallanes (Espanyol), bilang katapatan sa Espanya.\r\n\r\n2. Pinakasalan ni
+    Magellan si Beatriz Barbosa, ang anak ng kanyang host na si Diogo Barbosa na
+    nag-imbita sa kanya na manatili sa kanilang tirahan.\r\n\r\n3. Nagkaanak si Beatriz
+    ng isang lalaki na pinangalanan nilang Rodrigo, na anim (6) na buwang gulang
+    noong panahon ng ekspedisyon.\r\n\r\n4. Ang Seville ay tahanan ng mga pinaka-kilalang
+    hidalgo sa mga agham, sining, kultura, relihiyon, militar, at mga paglalakbay
+    sa iba\u2019t ibang bansa.\r\n\r\n5. Si Ruy Falero ay katuwang ni Magellan sa
+    ekspedisyon at kapwa Portuges.\r\n\r\n6. Kadalasang wala si Haring Charles I
+    at bihirang manatili sa kanyang teritoryo sa Espanya. Dahil dito, nahirapan sina
+    Magellan bisitahin at talakayin ang ekspedisyon kay Haring Charles I.\n\n7. Ang
+    maharlikang pag-apruba ng ekspedisyon ay nilagdaan ni Haring Charles I ng Espanya
+    noong Marso 22, 1518.\r\n\r\n8. Si Haring Charles I ng Espanya at Haring Manoel
+    I ng Portugal ay may kaugnayan sa pamamagitan ng kasal ni Manoel sa tiyahin ni
+    Charles na si Isabel, sunod sa kanyang tiyahin Maria, at sa kapatid niyang si
+    Leonora.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -11430,8 +11616,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 17
+  m_fontSizeBase: 17
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12156,6 +12342,230 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &3954319380474424536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8836824365102550778}
+  - component: {fileID: 8800759154617374818}
+  - component: {fileID: 8310964513654434111}
+  m_Layer: 7
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8836824365102550778
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954319380474424536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6694680055594734206}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8800759154617374818
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954319380474424536}
+  m_CullTransparentMesh: 1
+--- !u!114 &8310964513654434111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954319380474424536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: YOU
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
+  m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3969824206835725072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 952206955268538559}
+  - component: {fileID: 4890100547534037970}
+  - component: {fileID: 4134400190345694586}
+  - component: {fileID: 6498530005367847231}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &952206955268538559
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969824206835725072}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1648086030007616122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 115, y: 115}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4890100547534037970
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969824206835725072}
+  m_CullTransparentMesh: 1
+--- !u!114 &4134400190345694586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969824206835725072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.645283, g: 0.30343083, b: 0.1984549, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6498530005367847231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969824206835725072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 30
+  image: {fileID: 4134400190345694586}
 --- !u!1 &4007386004846457114
 GameObject:
   m_ObjectHideFlags: 0
@@ -12216,7 +12626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.56573784, b: 0.36320752, a: 1}
+  m_Color: {r: 0.48627454, g: 0.21960786, b: 0.08627451, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12591,7 +13001,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: '1. Si Magellan ay tinanggalan ng mga pribilehiyo, nahatulan na hindi nagtatrabaho,
+    at inalisan ng tungkulin bilang mandaragat at kapitan.
+
+
+    2. Nagsimula si
+    Magellan sa pagbuo ng isang bagong imahe ng mundo para sa kanyang pangarap na
+    ekspedisyon sa tulong ng mga piloto na dalubhasa sa nabigasyon sa Asya.
+
+
+    3.
+    Noong Oktubre 1517, umalis si Magellan sa kanyang bansa, itinakwil ang kanyang
+    nasyonalidad, at lumipat sa Seville, Spain.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -13458,7 +13881,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: '1. Patuloy na pumunta si Magellan kay Haring Manoel I ng Portugal para
+    humiling ng pagtaas sa kanyang buwanang sahod.
+
+
+    2. Humiling si Magellan
+    ng pagtaas sa kanyang buwanang sahod sa Hari ng mga apat (4) na beses.
+
+
+    3.
+    Ang Magellan Expedition ang unang circumnavigation ng mundo.
+
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -14538,10 +14973,10 @@ RectTransform:
   - {fileID: 4179584667242506551}
   m_Father: {fileID: 6294922296987050897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -810}
-  m_SizeDelta: {x: 950, y: 60}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1675907265924156779
 CanvasRenderer:
@@ -14821,7 +15256,48 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: '
+
+
+
+    9. Ang kasal ni Haring Manoel I sa pamilya ni Haring Charles I
+    ang inaasahang tatapos sa teritoryal na hidwaan sa pagitan ng Portugal at Espanya
+    ngunit muling umusbong sa pagtuklas ni Magellan ng Moluccas o Spice Islands.
+
+
+
+    10.
+    Ipinakita ni Magellan ang isang globo sa kanyang presentasyon ng ekspedisyon
+    kay Haring Charles I habang pinapanatiling lihim ang daanan ng Strait sa Amerika.
+
+
+
+    11.
+    Ang layunin ng ekspedisyon ay makamit ang Spice Islands sa Asya at palawakin
+    ang pamamahala ng Espanya.
+
+
+
+    12. Ang Spice Islands ang pinakamayamang pinagkukunan
+    ng mga pampalasa sa mundo.
+
+
+
+    13. Ang halaga ng mga pampalasa ay umiikot
+    sa pagpapalasa ng pagkain, pagpreserba ng karne, mga gamit panggamot, at mga
+    ritwal ng pagsamba.
+
+
+
+    14. Ang linya ng demarkasyon (demarcation line) ay
+    ang teritoryal na linya sa pagitan ng Portugal at Espanya, kung saan ito ang
+    hangganan ng teritoryo ng dalawang bansa.
+
+
+
+    15. Ang ekspedisyon ay inaprubahan
+    at inilunsad ni Haring Charles I dalawang (2) taon lamang matapos siyang umakyat
+    sa trono ng Espanya.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -14848,8 +15324,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15422,7 +15898,7 @@ RectTransform:
   m_Father: {fileID: 4427275801041006007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15523,7 +15999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6313726, g: 0.3803922, b: 0.24705884, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15619,7 +16095,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: "1.\tPara sa mga Espanyol, ang pagtuklas sa Moluccas o Spice Islands ay
+    nangangahulugan ng walang limitasyong pagkalakal ng mga pampalasa na mahalaga
+    sa pagpreserba ng karne.\r\n2.\tAng mga pampalasa ay ang mga pangunahing sangkap
+    sa pagtatayo ng imperyo ng Espanya.\r\n3.\tAng Magellan Expedition ay ang pinakamahal
+    na inilunsad na proyekto ng Espanya na nagkakahalaga ng 8,751,125 maravedis.\r\n4.\tAng
+    Consejo de Castilla ang sentral na katawan ng administrasyon ng maharlika ng
+    Espanya.\r\n5.\tBumili si Aranda ng limang (5) barko na nagkakahalaga ng 1,316,250
+    maravedis.\r\n6.\tAng San Antonio ay ang pinakamahal na barko na binili ng 330,000
+    maravedis.\r\n7.\tAng barkong Trinidad, ang pangalawa sa pinakamalaki at ang
+    punong barko ng ekspedisyon, ay nagkakahalaga ng 270,000 maravedis.\r\n8.\tAng
+    barkong Concepcion ay may presyong 228,750 maravedis.\r\n9.\tAng barkong Victoria,
+    ang pangalawang pinakamaliit na barko, ay binili ng 300,000 maravedis.\r\n10.\tAng
+    barkong Santiago, ang pinakamaliit na barko, ay nagkakahalagang 187,500 maravedis.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -15646,8 +16134,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15862,7 +16350,31 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: '1. Ayon sa Patakaran ng Imperyong Espanyol, ipinagbabawal ang paglalakbay
+    ng mga kababaihan sa mga barko noong ika-15 siglo.
+
+
+
+    2. Si Magellan, 25
+    taong gulang, ay isang mandaragat na kinilala dahil sa kanyang katapangan at
+    kabayanihan sa panahon ng pagpapalawak ng teritoryo ng mga Portuges sa India
+    laban sa mga lokal na pinuno ng Moro.
+
+
+
+    3. Isang misteryo ang pagkabata
+    ni Magellan.
+
+
+
+    4. Nawalan ng mga magulang si Magellan noong mga 10-12 taong
+    gulang siya.
+
+
+    5. Dinala si Magellan ng kaniyang mga nakatatandang pinsan
+    sa Lisbon, ang kabisera ng lumalaking imperyong Portuges.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -16773,6 +17285,96 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5713344394764502010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8661145555028831430}
+  - component: {fileID: 6573124176164717202}
+  - component: {fileID: 3172018578842524429}
+  - component: {fileID: 8941279716991632261}
+  m_Layer: 5
+  m_Name: Panel (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8661145555028831430
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5713344394764502010}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1648086030007616122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6573124176164717202
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5713344394764502010}
+  m_CullTransparentMesh: 1
+--- !u!114 &3172018578842524429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5713344394764502010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8941279716991632261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5713344394764502010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 30
+  image: {fileID: 3172018578842524429}
 --- !u!1 &5741625743871055325
 GameObject:
   m_ObjectHideFlags: 0
@@ -17633,10 +18235,10 @@ RectTransform:
   - {fileID: 8234589171699062011}
   m_Father: {fileID: 6294922296987050897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -465}
-  m_SizeDelta: {x: 950, y: 600}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5965043901427098740
 CanvasRenderer:
@@ -17720,6 +18322,96 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 40
   image: {fileID: 7348259551426713250}
+--- !u!1 &6023959248641272116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6237909348038544438}
+  - component: {fileID: 1645207639590797510}
+  - component: {fileID: 8202895184329750277}
+  - component: {fileID: 2757354882212312086}
+  m_Layer: 5
+  m_Name: Panel (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6237909348038544438
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023959248641272116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6803426063597848929}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1645207639590797510
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023959248641272116}
+  m_CullTransparentMesh: 1
+--- !u!114 &8202895184329750277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023959248641272116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2757354882212312086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023959248641272116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 30
+  image: {fileID: 8202895184329750277}
 --- !u!1 &6032637197573486994
 GameObject:
   m_ObjectHideFlags: 0
@@ -18072,9 +18764,9 @@ RectTransform:
   - {fileID: 1876045458907908957}
   m_Father: {fileID: 1051211145877449589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4461211736362614190
@@ -18628,7 +19320,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: "11.\tAng bawat tao sa ekspedisyon ay tatanggap ng isang litro na rasyon
+    araw-araw.\r\n\n12.\tHinulaan ni Magellan na ang ekspedisyon ay tatagal ng dalawang
+    (2) taon.\r\n\n13.\tInatasan si Magellan na pangasiwaan ang pagrarasyon at pana-panahong
+    suriin ang mga nakaimbak na probisyon.\r\n\n14.\tSi Magellan ay may awtoridad
+    na bawasan ang rasyon kung kinakailangan.\r\n\n15.\tAng bawat barko ay nagdala
+    ng bahagi sa mga probisyon na proporsyonal sa bilang ng mga tripulante.\r\n\n16.\tAng
+    superbisor ng rasyon ang pinaka-kanais-nais ngunit kontrobersyal na posisyon
+    sa ekspedisyon.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -19913,7 +20612,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3181792120206420576}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7103105847737449055}
+        m_TargetAssemblyTypeName: BookOfTriviaManager, Assembly-CSharp
+        m_MethodName: TogglePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4233943817542813994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20935,6 +21646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PLAYER_CURRENT_ADP: 0
   ADP: {fileID: 1015410806560296684}
+  ACP: {fileID: 3338220305518111987}
   ADP_Parent: {fileID: 1828641871065470609}
   scaleDuration: 0.2
   scaleFactor: 1.2
@@ -21459,9 +22171,9 @@ RectTransform:
   - {fileID: 2577578599863994943}
   m_Father: {fileID: 1051211145877449589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -633.3333}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1584791832136776873
@@ -23165,9 +23877,9 @@ RectTransform:
   - {fileID: 1901139576478542702}
   m_Father: {fileID: 1051211145877449589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -516.6666}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4059597810723477519
@@ -23403,7 +24115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7433963, g: 0.45136496, b: 0.2959558, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -23717,7 +24429,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2164972181610494096}
   m_Father: {fileID: 1724519174398473725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -23746,7 +24459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9245283, g: 0.5271136, b: 0.34451762, a: 1}
+  m_Color: {r: 0.4867924, g: 0.21903177, b: 0.09827694, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -24675,7 +25388,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: "6. Bilang empleyado ng korona ng Portuges, si Magellan ay tumatanggap
+    ng buwanang suweldo na 1,000 re\xEDs at pang-araw-araw na salapi ng barley.\r\n\r\n7.
+    Dahil sa pagtaas ng presyo ng merkado, hindi sapat ang suweldo ni Magellan para
+    sa mga gastusin sa pamumuhay, kaya humiling siya sa pagtaas ng kanyang buwanang
+    suweldo ng kalahating ducat ayon sa kanyang mga serbisyo.\r\n\r\n8. Noong ika-15
+    siglo, ang paglalakbay sa karagatan (seafaring) ay nagbibigay ng malaking benepisyo
+    at gantimpala, tulad ng promosyon ng kabalyero, pagbawas ng buwis, at pagbibigay
+    ng maliliit na taunang pensyon.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -25453,7 +26173,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: no data
+  m_text: '.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
   m_sharedMaterial: {fileID: -9135840462563574047, guid: 5fd6fc1298f1b16418ed196a1ffd3037, type: 2}
@@ -26468,6 +27190,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6317163362846884589}
+  - {fileID: 6237909348038544438}
   - {fileID: 7971551025018254736}
   - {fileID: 1087694152582204018}
   m_Father: {fileID: 3684742995310105524}
@@ -26498,7 +27222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.77254903}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -26791,6 +27515,7 @@ GameObject:
   - component: {fileID: 38962041580595976}
   - component: {fileID: 820175688632768052}
   - component: {fileID: 3303828452004469281}
+  - component: {fileID: 7465771059668194943}
   m_Layer: 5
   m_Name: DialogueBoxPanel
   m_TagString: Untagged
@@ -26884,10 +27609,11 @@ MonoBehaviour:
   feedbackText: {fileID: 7640875997363542817}
   isDialogueActive: 0
   isCompleteQuiz: 0
-  typingSpeed: 0.007
+  typingSpeed: 0.05
   animator: {fileID: 7880109092372475053}
   canvasGroup: {fileID: 3303828452004469281}
   acpCount: {fileID: 3338220305518111987}
+  audioSource: {fileID: 7465771059668194943}
 --- !u!95 &7880109092372475053
 Animator:
   serializedVersion: 5
@@ -26961,6 +27687,102 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!82 &7465771059668194943
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8767147907723047607}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -5912759467535698417, guid: 6ff6ab8253d72d94fb7018bb3c59a541, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.7
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8821600639271167499
 GameObject:
   m_ObjectHideFlags: 0
