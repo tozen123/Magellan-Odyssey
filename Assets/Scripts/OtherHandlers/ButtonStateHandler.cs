@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class ButtonStateHandler : MonoBehaviour
 {
-    [SerializeField] private Image ChildImage; // Reference to the Image component
-    [SerializeField] private Sprite lockImage; // Sprite for the lock icon
-    [SerializeField] private Sprite doneImage; // Sprite for the completed icon
-    [SerializeField] private Sprite checkImage; // Sprite for the completed icon
+    [SerializeField] private Image ChildImage; 
+    [SerializeField] private Sprite lockImage; 
+    [SerializeField] private Sprite doneImage;
+    [SerializeField] private Sprite checkImage; 
 
-    private Button thisButton; // Reference to the Button component
+    private Button thisButton; 
  
     void Start()
     {

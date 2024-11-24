@@ -21,91 +21,82 @@ public class TutorialGenerator : MonoBehaviour
     public Sprite ACP;
     public Sprite ADP;
 
-
     public ChapterMenuHandler ChapterMenuHandler;
 
+    public GameObject canvasAvatarPanel;
+    public GameObject canvasSettingsPanel;
     private bool isAvatarProfileClicked = false;
+
     private void Awake()
     {
         ChapterMenuHandler.undertutorial = false;
-
     }
+
     void Start()
     {
-        if (PlayerPrefs.HasKey("HasSeenTutorial"))
+        PlayerPrefs.SetString("HasSeenTutorial", "No");
+        PlayerPrefs.Save();
+
+        if (PlayerPrefs.HasKey("HasSeenTutorial") && PlayerPrefs.GetString("HasSeenTutorial", "No") == "No")
         {
-            if (PlayerPrefs.GetString("HasSeenTutorial", "No") == "No")
-            {
-                Debug.Log("YEAH: 1");
-
-                DeleteButton.interactable = false;
-                KabanataButton.interactable = false;
-                SettingsButton.interactable = false;
-                PlayerPrefs.SetString("HasSeenTutorial", "Yes");
-                PlayerPrefs.Save();
-
-                ShowTutorial();
-
-            }
-            else
-            {
-                Debug.Log("YEAH: 2");
-                ChapterMenuHandler.undertutorial = false;
-                DeleteButton.interactable = true;
-                KabanataButton.interactable = true;
-                SettingsButton.interactable = true;
-
-            }
-
-        }
-        else
-        {
-            Debug.Log("YEAH: 3");
-
+            Debug.Log("Starting Tutorial...");
             DeleteButton.interactable = false;
             KabanataButton.interactable = false;
             SettingsButton.interactable = false;
+
             PlayerPrefs.SetString("HasSeenTutorial", "Yes");
             PlayerPrefs.Save();
 
             ShowTutorial();
         }
-        
+        else
+        {
+            Debug.Log("Skipping Tutorial...");
+            ChapterMenuHandler.undertutorial = false;
+            DeleteButton.interactable = true;
+            KabanataButton.interactable = true;
+            SettingsButton.interactable = true;
+        }
 
-
+        CloseButton.onClick.AddListener(() =>
+        {
+            Pointer3End();
+        });
     }
 
     private void ShowTutorial()
     {
         DialogMessagePrompt.Instance
-               .SetTitle("System Message")
-               .SetMessage("Welcome to Magellan Odyssey Game")
-               .Show();
+            .SetTitle("System Message")
+            .SetMessage("Welcome to Magellan Odyssey Game")
+            .Show();
 
         DialogMessagePrompt.Instance
-               .SetTitle("System Message")
-               .SetMessage("You will now embark on an engaging adventure to learn about Ferdinand Magellan's Expedition")
-               .Show();
+            .SetTitle("System Message")
+            .SetMessage("You will now embark on an engaging adventure to learn about Ferdinand Magellan's Expedition")
+            .Show();
 
         DialogMessagePrompt.Instance
-               .SetTitle("System Message")
-               .SetMessage("But first, let's guide you through this game.")
-               .Show();
+            .SetTitle("System Message")
+            .SetMessage("But first, let's guide you through this game.")
+            .Show();
 
         DialogMessagePrompt.Instance
-              .SetTitle("System Message")
-              .SetMessage("Take note, some of the button are disabled until you finish the tutorial.")
-              .OnClose(() => ShowTutorialDialog())
-              .Show();
+            .SetTitle("System Message")
+            .SetMessage("Take note, some buttons are disabled until you finish the tutorial.")
+            .OnClose(() => ShowTutorialDialog())
+            .Show();
     }
 
     private void ShowTutorialDialog()
     {
+        canvasAvatarPanel.SetActive(false);
         ShowPointer1.SetActive(true);
         TutorialDialogPrompt.Instance
             .SetMessage("I put an arrow pointing to the avatar profile. Tap that to open your profile tab.")
             .SetImage(null)
             .OnClose(() => Pointer1())
+            .OnPrevious(null)
             .Show();
     }
 
@@ -118,13 +109,15 @@ public class TutorialGenerator : MonoBehaviour
         if (!isAvatarProfileClicked)
         {
             isAvatarProfileClicked = true;
-            AvatarProfileButton.onClick.RemoveAllListeners(); // Ensure no duplicate listeners
+
+            AvatarProfileButton.onClick.RemoveAllListeners();
             AvatarProfileButton.onClick.AddListener(() =>
             {
                 TutorialDialogPrompt.Instance
                     .SetImage(null)
                     .SetMessage("In this tab, you can view your profile information and also change your name if you wanted. ACP and ADP can also be viewed here!")
                     .OnClose(() => Pointer2Start())
+                    .OnPrevious(() => ShowTutorialDialog()) // Enable Back Button
                     .Show();
             });
         }
@@ -132,7 +125,6 @@ public class TutorialGenerator : MonoBehaviour
 
     public void Pointer2Start()
     {
-
         TutorialDialogPrompt.Instance
             .SetImage(ACP)
             .SetMessage("ACP. Ang bilang ng Academic Points ay may kaakibat na Academic Rank para matukoy ang antas ng kaalaman. Para magkaroon ng Academic Points, sagutan ang mga pagsusulit pagkatapos ng bawat kabanata. " +
@@ -141,59 +133,50 @@ public class TutorialGenerator : MonoBehaviour
             "\n - Academic Rank B: 200 ACP+" +
             "\n")
             .OnClose(() => Pointer2End())
-
+            .OnPrevious(() => Pointer1()) // Enable Back Button
             .Show();
-
-        
     }
 
     public void Pointer2End()
     {
+        
         TutorialDialogPrompt.Instance
-           .SetImage(ADP)
-           .SetMessage("ADP. ang Adventure Points ay ang pera na magagamit sa pagbukas ng mga kabanata. Para magkaroon ng adventure Points, kailangan mong gawin ang mga sumusunod:" +
+            .SetImage(ADP)
+            .SetMessage("ADP. Ang Adventure Points ay ang pera na magagamit sa pagbukas ng mga kabanata. Para magkaroon ng Adventure Points, kailangan mong gawin ang mga sumusunod:" +
             "\n - Tapusin ang mga kabanata" +
             "\n - Gawin ang mga Quest (kabilang na ang Mini-Games sa Quest)" +
             "\n - Magkaroon ng Perpektong Puntos sa mga Pagsusulit" +
             "\n")
             .OnClose(() => Pointer3Start())
-
-           .Show();
-     
-
-
-       
+            .OnPrevious(() => Pointer2Start()) // Enable Back Button
+            .Show();
     }
 
     public void Pointer3Start()
     {
+        canvasAvatarPanel.SetActive(true);
+        ShowPointer3.SetActive(false);
 
         TutorialDialogPrompt.Instance
             .SetImage(null)
-            .SetMessage("Now you can close this tab and proceed to the next part of the tutorial")
-            
-            
-
+            .SetMessage("Now you can close this tab and proceed to the next part of the tutorial.")
+            .OnPrevious(() => Pointer2End()) // Enable Back Button
             .Show();
 
-        CloseButton.onClick.AddListener(() =>
-        {
-            Pointer3End();
-        });
+        
     }
 
     public void Pointer3End()
     {
-        ShowPointer3.SetActive (true);
+        canvasSettingsPanel.SetActive(false);
+
+        ShowPointer3.SetActive(true);
         TutorialDialogPrompt.Instance
             .SetImage(null)
-            .SetMessage("Lets go the settings, i have put an arrow pointing to the button for opening the settings tab.")
-
+            .SetMessage("Let's go to the settings. I have put an arrow pointing to the button for opening the settings tab.")
             .OnClose(() => Pointer4Start())
-
+            .OnPrevious(() => Pointer3Start()) // Enable Back Button
             .Show();
-
-
     }
 
     public void Pointer4Start()
@@ -205,38 +188,33 @@ public class TutorialGenerator : MonoBehaviour
         SettingsButton.onClick.AddListener(() =>
         {
             TutorialDialogPrompt.Instance
-            .SetImage(null)
-            .SetMessage("This is the settings, you can adjust the audio of the game and change the graphics quality.")
-
-            .OnClose(() => Pointer4End())
-
-            .Show();
-
+                .SetImage(null)
+                .SetMessage("This is the settings. You can adjust the audio of the game and change the graphics quality.")
+                .OnClose(() => Pointer4End())
+                .OnPrevious(() => Pointer3End()) // Enable Back Button
+                .Show();
         });
     }
 
     public void Pointer4End()
     {
-
         SettingsCloseButton.onClick.AddListener(() =>
         {
             TutorialDialogPrompt.Instance
+                .SetImage(null)
+                .SetMessage("Now you can tap on Kabanata 1 to start your adventure!")
+                .OnClose(() => EndTutorial())
+                .OnPrevious(() => Pointer4Start()) // Enable Back Button
+                .Show();
+        });
+    }
+
+    private void EndTutorial()
+    {
+        TutorialDialogPrompt.Instance
             .SetImage(null)
-            .SetMessage("Now you can tap on the Kabanata 1 to start you adventure!")
-
-
-            .Show();
-
-            TutorialDialogPrompt.Instance
-            .SetImage(null)
-            .SetMessage("This the end of the tutorial here. Goodluck!")
-
+            .SetMessage("This is the end of the tutorial. Good luck!")
             .OnClose(() => ChapterMenuHandler.undertutorial = false)
             .Show();
-
-
-
-        });
-       
     }
 }

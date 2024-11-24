@@ -23,6 +23,7 @@ public class ChapterMenuHandler : MonoBehaviour
     public bool undertutorial;
     private void Start()
     {
+
         UnlockMode();
 
         Debug.Log("--------------------------------------------------------------");
@@ -54,8 +55,8 @@ public class ChapterMenuHandler : MonoBehaviour
         PlayerPrefs.SetInt("Kabanata5BookOfTrivia_IsLock", 0);
         PlayerPrefs.SetInt("Kabanata6BookOfTrivia_IsLock", 0);
 
-        PlayerPrefs.SetInt("adventure_points", 999);
-        PlayerPrefs.SetInt("Chapter1TotalQuizScore", 999);
+        PlayerPrefs.SetInt("adventure_points", 9999);
+        PlayerPrefs.SetInt("Chapter1TotalQuizScore", 9999);
 
         PlayerPrefs.SetString("Chapter1Level1", "IN_PROGRESS");
         PlayerPrefs.SetString("Chapter1Level2", "IN_PROGRESS");

@@ -10,13 +10,14 @@ public class TutorialDialogPrompt : MonoBehaviour
     public static TutorialDialogPrompt Instance;
 
     public TextMeshProUGUI promptMessage;
-    public Button tapToAnywhereToContinue;
+    public Button nextButton;
+    public Button backButton;
     public Image optionalImage;
     public GameObject child;
 
-    private Queue<DialogData> dialogQueue = new Queue<DialogData>();
-    private bool isShowingDialog = false;
+    private DialogData currentDialog; // Current dialog
     private UnityAction onCloseAction;
+    private UnityAction onPreviousAction; // OnPrevious UnityAction
 
     private void Awake()
     {
@@ -32,10 +33,8 @@ public class TutorialDialogPrompt : MonoBehaviour
 
     private void Start()
     {
-        tapToAnywhereToContinue.onClick.AddListener(() =>
-        {
-            Hide();
-        });
+        nextButton.onClick.AddListener(() => Hide());
+        backButton.onClick.AddListener(() => GoBack());
 
         child.SetActive(false);
         if (optionalImage != null)
@@ -46,68 +45,56 @@ public class TutorialDialogPrompt : MonoBehaviour
 
     public TutorialDialogPrompt SetMessage(string message)
     {
-        if (dialogQueue.Count > 0)
-        {
-            dialogQueue.Peek().Message = message;
-        }
-        else
-        {
-            dialogQueue.Enqueue(new DialogData { Message = message });
-        }
+        if (currentDialog == null) currentDialog = new DialogData();
+        currentDialog.Message = message;
         return this;
     }
 
     public TutorialDialogPrompt SetImage(Sprite image)
     {
-        if (dialogQueue.Count > 0)
-        {
-            dialogQueue.Peek().Image = image;
-        }
-        else
-        {
-            dialogQueue.Enqueue(new DialogData { Image = image });
-        }
+        if (currentDialog == null) currentDialog = new DialogData();
+        currentDialog.Image = image;
         return this;
     }
 
     public TutorialDialogPrompt OnClose(UnityAction action)
     {
-        if (dialogQueue.Count > 0)
-        {
-            dialogQueue.Peek().OnClose = action;
-        }
-        else
-        {
-            dialogQueue.Enqueue(new DialogData { OnClose = action });
-        }
+        if (currentDialog == null) currentDialog = new DialogData();
+        currentDialog.OnClose = action;
+        return this;
+    }
+
+    public TutorialDialogPrompt OnPrevious(UnityAction action)
+    {
+        if (currentDialog == null) currentDialog = new DialogData();
+        currentDialog.OnPrevious = action;
+
+        // Enable the back button if OnPrevious is set
+        backButton.interactable = true;
         return this;
     }
 
     public void Show()
     {
-        if (dialogQueue.Count == 0)
+        bool hasPreviousAction = currentDialog?.OnPrevious != null;
+        backButton.interactable = hasPreviousAction;
+
+        if (backButton.transform.childCount > 0)
         {
-            dialogQueue.Enqueue(new DialogData
+            Image childImage = backButton.transform.GetChild(0).GetComponent<Image>();
+            if (childImage != null)
             {
-                Message = promptMessage.text,
-                Image = optionalImage.sprite,
-                OnClose = onCloseAction
-            });
+                childImage.color = hasPreviousAction ? Color.white : Color.gray;
+            }
         }
 
-        if (!isShowingDialog)
-        {
-            ShowNextDialog();
-        }
+        DisplayDialog();
     }
 
-    private void ShowNextDialog()
+    private void DisplayDialog()
     {
-        if (dialogQueue.Count > 0)
+        if (currentDialog != null)
         {
-            isShowingDialog = true;
-            DialogData currentDialog = dialogQueue.Dequeue();
-
             promptMessage.text = currentDialog.Message;
 
             if (currentDialog.Image != null)
@@ -123,10 +110,7 @@ public class TutorialDialogPrompt : MonoBehaviour
 
             child.SetActive(true);
             onCloseAction = currentDialog.OnClose;
-        }
-        else
-        {
-            isShowingDialog = false;
+            onPreviousAction = currentDialog.OnPrevious;
         }
     }
 
@@ -135,13 +119,15 @@ public class TutorialDialogPrompt : MonoBehaviour
         child.SetActive(false);
         onCloseAction?.Invoke();
         onCloseAction = null;
-        if (optionalImage != null)
-        {
-            optionalImage.gameObject.SetActive(false);
-        }
+    }
 
-        isShowingDialog = false;
-        ShowNextDialog();
+    private void GoBack()
+    {
+        if (onPreviousAction != null)
+        {
+            child.SetActive(false);
+            onPreviousAction.Invoke();
+        }
     }
 
     private class DialogData
@@ -149,5 +135,6 @@ public class TutorialDialogPrompt : MonoBehaviour
         public string Message;
         public Sprite Image;
         public UnityAction OnClose;
+        public UnityAction OnPrevious; // Optional OnPrevious action
     }
 }
