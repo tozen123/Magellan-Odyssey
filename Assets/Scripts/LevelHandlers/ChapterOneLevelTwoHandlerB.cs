@@ -137,7 +137,7 @@ public class ChapterOneLevelTwoHandlerB : MonoBehaviour
 
 
         ChapterLevelSummaryAnnounceControl.Instance
-           .SetTitle("Chapter 3")
+           .SetTitle("Kabanata 3")
            .SetAnnounce("\n" +
                             "- Kilalanin si Haring Manoel I ng Portugal \n\n" +
                             "- Ang mapagmatigas at walang utang na loob na pagkatao ni Haring Manoel I \n\n" +

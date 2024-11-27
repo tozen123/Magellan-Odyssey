@@ -456,6 +456,13 @@ public class DialogueManager : MonoBehaviour
 
                 PlayerPrefs.SetInt("Chapter4QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
+
+                if (correctAnswersCount == 3)
+                {
+                    adp = 30;
+                }
+                quizlength = 3;
+
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level5")
             {
@@ -466,6 +473,12 @@ public class DialogueManager : MonoBehaviour
 
                 PlayerPrefs.SetInt("Chapter5QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
+
+                if (correctAnswersCount == 3)
+                {
+                    adp = 30;
+                }
+                quizlength = 3;
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level6")
             {
@@ -476,6 +489,12 @@ public class DialogueManager : MonoBehaviour
 
                 PlayerPrefs.SetInt("Chapter6QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
+
+                if (correctAnswersCount == 3)
+                {
+                    adp = 30;
+                }
+                quizlength = 3;
             }
             AddACP();
 

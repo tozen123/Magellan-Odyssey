@@ -29,6 +29,10 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
 
     public AudioClip audioClip_Kabanata1_Buod;
     public AudioClip audioClip_Kabanata2_Buod;
+    public AudioClip audioClip_Kabanata3_Buod;
+    public AudioClip audioClip_Kabanata4_Buod;
+    public AudioClip audioClip_Kabanata5_Buod;
+    public AudioClip audioClip_Kabanata6_Buod;
 
     void Awake()
     {
@@ -103,6 +107,30 @@ public class ChapterLevelSummaryAnnounceControl : MonoBehaviour
             audioSource.Play();
         }
 
+        if (chapterHeader.text.Equals("Kabanata 3"))
+        {
+            audioSource.clip = audioClip_Kabanata3_Buod;
+            audioSource.Play();
+        }
+
+
+        if (chapterHeader.text.Equals("Kabanata 4"))
+        {
+            audioSource.clip = audioClip_Kabanata4_Buod;
+            audioSource.Play();
+        }
+        if (chapterHeader.text.Equals("Kabanata 5"))
+        {
+            audioSource.clip = audioClip_Kabanata5_Buod;
+            audioSource.Play();
+        }
+
+
+        if (chapterHeader.text.Equals("Kabanata 6"))
+        {
+            audioSource.clip = audioClip_Kabanata6_Buod;
+            audioSource.Play();
+        }
         //Populate(currentSummary.Quests);
 
         canvas.SetActive(true);

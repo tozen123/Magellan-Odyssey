@@ -68,7 +68,7 @@ public class TutorialGenerator : MonoBehaviour
     {
         DialogMessagePrompt.Instance
             .SetTitle("System Message")
-            .SetMessage("Welcome to Magellan Odyssey Game")
+            .SetMessage("Maligayang pagdating sa larong Ang Paghahanda sa Paglalakbay ni Magellan")
             .Show();
 
         DialogMessagePrompt.Instance

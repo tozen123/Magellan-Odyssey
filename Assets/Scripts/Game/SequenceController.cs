@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class SequenceController : MonoBehaviour
 {
     [Header("Creation Inputs")]
-    public TextMeshProUGUI inputName;
-    public TextMeshProUGUI inputLoginName;
+    public TMP_InputField inputName;
 
 
 
@@ -18,6 +18,9 @@ public class SequenceController : MonoBehaviour
 
     private CanvasGroup creationCanvasGroup;
     private CanvasGroup loginCanvasGroup;
+
+    [Header("Button")]
+    public Button LoginButton;
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -31,14 +34,14 @@ public class SequenceController : MonoBehaviour
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("Welcome to Magellan Odyssey")
+               .SetMessage("Maligayang pagdating sa larong Ang Paghahanda sa Paglalakbay ni Magellan")
                .Show();
 
         if (PlayerPrefs.HasKey("userName") )
         {
             DialogMessagePrompt.Instance
                 .SetTitle("System Message")
-                .SetMessage("Welcome back, Player. " + PlayerPrefs.GetString("userName"))
+                .SetMessage("Maligayang pagdating, Player. " + PlayerPrefs.GetString("userName"))
                 .OnClose(AutomaticLogin)
                 .Show();
         }
@@ -46,9 +49,23 @@ public class SequenceController : MonoBehaviour
         {
             DialogMessagePrompt.Instance
                 .SetTitle("System Message")
-                .SetMessage("Hello, Player. Before you start the game, you need to have an avatar.")
+                .SetMessage("Kamusta, Player. bago ka mag simula mag laro kailangan mo muna gumawa ng avatar")
                 .OnClose(ShowCreationAvatarCanvas)
                 .Show();
+        }
+    }
+    private void Update()
+    {
+        // Check if the input name is empty
+        if (inputName.text == "")
+        {
+            LoginButton.interactable = false;
+
+        }
+        else
+        {
+            LoginButton.interactable = true;
+
         }
     }
     private void LoadGraphicsQuality()
@@ -68,10 +85,13 @@ public class SequenceController : MonoBehaviour
 
     public void Register()
     {
+      
+       
+
+        // Save the user name and initialize game progress
         PlayerPrefs.SetString("userName", inputName.text.ToString());
 
         PlayerPrefs.SetString("Chapter1", "IN_PROGRESS");
-
         PlayerPrefs.SetString("Chapter1Level1", "IN_PROGRESS");
         PlayerPrefs.SetString("Chapter1Level2", "LOCKED");
         PlayerPrefs.SetString("Chapter1Level3", "LOCKED");
@@ -80,19 +100,18 @@ public class SequenceController : MonoBehaviour
         PlayerPrefs.SetString("Chapter1Level6", "LOCKED");
         PlayerPrefs.SetString("Chapter1Level7", "LOCKED");
 
-
-
-
         PlayerPrefs.Save();
 
+        // Display success message
         DialogMessagePrompt.Instance
-                .SetTitle("System Message")
-                .SetMessage("Avatar successfully created.")
-                .OnClose(Finish)
-                .Show();
+            .SetTitle("System Message")
+            .SetMessage("Matagumpay na nalikha ang iyong Avatar.")
+            .OnClose(Finish)
+            .Show();
 
 
     }
+   
 
     public void AutomaticLogin()
     {

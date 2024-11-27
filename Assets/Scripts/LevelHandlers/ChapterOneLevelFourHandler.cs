@@ -45,7 +45,7 @@ public class ChapterOneLevelFourHandler : MonoBehaviour
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("Magellan underwent a humiliating investigation in Morocco. After the court cleared him of the accusations, Magellan returned to Lisbon.")
+               .SetMessage("Matapos linisin ng korte si Magellan sa mga akusasyon, bumalik siya sa Lisbon.")
                .Show();
 
      
@@ -86,8 +86,8 @@ public class ChapterOneLevelFourHandler : MonoBehaviour
         ChapterLevelSummaryAnnounceControl.Instance
             .SetTitle("Chapter 4")
             .SetAnnounce("\n" +
-                            "Ang pagpasiya ni Magellan na lumipat mula sa Portugal patungo sa Espanya \n\n" +
-                            "Ang pagsisimula ng pangarap na ekspedisyon ni Magellan \n\n" +
+                            " - Ang pagpasiya ni Magellan na lumipat mula sa Portugal patungo sa Espanya \n\n" +
+                            " - Ang pagsisimula ng pangarap na ekspedisyon ni Magellan \n\n" +
                             "\n")
             .SetFadeInDuration(0.5f)
             .OnContinue(() =>

@@ -141,20 +141,44 @@ public class PlayerInteractionController : MonoBehaviour
 
                         }
 
+                        if (SceneManager.GetActiveScene().name == "Chapter1Level4")
+                        {
+
+                            if (playerQuestHandler.IsCurrentQuest("Go to Magellan"))
+                            {
+
+
+                                PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to Magellan"));
+
+                                PlayerQuestHandler.CompleteQuest("Go to Magellan");
+
+                                PlayerPrefs.SetInt("Kabanata4BookOfTrivia_IsLock", 0);
+                            }
+                            else
+                            {
+                                DialogMessagePrompt.Instance
+                                       .SetTitle("System Message")
+                                       .SetMessage("You must complete the other quest before interacting with this character.")
+                                       .Show();
+                                return;
+                            }
+
+                        }
+
 
                         // -------------------------- CHAPTER 1 LEVEL 5 ---------------------------------
                         if (SceneManager.GetActiveScene().name == "Chapter1Level5")
                         {  
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to Magellan"));
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta kay Magellan"));
 
-                            PlayerQuestHandler.CompleteQuest("Go to Magellan");
+                            PlayerQuestHandler.CompleteQuest("Pumunta kay Magellan");
                         }
 
                         if (SceneManager.GetActiveScene().name == "Chapter1Level5")
                         {
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to Magellan at the fountain"));
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Makibalita kina Magellan at Ruy"));
 
-                            PlayerQuestHandler.CompleteQuest("Go to Magellan at the fountain");
+                            PlayerQuestHandler.CompleteQuest("Makibalita kina Magellan at Ruy");
                         }
 
                         // -------------------------- CHAPTER 1 LEVEL 6 ---------------------------------
@@ -180,9 +204,9 @@ public class PlayerInteractionController : MonoBehaviour
 
                         if (SceneManager.GetActiveScene().name == "Chapter1Level5")
                         {
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Meet Ruy Falero"));
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Kilalanin si Ruy Falero"));
 
-                            PlayerQuestHandler.CompleteQuest("Meet Ruy Falero");
+                            PlayerQuestHandler.CompleteQuest("Kilalanin si Ruy Falero");
                         }
                     }
 
@@ -370,8 +394,6 @@ public class PlayerInteractionController : MonoBehaviour
                      * 
                      * 
                      */
-
-
                     if (SceneManager.GetActiveScene().name == "Chapter1Level3")
                     {
 
@@ -395,6 +417,38 @@ public class PlayerInteractionController : MonoBehaviour
                         }
 
                     }
+                    /*
+                     * 
+                     * 
+                     *                          Chapter1Level4
+                     * 
+                     * 
+                     */
+                    if (SceneManager.GetActiveScene().name == "Chapter1Level4")
+                    {
+
+                        if (playerQuestHandler.IsCurrentQuest("Go to Magellan"))
+                        {
+
+
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to Magellan"));
+
+                            PlayerQuestHandler.CompleteQuest("Go to Magellan");
+
+                            //PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 0);
+                        }
+                        else
+                        {
+                            DialogMessagePrompt.Instance
+                                   .SetTitle("System Message")
+                                   .SetMessage("You must complete the other quest before interacting with this character.")
+                                   .Show();
+                            return;
+                        }
+
+                    }
+
+                   
                 }
 
             }
@@ -471,6 +525,78 @@ public class PlayerInteractionController : MonoBehaviour
                 }
 
                 if (SceneManager.GetActiveScene().name == "Chapter1Level3")
+                {
+                    if (playerQuestHandler.IsCurrentQuest("Pumunta sa Quiz Master"))
+                    {
+                        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level3", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level4", "IN_PROGRESS");
+                        PlayerPrefs.Save();
+
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta sa Quiz Master"));
+
+                        PlayerQuestHandler.CompleteQuest("Pumunta sa Quiz Master");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+                }
+
+                if (SceneManager.GetActiveScene().name == "Chapter1Level4")
+                {
+                    if (playerQuestHandler.IsCurrentQuest("Pumunta sa Quiz Master"))
+                    {
+                        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level3", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level4", "IN_PROGRESS");
+                        PlayerPrefs.Save();
+
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta sa Quiz Master"));
+
+                        PlayerQuestHandler.CompleteQuest("Pumunta sa Quiz Master");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+                }
+
+                if (SceneManager.GetActiveScene().name == "Chapter1Level5")
+                {
+                    if (playerQuestHandler.IsCurrentQuest("Pumunta sa Quiz Master"))
+                    {
+                        PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level3", "COMPLETED");
+                        PlayerPrefs.SetString("Chapter1Level4", "IN_PROGRESS");
+                        PlayerPrefs.Save();
+
+                        PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta sa Quiz Master"));
+
+                        PlayerQuestHandler.CompleteQuest("Pumunta sa Quiz Master");
+                    }
+                    else
+                    {
+                        DialogMessagePrompt.Instance
+                               .SetTitle("System Message")
+                               .SetMessage("You must complete the other quest before interacting with this character.")
+                               .Show();
+                        return;
+                    }
+                }
+
+                if (SceneManager.GetActiveScene().name == "Chapter1Level6")
                 {
                     if (playerQuestHandler.IsCurrentQuest("Pumunta sa Quiz Master"))
                     {

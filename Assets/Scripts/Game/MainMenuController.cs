@@ -19,7 +19,7 @@ public class MainMenuController : MonoBehaviour
 
         if (CreateUser())
         {
-            WelcomeText.text = "Welcome, " + user.name;
+            WelcomeText.text = "Maligayang pagdating, " + user.name;
         }
         else
         {

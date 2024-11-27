@@ -69,18 +69,18 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("Magellan began drafting a new image of the world for his dream expedition with the help of pilots who specialized in Asian navigation.")
+               .SetMessage("Ilang araw pagkatapos dumating sa Seville, pormal na pinaltan ni Magellan ang kanyang pangalan, mula Fernao de Magalhaes (Portuges) naging Fernando de Magallanes (Espanyol), bilang katapatan sa Espanya.")
                .Show();
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("In October 1517, Magellan left his country, renounced his nationality, and moved to Seville, Spain.")
+               .SetMessage("Pagkalipas ng isang taon, pinakasalan ni Magellan si Beatriz Barbosa. Si Beatriz ay anak ng kanyang host na si Diogo Barbosa, na nag-imbita sa kanya na manatili sa kanilang tirahan. ")
                .Show();
 
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("A few days after arriving in Seville, Magellan formalized his change of loyalty from Fernao de Magalhaes (Portuguese subject) to Fernando de Magallanes (Spanish subject).")
+               .SetMessage("Nagkaanak si Beatriz ng isang lalaki na pinangalanan nilang Rodrigo, na anim (6) na buwang gulang noong panahon ng ekspedisyon.")
                .Show();
 
 
@@ -120,13 +120,13 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
         //    .Show();
 
         ChapterLevelSummaryAnnounceControl.Instance
-            .SetTitle("Chapter 5")
+            .SetTitle("Kabanata 5")
             .SetAnnounce("\n" +
-                            "Explore the city of Seville, Spain \n\n" +
-                            "Magellan formed a family in Seville with Beatriz Barbosa \n\n" +
-                            "Magellan and Falero’s expedition meeting with the royal council of Spain \n\n" +
-                            "King Charles I of Spain’s consent and royal approval for the Magellan's Expedition \n\n" +
-                            "The instructions or guidelines of King Charles I for the Magellan Expedition \n\n" +
+                            " - Tuklasin ang lungsod ng Seville, Spain \n\n" +
+                            " - Ang pamilya ni Magellan kasama si Beatriz Barbosa \n\n" +
+                            " - Ang pagpupulong nina Magellan at Falero sa maharlikang konseho ng Espanya para sa ekspedisyon \n\n" +
+                            " - Ang pahintulot ni Haring Charles I ng Espanya para sa Magellan Expedition \n\n" +
+                            " - Ang mga tagubilin o alituntunin ni Haring Charles I kay Magellan para sa ekspedisyon  \n\n" +
                             "\n")
             .SetFadeInDuration(0.5f)
             .OnContinue(() =>
@@ -149,8 +149,8 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
         {
             explorationCollider.enabled = false;
 
-            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Explore the City of Seville"));
-            PlayerQuestHandler.CompleteQuest("Explore the City of Seville");
+            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Tuklasin ang lungsod ng Seville, Spain"));
+            PlayerQuestHandler.CompleteQuest("Tuklasin ang lungsod ng Seville, Spain");
         }
     }
 
@@ -159,18 +159,18 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
         UpdateFindChestQuest();
 
 
-        if (playerQuestHandler.IsQuestCompleted("Go to Magellan"))
+        if (playerQuestHandler.IsQuestCompleted("Pumunta kay Magellan"))
         {
             mag0.SetActive(true);
             ruy0.SetActive(true);
         }
-        if (playerQuestHandler.IsQuestCompleted("Special Quest: Find The Missing Treasure In The City"))
+        if (playerQuestHandler.IsQuestCompleted("Special Quest: Hanapin ang mga Kaban ng Kayamanan"))
         {
             ruy1.SetActive(true);
             mag1.SetActive(true);
         }
 
-        if (playerQuestHandler.IsCurrentQuest("Go to Magellan"))
+        if (playerQuestHandler.IsCurrentQuest("Pumunta kay Magellan"))
         {
             CH1L5_ToMagellan1.SetActive(true);
         }
@@ -180,7 +180,7 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
 
         }
 
-        if (playerQuestHandler.IsCurrentQuest("Meet Ruy Falero"))
+        if (playerQuestHandler.IsCurrentQuest("Kilalanin si Ruy Falero"))
         {
             CH1L5_MeetRuy1.SetActive(true);
         }
@@ -199,13 +199,13 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
         if (playerQuestHandler.Level1Quests.Count > 0)
         {
             Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
-            if (currentQuest.QuestTitle == "Special Quest: Find The Missing Treasure In The City")
+            if (currentQuest.QuestTitle == "Special Quest: Hanapin ang mga Kaban ng Kayamanan")
             {
                 foreach (Quest quest in quests)
                 {
-                    if (quest.QuestTitle == "Special Quest: Find The Missing Treasure In The City")
+                    if (quest.QuestTitle == "Special Quest: Hanapin ang mga Kaban ng Kayamanan")
                     {
-                        quest.ChangeWhatToDo("Special Quest: Find The Missing Treasure In The City", $"Find the 3 Chest ({3 - remainingChest}/3)");
+                        quest.ChangeWhatToDo("Special Quest: Hanapin ang mga Kaban ng Kayamanan", $"Hanapin ang tatlong kaban ({3 - remainingChest}/3)");
                         playerQuestListManager.PopulateQuestList();
                         playerQuestHandler.DisplayQuest(quest);
                     }
@@ -213,8 +213,8 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
 
                 if (remainingChest == 0 && !isTargetChestCompleted)
                 {
-                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Special Quest: Find The Missing Treasure In The City"));
-                    PlayerQuestHandler.CompleteQuest("Special Quest: Find The Missing Treasure In The City");
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Special Quest: Hanapin ang mga Kaban ng Kayamanan"));
+                    PlayerQuestHandler.CompleteQuest("Special Quest: Hanapin ang mga Kaban ng Kayamanan");
 
 
                     isTargetChestCompleted = true;
@@ -234,7 +234,7 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage("The treasures contain trivia scrolls that will help with this chapter's short quiz and long quiz. \n During King Charles I’s  reign, Spain rose to imperial greatness \n King Charles I of Spain and King Manoel I of Portugal were related through Manoel's marriage to Charles' Aunt Isabel, then Aunt Maria, and then to Charles' sister Leonora.")
+              .SetMessage("Si Haring Charles I ng Espanya at Haring Manoel I ng Portugal ay may kaugnayan sa pamamagitan ng kasal ni Manoel sa tiyahin ni Charles na si Isabel, sunod sa kanyang tiyahin Maria, at sa kapatid niyang si Leonora.")
               .Show();
         }
 
@@ -242,7 +242,7 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage("The treasures contain trivia scrolls that will help with this chapter's short quiz and long quiz. \n King Manoel's marriage to King Charles I’s family was supposed to end the territorial dispute between Portugal and Spain but was revived with Magellan's discovery of the Moluccas or the Spice Islands.")
+              .SetMessage("Ang kasal ni Haring Manoel I sa pamilya ni Haring Charles I ang inaasahang tatapos sa teritoryal na hidwaan sa pagitan ng Portugal at Espanya ngunit muling umusbong sa pagtuklas ni Magellan ng Moluccas o Spice Islands.")
               .Show();
         }
 
@@ -250,7 +250,7 @@ public class ChapterOneLevelFiveHandler : MonoBehaviour
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage("The treasures contain trivia scrolls that will help with this chapter's short quiz and long quiz. \n Magellan showed a globe in his expedition presentation with the King while keeping the Strait passage in America a secret.")
+              .SetMessage("Ipinakita ni Magellan ang isang globo sa kanyang presentasyon ng ekspedisyon kay Haring Charles I habang pinapanatiling lihim ang daanan ng Strait sa Amerika.")
               .Show();
         }
 
