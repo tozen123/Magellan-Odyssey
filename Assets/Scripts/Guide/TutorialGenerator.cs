@@ -34,8 +34,7 @@ public class TutorialGenerator : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetString("HasSeenTutorial", "No");
-        PlayerPrefs.Save();
+ 
 
         if (PlayerPrefs.HasKey("HasSeenTutorial") && PlayerPrefs.GetString("HasSeenTutorial", "No") == "No")
         {

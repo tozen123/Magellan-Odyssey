@@ -32,8 +32,7 @@ public class TutorialGamePlay : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetString("HasSeenTutorial2", "No");
-        PlayerPrefs.Save();
+       
 
         if (PlayerPrefs.HasKey("HasSeenTutorial2"))
         {

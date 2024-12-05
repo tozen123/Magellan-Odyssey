@@ -52,19 +52,19 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("The Magellan expedition was organized to exploit the wealth offered by the abundant resources of the Moluccas or Spice Islands.")
+               .SetMessage("Ang Magellan Expedition ay inorganisa upang samantalahin ang yaman ng Moluccas o Spice Islands.\r\n")
                .Show();
 
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("For the Spaniards, the discovery of the Moluccas or Spice Islands meant unlimited access to spices crucial in preserving meat.")
+               .SetMessage("Para sa mga Espanyol, ang pagtuklas sa Moluccas o Spice Islands ay nangangahulugan ng walang limitasyong pagkalakal ng mga pampalasa na mahalaga sa pagpreserba ng karne.\r\n")
                .Show();
 
 
         DialogMessagePrompt.Instance
                .SetTitle("System Message")
-               .SetMessage("The spices were the major ingredients of Spain's empire-building projects.")
+               .SetMessage("Ang mga pampalasa ay ang mga pangunahing sangkap sa pagtatayo ng imperyo ng Espanya.")
                .Show();
 
 
@@ -78,7 +78,7 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
     {
         UpdateCrateQuest();
 
-        if(playerQuestHandler.IsQuestCompleted("Gather the Provisions in the Port"))
+        if(playerQuestHandler.IsQuestCompleted("Tipunin ang mga Probisyon sa Daungan"))
         {
             mag2.SetActive(true);
             mag1.SetActive(false);
@@ -91,7 +91,7 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
         }
         
 
-        if (playerQuestHandler.IsQuestCompleted("Report to Magellan"))
+        if (playerQuestHandler.IsQuestCompleted("Mag-ulat kay Magellan"))
         {
             foreach(Transform child in playerInv.transform)
             {
@@ -100,7 +100,7 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
         }
 
         
-        if (playerQuestHandler.IsQuestCompleted("Go to Magellan") && !showProv)
+        if (playerQuestHandler.IsQuestCompleted("Pumunta kay Magellan") && !showProv)
         {
 
             DialogMessagePrompt.Instance
@@ -173,17 +173,17 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
         if (playerQuestHandler.Level1Quests.Count > 0)
         {
             Quest currentQuest = playerQuestHandler.Level1Quests[playerQuestHandler.currentQuestIndex];
-            if (currentQuest.QuestTitle == "Gather the Provisions in the Port")
+            if (currentQuest.QuestTitle == "Tipunin ang mga Probisyon sa Daungan")
             {
                 Debug.Log("Gather MATCHED");
 
                 foreach (Quest quest in quests) 
                 {
-                    if (quest.QuestTitle == "Gather the Provisions in the Port")
+                    if (quest.QuestTitle == "Tipunin ang mga Probisyon sa Daungan")
                     {
                         Debug.Log("Data");
 
-                        quest.ChangeWhatToDo("Gather the Provisions in the Port", $"Gather the Provisions in the Port({6 - remainingCrates}/6)");
+                        quest.ChangeWhatToDo("Tipunin ang mga Probisyon sa Daungan", $"Tipunin ang mga Probisyon sa Daungan ({6 - remainingCrates}/6)");
                         playerQuestListManager.PopulateQuestList();
                         playerQuestHandler.DisplayQuest(quest);
                     }
@@ -191,8 +191,8 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
 
                 if (remainingCrates == 0 && !isCrateQuestCompleted)
                 {
-                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Gather the Provisions in the Port"));
-                    PlayerQuestHandler.CompleteQuest("Gather the Provisions in the Port");
+                    PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Tipunin ang mga Probisyon sa Daungan"));
+                    PlayerQuestHandler.CompleteQuest("Tipunin ang mga Probisyon sa Daungan");
 
                     isCrateQuestCompleted = true;
                 }
@@ -210,8 +210,8 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
      
-            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Explore the Port in Seville"));
-            PlayerQuestHandler.CompleteQuest("Explore the Port in Seville");
+            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Tuklasin ang Daungan ng Seville"));
+            PlayerQuestHandler.CompleteQuest("Tuklasin ang Daungan ng Seville");
         }
     }
 
@@ -226,7 +226,7 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage("Magellan was tasked to supervise the rationing and periodically check the stored provisions.")
+              .SetMessage("Ang timbangan at mga dispenser ay gagamitin para sa pagrarasyon.")
               .Show();
         }
 
@@ -234,35 +234,35 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage(" Magellan had the authority to reduce the ration as deemed necessary. \n The basic ingredient of the 16th-century nautical diet was a biscuit that could endure long voyages.")
+              .SetMessage("Inatasan si Magellan na pangasiwaan ang pagrarasyon at pana-panahong suriin ang mga nakaimbak na probisyon. \n Si Magellan ay may awtoridad na bawasan ang rasyon kung kinakailangan.\r\n")
               .Show();
         }
         if (targetCrates.Count == 2)
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage("The expedition's preserved food included hefty anchovies, dried fish, dried pork, and cheese to feed many people, even in small quantities for long voyages. \n The crew enjoyed a heavy vegetable diet, either in pickled or salad form.")
+              .SetMessage("Ang pangunahing sangkap ng ika-16 na siglong diyeta sa dagat ay ang biskwit na maaaring tumagal sa mahabang paglalakbay. \n Kasama sa napreserbang pagkain ng ekspedisyon ang bagoong, tuyong isda, tuyong baboy, at keso na kaya pakainin ang maraming tao para sa mahabang paglalakbay.\r\n")
               .Show();
         }
         if (targetCrates.Count == 3)
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage("The expedition was provisioned with substantial barrels of wine costing around 590,000 maravedis.")
+              .SetMessage("Ang mga tripulante ay nasiyahan magdiyeta ng atsarang gulay o salad.\n Ang ekspedisyon ay binigyan ng malaking bariles ng alak na nagkakahalaga ng humigit-kumulang 590,000 maravedis.\r\n")
               .Show();
         }
         if (targetCrates.Count == 4)
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage("The expedition’s cargo also consisted of weapons, equipment, trade, giveaways, medical kits, and record books for documentation and official reports.")
+              .SetMessage("Ang mga kargamento ng ekspedisyon ay binubuo rin ng mga armas, kagamitan, kalakalan, pamigay, medical kits, at mga record book para sa dokumentasyon at opisyal na mga ulat.\n")
               .Show();
         }
         if (targetCrates.Count == 5)
         {
             DialogMessagePrompt.Instance
               .SetTitle("System Message")
-              .SetMessage("The expedition also carried 7 cows and 3 pigs since meat was vital in Spanish culinary culture.")
+              .SetMessage("Ang ekspedisyon ay nagdala rin ng pitong (7) baka at tatlong (3) baboy dahil ang karne ay mahalaga sa kultura ng Espanyol sa pagluluto.\n")
               .Show();
         }
     }

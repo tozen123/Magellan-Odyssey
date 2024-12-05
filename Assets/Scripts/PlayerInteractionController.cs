@@ -184,17 +184,17 @@ public class PlayerInteractionController : MonoBehaviour
                         // -------------------------- CHAPTER 1 LEVEL 6 ---------------------------------
                         if (SceneManager.GetActiveScene().name == "Chapter1Level6")
                         {
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Go to Magellan"));
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Pumunta kay Magellan"));
 
-                            PlayerQuestHandler.CompleteQuest("Go to Magellan");
+                            PlayerQuestHandler.CompleteQuest("Pumunta kay Magellan");
                         }
 
                         // -------------------------- CHAPTER 1 LEVEL 6 ---------------------------------
                         if (SceneManager.GetActiveScene().name == "Chapter1Level6")
                         {
-                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Report to Magellan"));
+                            PlayerPointingSystem.Instance.AddPoints(PlayerQuestHandler.GetQuestADPPoints("Mag-ulat kay Magellan"));
 
-                            PlayerQuestHandler.CompleteQuest("Report to Magellan");
+                            PlayerQuestHandler.CompleteQuest("Mag-ulat kay Magellan");
                         }
 
                     }
@@ -503,7 +503,7 @@ public class PlayerInteractionController : MonoBehaviour
 
                 if (SceneManager.GetActiveScene().name == "Chapter1Level2")
                 {
-                    if (playerQuestHandler.IsCurrentQuest("Quiz Master Kabanata 2"))
+                    if (playerQuestHandler.IsCurrentQuest("Pumunta sa Quiz Master"))
                     {
                         PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
                         PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");

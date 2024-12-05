@@ -24,7 +24,7 @@ public class ChapterMenuHandler : MonoBehaviour
     private void Start()
     {
 
-        UnlockMode();
+        //UnlockMode();
 
         Debug.Log("--------------------------------------------------------------");
         Debug.Log("Chapter1: " + PlayerPrefs.GetString("Chapter1"));
