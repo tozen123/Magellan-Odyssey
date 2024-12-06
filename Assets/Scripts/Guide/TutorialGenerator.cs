@@ -34,9 +34,11 @@ public class TutorialGenerator : MonoBehaviour
 
     void Start()
     {
- 
+        //PlayerPrefs.SetInt("Kabanata1BookOfTrivia_IsLock", 0);
+        //PlayerPrefs.SetInt("academic_points", 385);
+        //PlayerPrefs.SetInt("adventure_points", 1285);
 
-        if (PlayerPrefs.HasKey("HasSeenTutorial") && PlayerPrefs.GetString("HasSeenTutorial", "No") == "No")
+        if (PlayerPrefs.HasKey("HasSeenTutorial") && (PlayerPrefs.GetString("HasSeenTutorial", "No") == "No"))
         {
             Debug.Log("Starting Tutorial...");
             DeleteButton.interactable = false;

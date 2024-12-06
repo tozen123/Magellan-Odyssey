@@ -149,10 +149,10 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
 
 
         ChapterLevelSummaryAnnounceControl.Instance
-            .SetTitle("Chapter 6")
+            .SetTitle("Kabanata 6")
             .SetAnnounce("\n" +
-                            "The preparation and provisions of the Magellan Expedition \n\n" +
-                            "The five ships of the Magellan Expedition \n\n" +
+                            "Ang paghahanda at mga probisyon para sa Magellan Expedition \n\n" +
+                            "Ang limang barko ng Magellan Expedition \n\n" +
                             "\n")
             .SetFadeInDuration(0.5f)
             .OnContinue(() =>
