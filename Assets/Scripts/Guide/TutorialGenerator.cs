@@ -38,7 +38,7 @@ public class TutorialGenerator : MonoBehaviour
         //PlayerPrefs.SetInt("academic_points", 385);
         //PlayerPrefs.SetInt("adventure_points", 1285);
 
-        if (PlayerPrefs.HasKey("HasSeenTutorial") && (PlayerPrefs.GetString("HasSeenTutorial", "No") == "No"))
+        if (PlayerPrefs.GetString("HasSeenTutorial") == "")
         {
             Debug.Log("Starting Tutorial...");
             DeleteButton.interactable = false;
@@ -52,6 +52,7 @@ public class TutorialGenerator : MonoBehaviour
         }
         else
         {
+
             Debug.Log("Skipping Tutorial...");
             ChapterMenuHandler.undertutorial = false;
             DeleteButton.interactable = true;
