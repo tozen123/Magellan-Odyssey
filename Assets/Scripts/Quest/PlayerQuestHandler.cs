@@ -153,7 +153,7 @@ public class PlayerQuestHandler : MonoBehaviour
 
             QuestPopCardManager.Instance
               .SetTitle("Quest Completed\n" + title)
-              .SetMessage(currentQuest.QuestDescription + "\n\n" + "You earned " + currentQuest.QuestADPPoints + " Academic Points")
+              .SetMessage(currentQuest.QuestDescription + "\n\n" + "Nakakuha ka ng " + currentQuest.QuestADPPoints + " Academic Points")
               .Show();
 
             if (_instance.currentQuestIndex >= _instance.Level1Quests.Count)

@@ -457,11 +457,11 @@ public class DialogueManager : MonoBehaviour
                 PlayerPrefs.SetInt("Chapter4QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
 
-                if (correctAnswersCount == 3)
+                if (correctAnswersCount == 7)
                 {
-                    adp = 30;
+                    adp = 70;
                 }
-                quizlength = 3;
+                quizlength = 7;
 
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level5")
@@ -474,11 +474,11 @@ public class DialogueManager : MonoBehaviour
                 PlayerPrefs.SetInt("Chapter5QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
 
-                if (correctAnswersCount == 3)
+                if (correctAnswersCount == 20)
                 {
-                    adp = 30;
+                    adp = 200;
                 }
-                quizlength = 3;
+                quizlength = 20;
             }
             if (SceneManager.GetActiveScene().name == "Chapter1Level6")
             {
@@ -490,11 +490,11 @@ public class DialogueManager : MonoBehaviour
                 PlayerPrefs.SetInt("Chapter6QuizScore", correctAnswersCount);
                 PlayerPrefs.Save();
 
-                if (correctAnswersCount == 3)
+                if (correctAnswersCount == 15)
                 {
-                    adp = 30;
+                    adp = 150;
                 }
-                quizlength = 3;
+                quizlength = 15;
             }
             AddACP();
 
@@ -511,7 +511,7 @@ public class DialogueManager : MonoBehaviour
             {
                 DialogMessagePrompt.Instance
                     .SetTitle("System Message")
-                    .SetMessage(correctAnswersCount + " / " + quizlength + " Ikaw ay akakuha ka ng Academic Points na " + acp)
+                    .SetMessage(correctAnswersCount + " / " + quizlength + " Ikaw ay nakakuha ka ng Academic Points na " + acp)
                     .OnClose(Close)
                     .Show();
             }

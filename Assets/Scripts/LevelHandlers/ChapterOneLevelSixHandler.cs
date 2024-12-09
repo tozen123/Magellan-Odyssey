@@ -99,25 +99,25 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
             }
         }
 
-        
+
         if (playerQuestHandler.IsQuestCompleted("Pumunta kay Magellan") && !showProv)
         {
-
             DialogMessagePrompt.Instance
                 .SetTitle("System Message")
-                .SetMessage("Look for this type of crate, it is specialized for provisions. This is scattered around the port.")
+                .SetMessage("Hanapin ang ganitong uri ng kahon, ito ay espesyal para sa mga probisyon. Ito ay nakakalat sa paligid ng pantalan.")
                 .SetImage(provCrateImage)
                 .Show();
             DialogMessagePrompt.Instance
                 .SetTitle("System Message")
-                .SetMessage("Magellan predicted that the expedition would last for two years, so the ships were provisioned for two years.")
+                .SetMessage("Inakala ni Magellan na tatagal ang ekspedisyon ng dalawang taon, kaya ang mga barko ay siniguradong may probisyon para sa dalawang taon.")
                 .Show();
             DialogMessagePrompt.Instance
                 .SetTitle("System Message")
-                .SetMessage("Each man was to receive a daily ration of one liter. All provisions were to be equally distributed every two days beginning from their departure.")
+                .SetMessage("Ang bawat tao ay makakatanggap ng isang litrong rasyon araw-araw. Ang lahat ng probisyon ay pantay na ipapamahagi bawat dalawang araw simula sa kanilang pag-alis.")
                 .Show();
             showProv = true;
         }
+
     }
     private void Start()
     {
@@ -126,6 +126,7 @@ public class ChapterOneLevelSixHandler : MonoBehaviour
         PlayerPrefs.SetString("Chapter1Level1", "COMPLETED");
         PlayerPrefs.SetString("Chapter1Level2", "COMPLETED");
         PlayerPrefs.SetString("Chapter1Level3", "COMPLETED");
+        PlayerPrefs.SetString("Chapter1Level4", "COMPLETED");
         PlayerPrefs.SetString("Chapter1Level5", "COMPLETED");
         PlayerPrefs.SetString("Chapter1Level6", "IN_PROGRESS");
         PlayerPrefs.Save();

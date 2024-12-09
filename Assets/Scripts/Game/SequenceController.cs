@@ -102,6 +102,10 @@ public class SequenceController : MonoBehaviour
 
         PlayerPrefs.Save();
 
+
+        PlayerPrefs.SetString("HasSeenTutorial", "");
+        PlayerPrefs.Save();
+
         // Display success message
         DialogMessagePrompt.Instance
             .SetTitle("System Message")

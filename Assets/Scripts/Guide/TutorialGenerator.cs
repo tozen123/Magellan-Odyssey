@@ -75,27 +75,28 @@ public class TutorialGenerator : MonoBehaviour
 
         DialogMessagePrompt.Instance
             .SetTitle("System Message")
-            .SetMessage("You will now embark on an engaging adventure to learn about Ferdinand Magellan's Expedition")
+            .SetMessage("Magsisimula ka na ngayon sa isang kapana-panabik na paglalakbay upang matutunan ang tungkol sa Ekspedisyon ni Ferdinand Magellan.")
             .Show();
 
         DialogMessagePrompt.Instance
             .SetTitle("System Message")
-            .SetMessage("But first, let's guide you through this game.")
+            .SetMessage("Ngunit bago ang lahat, gagabayan ka muna namin sa larong ito.")
             .Show();
 
         DialogMessagePrompt.Instance
             .SetTitle("System Message")
-            .SetMessage("Take note, some buttons are disabled until you finish the tutorial.")
+            .SetMessage("Paalala, ang ilang mga pindutan ay hindi magagamit hangga't hindi natatapos ang tutorial.")
             .OnClose(() => ShowTutorialDialog())
             .Show();
     }
+
 
     private void ShowTutorialDialog()
     {
         canvasAvatarPanel.SetActive(false);
         ShowPointer1.SetActive(true);
         TutorialDialogPrompt.Instance
-            .SetMessage("I put an arrow pointing to the avatar profile. Tap that to open your profile tab.")
+            .SetMessage("Naglagay ako ng arrow na tumuturo sa avatar profile. I-tap ito upang buksan ang iyong profile tab.")
             .SetImage(null)
             .OnClose(() => Pointer1())
             .OnPrevious(null)
@@ -117,7 +118,7 @@ public class TutorialGenerator : MonoBehaviour
             {
                 TutorialDialogPrompt.Instance
                     .SetImage(null)
-                    .SetMessage("In this tab, you can view your profile information and also change your name if you wanted. ACP and ADP can also be viewed here!")
+                    .SetMessage("Sa tab na ito, makikita mo ang impormasyon ng iyong profile at maari mo ring palitan ang iyong pangalan kung nais mo. Makikita rin dito ang ACP at ADP!")
                     .OnClose(() => Pointer2Start())
                     .OnPrevious(() => ShowTutorialDialog()) // Enable Back Button
                     .Show();
@@ -141,7 +142,6 @@ public class TutorialGenerator : MonoBehaviour
 
     public void Pointer2End()
     {
-        
         TutorialDialogPrompt.Instance
             .SetImage(ADP)
             .SetMessage("ADP. Ang Adventure Points ay ang pera na magagamit sa pagbukas ng mga kabanata. Para magkaroon ng Adventure Points, kailangan mong gawin ang mga sumusunod:" +
@@ -161,11 +161,9 @@ public class TutorialGenerator : MonoBehaviour
 
         TutorialDialogPrompt.Instance
             .SetImage(null)
-            .SetMessage("Now you can close this tab and proceed to the next part of the tutorial.")
+            .SetMessage("Ngayon, maaari mong isara ang tab na ito at magpatuloy sa susunod na bahagi ng tutorial.")
             .OnPrevious(() => Pointer2End()) // Enable Back Button
             .Show();
-
-        
     }
 
     public void Pointer3End()
@@ -175,7 +173,7 @@ public class TutorialGenerator : MonoBehaviour
         ShowPointer3.SetActive(true);
         TutorialDialogPrompt.Instance
             .SetImage(null)
-            .SetMessage("Let's go to the settings. I have put an arrow pointing to the button for opening the settings tab.")
+            .SetMessage("Pumunta tayo sa mga settings. Naglagay ako ng arrow na tumuturo sa pindutan para buksan ang settings tab.")
             .OnClose(() => Pointer4Start())
             .OnPrevious(() => Pointer3Start()) // Enable Back Button
             .Show();
@@ -191,7 +189,7 @@ public class TutorialGenerator : MonoBehaviour
         {
             TutorialDialogPrompt.Instance
                 .SetImage(null)
-                .SetMessage("This is the settings. You can adjust the audio of the game and change the graphics quality.")
+                .SetMessage("Ito ang settings. Maaari mong ayusin ang audio ng laro at baguhin ang kalidad ng graphics.")
                 .OnClose(() => Pointer4End())
                 .OnPrevious(() => Pointer3End()) // Enable Back Button
                 .Show();
@@ -204,7 +202,7 @@ public class TutorialGenerator : MonoBehaviour
         {
             TutorialDialogPrompt.Instance
                 .SetImage(null)
-                .SetMessage("Now you can tap on Kabanata 1 to start your adventure!")
+                .SetMessage("Ngayon, maaari mo nang i-tap ang Kabanata 1 upang simulan ang iyong paglalakbay!")
                 .OnClose(() => EndTutorial())
                 .OnPrevious(() => Pointer4Start()) // Enable Back Button
                 .Show();
@@ -215,8 +213,9 @@ public class TutorialGenerator : MonoBehaviour
     {
         TutorialDialogPrompt.Instance
             .SetImage(null)
-            .SetMessage("This is the end of the tutorial. Good luck!")
+            .SetMessage("Ito na ang pagtatapos ng tutorial. Good luck!")
             .OnClose(() => ChapterMenuHandler.undertutorial = false)
             .Show();
     }
+
 }
